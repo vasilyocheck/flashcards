@@ -7,20 +7,130 @@
   }
 }
 
+@mixin default-btn {
+  cursor: pointer;
+
+  padding: 10px 28px;
+
+  font-family: var(--font-family-primary);
+  font-size: var(--line-height-m);
+
+  border: none;
+  border-radius: 4px;
+}
+
 .primary {
-  background-color: red;
+  @include default-btn;
+
+  font-weight: var(--font-weight-bold);
+  color: var(--color-light-100);
+  background-color: var(--color-accent-500);
+
+  &:hover {
+    background-color: var(--color-accent-300);
+  }
+
+  &:active {
+    background-color: var(--color-accent-700);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-info-700);
+  }
+
+  &:disabled {
+    cursor: default;
+    color: var(--color-light-900);
+    background-color: var(--color-accent-900);
+  }
 }
 
 .secondary {
-  background-color: green;
+  @include default-btn;
+
+  font-weight: var(--font-weight-bold);
+  color: var(--color-light-100);
+  background-color: var(--color-dark-300);
+
+  &:hover {
+    background-color: var(--color-dark-500);
+  }
+
+  &:active {
+    background-color: var(--color-dark-100);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-info-700);
+  }
+
+  &:disabled {
+    cursor: default;
+    color: var(--color-light-900);
+    background-color: var(--color-dark-300);
+  }
 }
 
 .tertiary {
-  background-color: blue;
+  @include default-btn;
+
+  box-sizing: border-box;
+  padding: 8px 26px;
+
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-500);
+
+  background-color: transparent;
+  border: 2px solid var(--color-accent-500);
+
+  &:hover {
+    background-color: var(--color-dark-500);
+  }
+
+  &:active {
+    background-color: var(--color-accent-700);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-info-700);
+  }
+
+  &:disabled {
+    cursor: default;
+    color: var(--color-accent-900);
+    background-color: transparent;
+    border: 2px solid var(--color-accent-900);
+  }
 }
 
 .link {
-  background-color: yellow;
+  @include default-btn;
+
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-500);
+  text-decoration: none;
+  background-color: transparent;
+
+  &:visited {
+    color: var(--color-accent-500);
+  }
+
+  &:hover {
+    color: var(--color-accent-300);
+  }
+
+  &:active {
+    color: var(--color-accent-700);
+  }
+
+  &:focus-visible {
+    border-radius: 30px;
+    outline: 3px solid var(--color-info-700);
+  }
+
+  &:disabled {
+    color: var(--color-accent-900);
+  }
 }
 
 .fullWidth {
