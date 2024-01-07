@@ -7,7 +7,14 @@ const meta = {
     variant: {
       control: { type: 'radio' },
       fullWidth: true,
-      options: ['primary', 'secondary', 'tertiary', 'link'],
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'link',
+        'primary-with-icon',
+        'secondary-with-icon',
+      ],
     },
   },
   component: Button,
@@ -26,6 +33,15 @@ export const Primary: Story = {
   },
 }
 
+export const PrimaryWithIcon: Story = {
+  args: {
+    children: 'Primary Button',
+    className: 'primary-with-icon',
+    disabled: false,
+    variant: 'primary',
+  },
+}
+
 export const Secondary: Story = {
   args: {
     children: 'Secondary Button',
@@ -33,6 +49,16 @@ export const Secondary: Story = {
     variant: 'secondary',
   },
 }
+
+export const SecondaryWithIcon: Story = {
+  args: {
+    children: 'Secondary Button',
+    className: 'secondary-with-icon',
+    disabled: false,
+    variant: 'secondary',
+  },
+}
+
 export const Tertiary: Story = {
   args: {
     children: 'Tertiary',
@@ -50,20 +76,3 @@ export const AsLink: Story = {
     variant: 'link',
   },
 }
-
-// export const Link: Story = {
-// args: {
-//     children: 'Link-button',
-//     disabled: false,
-//     variant: 'link',
-//   },
-// }
-//
-// export const FullWidth: Story = {
-//   args: {
-//     children: 'Full Width Button',
-//     disabled: false,
-//     fullWidth: true,
-//     variant: 'primary',
-//   },
-// // }

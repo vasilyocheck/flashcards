@@ -10,6 +10,8 @@
 @mixin default-btn {
   cursor: pointer;
 
+  position: relative;
+
   padding: 10px 28px;
 
   font-family: var(--font-family-primary);
@@ -19,7 +21,8 @@
   border-radius: 4px;
 }
 
-.primary {
+.primary,
+.primary-with-icon {
   @include default-btn;
 
   font-weight: var(--font-weight-bold);
@@ -45,7 +48,36 @@
   }
 }
 
-.secondary {
+.primary-with-icon {
+  padding-left: 60px;
+
+  &::before {
+    content: url('./icons/button-enter.svg');
+
+    position: absolute;
+    top: 12px;
+    left: 26px;
+
+    width: 24px;
+    height: 24px;
+  }
+
+  &:disabled {
+    &::before {
+      content: url('./icons/button-enter-opacity.svg');
+
+      position: absolute;
+      top: 12px;
+      left: 26px;
+
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.secondary,
+.secondary-with-icon {
   @include default-btn;
 
   font-weight: var(--font-weight-bold);
@@ -68,6 +100,34 @@
     cursor: default;
     color: var(--color-light-900);
     background-color: var(--color-dark-300);
+  }
+}
+
+.secondary-with-icon {
+  padding-left: 60px;
+
+  &::before {
+    content: url('./icons/button-enter.svg');
+
+    position: absolute;
+    top: 12px;
+    left: 26px;
+
+    width: 24px;
+    height: 24px;
+  }
+
+  &:disabled {
+    &::before {
+      content: url('./icons/button-enter-opacity.svg');
+
+      position: absolute;
+      top: 12px;
+      left: 26px;
+
+      width: 24px;
+      height: 24px;
+    }
   }
 }
 
