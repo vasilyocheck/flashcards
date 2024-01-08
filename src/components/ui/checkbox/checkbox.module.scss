@@ -1,32 +1,66 @@
-/* reset */
 button {
   all: unset;
 }
 
+.CheckboxIndicator {
+  color: blue;
+
+  &::before {
+    content: url('./icons/checkbox.svg');
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.CheckboxIndicator:hover {
+  color: blue;
+
+  &::before {
+    content: url('./icons/checkbox-hover.svg');
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 24px;
+    height: 24px;
+  }
+}
+
 .CheckboxRoot {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 24px;
-  height: 24px;
-  padding: 3px;
+  &::before {
+    content: url('./icons/checkbox-unchecked.svg');
 
-  background-color: var(--color-dark-900);
+    position: absolute;
+    top: 0;
+    left: 0;
 
-  /* outline: 2px solid var(--color-light-900); */
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .CheckboxRoot:hover {
-  background-color: var(--violet-3);
-}
+  &::before {
+    content: url('./icons/checkbox-unchecked-hover.svg');
 
-.CheckboxRoot:focus {
-  box-shadow: 0 0 0 2px black;
-}
+    position: absolute;
+    top: -6px;
+    left: -6px;
 
-.CheckboxIndicator {
-  color: var(--violet-11);
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .Label {

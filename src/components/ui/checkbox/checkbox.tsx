@@ -4,27 +4,27 @@ import { CheckIcon } from '@radix-ui/react-icons'
 import s from './checkbox.module.scss'
 
 type CheckboxProps = {
-  checked: boolean
+  checked?: boolean
   label?: string
 }
 
 export const Checkbox = (props: CheckboxProps) => {
-  const { checked = false, label } = props
+  const { label } = props
 
   return (
     <form>
       <div
         style={{
           alignItems: 'center',
-          backgroundColor: '#2d2d2d',
+          // backgroundColor: '#2d2d2d',
           display: 'flex',
           gap: '8px',
           padding: '6px',
           width: 'fit-content',
         }}
       >
-        <RadixCheckbox.Root checked={checked} className={s.CheckboxRoot} defaultChecked id={'c1'}>
-          <RadixCheckbox.Indicator className={s.RadixCheckboxIndicator}>
+        <RadixCheckbox.Root className={s.CheckboxRoot} defaultChecked id={'c1'}>
+          <RadixCheckbox.Indicator className={s.CheckboxIndicator}>
             <CheckIcon />
           </RadixCheckbox.Indicator>
         </RadixCheckbox.Root>
