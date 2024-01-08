@@ -7,7 +7,14 @@ const meta = {
     variant: {
       control: { type: 'radio' },
       fullWidth: true,
-      options: ['primary', 'secondary', 'tertiary', 'link'],
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'link',
+        'primary-with-icon',
+        'secondary-with-icon',
+      ],
     },
   },
   component: Button,
@@ -26,6 +33,15 @@ export const Primary: Story = {
   },
 }
 
+export const PrimaryWithIcon: Story = {
+  args: {
+    children: 'Primary Button',
+    className: 'primary-with-icon',
+    disabled: false,
+    variant: 'primary',
+  },
+}
+
 export const Secondary: Story = {
   args: {
     children: 'Secondary Button',
@@ -33,27 +49,21 @@ export const Secondary: Story = {
     variant: 'secondary',
   },
 }
-export const Tertiary: Story = {
+
+export const SecondaryWithIcon: Story = {
   args: {
-    children: 'Tertiary Button',
+    children: 'Secondary Button',
+    className: 'secondary-with-icon',
     disabled: false,
-    variant: 'tertiary',
-  },
-}
-export const Link: Story = {
-  args: {
-    children: 'Tertiary Button',
-    disabled: false,
-    variant: 'link',
+    variant: 'secondary',
   },
 }
 
-export const FullWidth: Story = {
+export const Tertiary: Story = {
   args: {
-    children: 'Full Width Button',
+    children: 'Tertiary',
     disabled: false,
-    fullWidth: true,
-    variant: 'primary',
+    variant: 'tertiary',
   },
 }
 
@@ -63,6 +73,6 @@ export const AsLink: Story = {
     children: 'Link that looks like a button',
     href: 'https://www.google.com/',
     rel: 'noopener',
-    variant: 'primary',
+    variant: 'link',
   },
 }
