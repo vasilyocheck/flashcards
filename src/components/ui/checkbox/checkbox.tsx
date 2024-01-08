@@ -1,20 +1,37 @@
-import { ComponentPropsWithoutRef, ElementType } from 'react'
+import * as RadixCheckbox from '@radix-ui/react-checkbox'
+import { CheckIcon } from '@radix-ui/react-icons'
 
-import s from '@/components/ui/checkbox/checkbox.module.scss'
+import s from './checkbox.module.scss'
 
-export type ButtonProps<T extends ElementType = 'button'> = {
-  as?: T
-  className?: string
-  fullWidth?: boolean
-  variant?: 'link' | 'primary' | 'secondary' | 'tertiary'
-} & ComponentPropsWithoutRef<T>
+type CheckboxProps = {
+  checked: boolean
+  label?: string
+}
 
-export const Checkbox = <T extends ElementType = 'button'>(
-  props: ButtonProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>
-) => {
-  const { as: Component = 'button', className, fullWidth, variant = 'primary', ...rest } = props
+export const Checkbox = (props: CheckboxProps) => {
+  const { checked = false, label } = props
 
   return (
-    <Component className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`} {...rest} />
+    <form>
+      <div
+        style={{
+          alignItems: 'center',
+          backgroundColor: '#2d2d2d',
+          display: 'flex',
+          gap: '8px',
+          padding: '6px',
+          width: 'fit-content',
+        }}
+      >
+        <RadixCheckbox.Root checked={checked} className={s.CheckboxRoot} defaultChecked id={'c1'}>
+          <RadixCheckbox.Indicator className={s.RadixCheckboxIndicator}>
+            <CheckIcon />
+          </RadixCheckbox.Indicator>
+        </RadixCheckbox.Root>
+        <label className={s.Label} htmlFor={'c1'}>
+          {label}
+        </label>
+      </div>
+    </form>
   )
 }

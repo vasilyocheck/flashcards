@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Checkbox } from './'
+import { Checkbox } from '@/components/ui/checkbox/checkbox'
 
 const meta = {
   argTypes: {
-    variant: {
+    /*variant: {
       control: { type: 'radio' },
-      fullWidth: true,
-      options: ['primary', 'secondary', 'tertiary', 'link'],
-    },
+      options: ['unlabeled', 'labeled'],
+    },*/
   },
   component: Checkbox,
   tags: ['autodocs'],
@@ -18,51 +17,23 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {
+export const Unlabeled: Story = {
   args: {
-    children: 'Primary Checkbox',
-    disabled: false,
-    variant: 'primary',
+    checked: false,
+    label: 'unlabeled',
   },
 }
 
-export const Secondary: Story = {
+export const UnlabeledChecked: Story = {
   args: {
-    children: 'Secondary Checkbox',
-    disabled: false,
-    variant: 'secondary',
-  },
-}
-export const Tertiary: Story = {
-  args: {
-    children: 'Tertiary Checkbox',
-    disabled: false,
-    variant: 'tertiary',
-  },
-}
-export const Link: Story = {
-  args: {
-    children: 'Tertiary Checkbox',
-    disabled: false,
-    variant: 'link',
+    checked: true,
+    label: 'unlabeled checked',
   },
 }
 
-export const FullWidth: Story = {
+export const Labeled: Story = {
   args: {
-    children: 'Full Width Checkbox',
-    disabled: false,
-    fullWidth: true,
-    variant: 'primary',
-  },
-}
-
-export const AsLink: Story = {
-  args: {
-    as: 'a',
-    children: 'Link that looks like a button',
-    href: 'https://www.google.com/',
-    rel: 'noopener',
-    variant: 'primary',
+    checked: false,
+    label: 'labeled',
   },
 }

@@ -1,28 +1,37 @@
-.button {
+/* reset */
+button {
   all: unset;
-  cursor: pointer;
-
-  &:focus-visible {
-    outline: 2px solid var(--color-info-500);
-  }
 }
 
-.primary {
-  background-color: red;
+.CheckboxRoot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+
+  background-color: var(--color-dark-900);
+
+  /* outline: 2px solid var(--color-light-900); */
 }
 
-.secondary {
-  background-color: green;
+.CheckboxRoot:hover {
+  background-color: var(--violet-3);
 }
 
-.tertiary {
-  background-color: blue;
+.CheckboxRoot:focus {
+  box-shadow: 0 0 0 2px black;
 }
 
-.link {
-  background-color: yellow;
+.CheckboxIndicator {
+  color: var(--violet-11);
 }
 
-.fullWidth {
-  width: 100%;
+.Label {
+  padding-left: 15px;
+  font-size: 15px;
+  line-height: 1;
+  color: white;
 }
