@@ -1,16 +1,40 @@
 /* reset */
+@mixin image-dflt {
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+}
+
 button {
   all: unset;
+}
+
+.Arrow {
+  position: absolute;
+  top: -8px;
+  right: 12px;
 }
 
 .Image {
   padding-right: 6px;
 }
 
+// Добавить переменные var
 .InfoProfileName {
+  font-family: var(--font-family-primary);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
 }
 
+// Добавить переменные var
 .InfoProfileMail {
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 16px;
+  color: var(--color-dark-100);
 }
 
 .InfoProfile {
@@ -19,20 +43,28 @@ button {
 }
 
 .DropdownMenuImage {
-  width: 36px;
-  height: 36px;
-  border-radius: 36px;
+  @include image-dflt;
 
   &:hover {
     opacity: 0.8;
   }
 }
 
-.DropdownMenuContent {
-  will-change: transform, opacity;
+.DropdownMenuImageProfile {
+  @include image-dflt;
 
-  //min-width: 220px;
+  margin-top: 4px;
+  margin-right: 8px;
+}
+
+.DropdownMenuContent {
+  position: absolute;
+  right: -24px;
+
+  //will-change: transform, opacity;
+
   padding: 12px 12px 0;
+
   background-color: var(--color-dark-700);
   border-radius: 4px;
 }
