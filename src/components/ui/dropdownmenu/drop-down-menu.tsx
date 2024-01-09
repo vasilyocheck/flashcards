@@ -3,9 +3,10 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
 import s from './drop-down-menu.module.scss'
 
-import enter from './../button/icons/button-enter.svg'
 import arrow from './icons/arrow.svg'
-import user from './icons/user.svg'
+import deleteIcon from './icons/delete.svg'
+import edit from './icons/edit.svg'
+import play from './icons/play.svg'
 
 export const DropdownMenuMain = () => {
   return (
@@ -19,9 +20,9 @@ export const DropdownMenuMain = () => {
         sideOffset={12}
         style={{ outline: '1px solid var(--color-dark-500)' }}
       >
-        <Item icon={user}>My profile</Item>
-        <Item icon={enter}>Sign Up</Item>
-        <Item icon={enter}>Sign Up</Item>
+        <Item icon={play}>Learn</Item>
+        <Item icon={edit}>Edit</Item>
+        <Item icon={deleteIcon}>Delete</Item>
         <img className={s.Arrow} src={arrow} />
       </DropdownMenu.Content>
     </DropdownMenu.Root>

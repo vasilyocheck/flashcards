@@ -35,8 +35,6 @@ export const DropdownMenuAvatar = ({ img }: Props) => {
         </DropdownMenu.Label>
         <Item icon={user}>My profile</Item>
         <Item icon={enter}>Sign Up</Item>
-        {/*className={s.DropdownMenuArrow}*/}
-        {/*<DropdownMenu.Arrow className={s.Arrow} />*/}
         <img className={s.Arrow} src={arrow} />
       </DropdownMenu.Content>
     </DropdownMenu.Root>

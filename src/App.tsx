@@ -1,5 +1,6 @@
 import { Checkbox } from '@/components/ui/checkbox/checkbox'
-import { DropdownMenuAvatar } from '@/components/ui/dropdownmenu/drop-down-menu'
+import { DropdownMenuMain } from '@/components/ui/dropdownmenu/drop-down-menu'
+import { DropdownMenuAvatar } from '@/components/ui/dropdownmenu/drop-down-menu-main'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         }}
       >
         <DropdownMenuAvatar />
+        <DropdownMenuMain />
       </div>
     </div>
   )
