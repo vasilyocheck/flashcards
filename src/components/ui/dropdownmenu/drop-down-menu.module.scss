@@ -1,0 +1,144 @@
+@mixin image-dflt {
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+}
+
+@mixin line {
+  content: '';
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background: var(--color-dark-500);
+}
+
+button {
+  all: unset;
+}
+
+.Arrow {
+  position: absolute;
+  top: -8px;
+  right: 12px;
+}
+
+.Image {
+  padding-right: 6px;
+}
+
+.InfoProfileName {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+}
+
+.InfoProfileMail {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  font-style: normal;
+  line-height: var(--line-height-s);
+  color: var(--color-dark-100);
+}
+
+.InfoProfile {
+  display: flex;
+  flex-direction: column;
+}
+
+.DropdownMenuImage {
+  @include image-dflt;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.DropdownMenuImageProfile {
+  @include image-dflt;
+
+  margin-top: 4px;
+  margin-right: 8px;
+}
+
+.DropdownMenuContent {
+  will-change: transform, opacity;
+
+  position: absolute;
+  right: -24px;
+
+  padding: 0 12px;
+
+  background-color: var(--color-dark-700);
+  border-radius: 4px;
+}
+
+.DropdownMenuItem {
+  user-select: none;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  height: 40px;
+
+  font-size: 12px;
+  line-height: 16px;
+
+  border-radius: 3px;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
+  &:not(:last-of-type) {
+    &::after {
+      @include line;
+    }
+  }
+}
+
+.DropdownMenuLabel {
+  position: relative;
+
+  display: flex;
+
+  padding-top: 12px;
+  padding-right: 28px;
+  padding-bottom: 12px;
+
+  font-size: 14px;
+
+  &::after {
+    @include line;
+  }
+}
+
+.DropdownMenuArrow {
+  position: absolute;
+  top: 0;
+  right: 12px;
+  fill: var(--color-dark-700);
+}
+
+.IconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
