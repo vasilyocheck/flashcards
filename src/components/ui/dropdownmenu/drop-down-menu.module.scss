@@ -1,0 +1,151 @@
+/* reset */
+@mixin image-dflt {
+  width: 36px;
+  height: 36px;
+  border-radius: 36px;
+}
+
+button {
+  all: unset;
+}
+
+.Arrow {
+  position: absolute;
+  top: -8px;
+  right: 12px;
+}
+
+.Image {
+  padding-right: 6px;
+}
+
+// Добавить переменные var
+.InfoProfileName {
+  font-family: var(--font-family-primary);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+// Добавить переменные var
+.InfoProfileMail {
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 16px;
+  color: var(--color-dark-100);
+}
+
+.InfoProfile {
+  display: flex;
+  flex-direction: column;
+}
+
+.DropdownMenuImage {
+  @include image-dflt;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.DropdownMenuImageProfile {
+  @include image-dflt;
+
+  margin-top: 4px;
+  margin-right: 8px;
+}
+
+.DropdownMenuContent {
+  will-change: transform, opacity;
+
+  position: absolute;
+  right: -24px;
+
+  padding: 12px 12px 0;
+
+  background-color: var(--color-dark-700);
+  border-radius: 4px;
+}
+
+.DropdownMenuItem {
+  user-select: none;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  height: 40px;
+
+  font-size: 12px;
+  line-height: 16px;
+
+  border-radius: 3px;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
+  &:not(:last-of-type) {
+    &::after {
+      content: '';
+
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      width: 100%;
+      height: 1px;
+
+      background: var(--color-dark-500);
+    }
+  }
+}
+
+.DropdownMenuLabel {
+  position: relative;
+
+  display: flex;
+
+  padding-right: 28px;
+  padding-bottom: 12px;
+
+  font-size: 14px;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 1px;
+
+    background: var(--color-dark-500);
+  }
+}
+
+.DropdownMenuArrow {
+  position: absolute;
+  top: 0;
+  right: 12px;
+  fill: var(--color-dark-700);
+}
+
+.IconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

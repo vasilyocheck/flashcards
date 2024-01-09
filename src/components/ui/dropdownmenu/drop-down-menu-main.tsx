@@ -1,7 +1,7 @@
 import { Item } from '@/components/ui/dropdownmenu/item'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
-import s from './dropdownmenu.module.scss'
+import s from './drop-down-menu.module.scss'
 
 import enter from './../button/icons/button-enter.svg'
 import arrow from './icons/arrow.svg'
@@ -12,7 +12,7 @@ type Props = {
   img?: string
 }
 
-export const DropdownMenuComponent = ({ img }: Props) => {
+export const DropdownMenuAvatar = ({ img }: Props) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>

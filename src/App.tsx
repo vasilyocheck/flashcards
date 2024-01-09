@@ -1,5 +1,5 @@
 import { Checkbox } from '@/components/ui/checkbox/checkbox'
-import { DropdownMenuComponent } from '@/components/ui/dropdownmenu/dropdownmenu'
+import { DropdownMenuAvatar } from '@/components/ui/dropdownmenu/drop-down-menu'
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           justifyContent: 'center',
         }}
       >
-        <DropdownMenuComponent />
+        <DropdownMenuAvatar />
       </div>
     </div>
   )

@@ -1,1 +1,1 @@
-export * from '@/components/ui/checkbox/checkbox'
+export * from '@/components/ui/dropdownmenu/drop-down-menu'
