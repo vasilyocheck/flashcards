@@ -1,6 +1,7 @@
 import { Checkbox } from '@/components/ui/checkbox/checkbox'
-import { DropdownMenuMain } from '@/components/ui/dropdownmenu/drop-down-menu'
-import { DropdownMenuAvatar } from '@/components/ui/dropdownmenu/drop-down-menu-main'
+import { SelectComponent } from '@/components/ui/select'
+
+const arrayElements = ['Vitaliy', 'Kirill', 'Vasiliy']
 
 function App() {
   return (
@@ -15,8 +16,7 @@ function App() {
           justifyContent: 'center',
         }}
       >
-        <DropdownMenuAvatar />
-        <DropdownMenuMain />
+        <SelectComponent array={arrayElements} />
       </div>
     </div>
   )
