@@ -5,12 +5,17 @@ import s from './select.module.scss'
 
 type Props = {
   array: string[]
-  width?: string
+  className?: string
+  disabled?: boolean
 }
 
-export const SelectComponent = ({ array }: Props) => (
-  <Select.Root>
-    <Select.Trigger aria-label={'Food'} className={s.SelectTrigger}>
+export const SelectComponent = ({
+  array,
+  className = s.SelectTrigger,
+  disabled = false,
+}: Props) => (
+  <Select.Root disabled={disabled}>
+    <Select.Trigger className={className}>
       <Select.Value placeholder={array[0]} />
       <Select.Icon className={s.SelectIcon}>
         <svg
@@ -31,19 +36,19 @@ export const SelectComponent = ({ array }: Props) => (
       </Select.Icon>
     </Select.Trigger>
 
-    {/*<Select.Portal>*/}
-    <Select.Content className={s.SelectContent}>
-      <Select.Group className={s.SelectGroup}>
-        {array.map((el, i) => (
-          <SelectItem key={i} value={el}>
-            {el}
-          </SelectItem>
-        ))}
-      </Select.Group>
+    <Select.Portal>
+      <Select.Content className={s.SelectContent} position={'popper'}>
+        <Select.Group className={s.SelectGroup}>
+          {array.map((el, i) => (
+            <SelectItem key={i} value={el}>
+              {el}
+            </SelectItem>
+          ))}
+        </Select.Group>
 
-      {/*<Select.Separator className={s.SelectSeparator} />*/}
-    </Select.Content>
-    {/*</Select.Portal>*/}
+        {/*<Select.Separator className={s.SelectSeparator} />*/}
+      </Select.Content>
+    </Select.Portal>
   </Select.Root>
 )
 
