@@ -3,12 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Checkbox } from '@/components/ui/checkbox/checkbox'
 
 const meta = {
-  argTypes: {
-    /*variant: {
-      control: { type: 'radio' },
-      options: ['unlabeled', 'labeled'],
-    },*/
-  },
+  argTypes: {},
   component: Checkbox,
   tags: ['autodocs'],
   title: 'Components/Checkbox',
@@ -17,23 +12,60 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Unlabeled: Story = {
+export const DefaultUnlabeledUnchecked: Story = {
   args: {
     checked: false,
-    label: 'unlabeled',
+    label: '',
   },
 }
 
-export const UnlabeledChecked: Story = {
+export const DefaultUnlabeledChecked: Story = {
   args: {
     checked: true,
-    label: 'unlabeled checked',
+    label: '',
   },
 }
 
-export const Labeled: Story = {
+export const DefaultLabeledUnchecked: Story = {
   args: {
     checked: false,
-    label: 'labeled',
+    label: 'Check-box',
+  },
+}
+
+export const DefaultLabeledChecked: Story = {
+  args: {
+    checked: true,
+    label: 'Check-box',
+  },
+}
+
+export const DisabledUnlabeledUnchecked: Story = {
+  args: {
+    checked: false,
+    disabled: true,
+  },
+}
+
+export const DisabledUnlabeledChecked: Story = {
+  args: {
+    checked: true,
+    disabled: true,
+  },
+}
+
+export const DisabledLabeledUnchecked: Story = {
+  args: {
+    checked: false,
+    disabled: true,
+    label: 'Check-box',
+  },
+}
+
+export const DisabledLabeledChecked: Story = {
+  args: {
+    checked: true,
+    disabled: true,
+    label: 'Check-box',
   },
 }

@@ -2,70 +2,76 @@ button {
   all: unset;
 }
 
-.CheckboxIndicator {
-  color: blue;
-
-  &::before {
-    content: url('./icons/checkbox.svg');
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 24px;
-    height: 24px;
-  }
-}
-
-.CheckboxIndicator:hover {
-  color: blue;
-
-  &::before {
-    content: url('./icons/checkbox-hover.svg');
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 24px;
-    height: 24px;
-  }
-}
-
-.CheckboxRoot {
-  position: relative;
+.circle {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  &::before {
-    content: url('./icons/checkbox-unchecked.svg');
+  width: 24px;
+  height: 24px;
 
-    position: absolute;
-    top: 0;
-    left: 0;
+  border-radius: 50%;
+}
 
-    width: 24px;
-    height: 24px;
+.CheckboxRoot {
+  position: relative;
+
+  display: block;
+
+  width: 18px;
+  height: 18px;
+
+  border: 2px solid var(--color-light-900);
+  border-radius: 5px;
+
+  svg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  &[data-state='checked'] {
+    background-color: var(--color-light-100);
+    border: 2px solid var(--color-light-100);
+  }
+
+  &[data-state='unchecked'] {
+    background-color: transparent;
+    border: 2px solid var(--color-light-100);
+  }
+
+  &[data-disabled] {
+    background-color: var(--color-dark-100);
+    border: 2px solid var(--color-dark-100);
+  }
+
+  &[data-state='unchecked'][data-disabled] {
+    background-color: transparent;
   }
 }
 
-.CheckboxRoot:hover {
-  &::before {
-    content: url('./icons/checkbox-unchecked-hover.svg');
-
-    position: absolute;
-    top: -6px;
-    left: -6px;
-
-    width: 24px;
-    height: 24px;
-  }
+.textLabel {
+  margin-right: 3px;
+  margin-left: 8px;
 }
 
-.Label {
-  padding-left: 15px;
-  font-size: 15px;
-  line-height: 1;
-  color: white;
+.textLabelDisabled {
+  color: var(--color-dark-100);
+}
+
+.root {
+  display: flex;
+  align-items: center;
+
+  width: fit-content;
+  height: 36px;
+  padding-right: 6px;
+  padding-left: 6px;
+
+  font-family: sans-serif;
+
+  &:hover .circle {
+    background-color: var(--color-dark-500);
+    box-shadow: 0 0 0 6px var(--color-dark-500);
+  }
 }
