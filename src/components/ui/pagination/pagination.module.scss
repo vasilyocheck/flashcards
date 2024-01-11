@@ -1,0 +1,83 @@
+.button {
+  all: unset;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  width: fit-content;
+  height: 24px;
+}
+
+.pagingBody {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+
+  height: 100%;
+  margin-right: 12px;
+  margin-left: 12px;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
+}
+
+.showPageSize {
+  margin-right: 6px;
+  margin-left: 24px;
+  font-size: var(--font-size-s);
+}
+
+.selectOption {
+  cursor: pointer;
+
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: left;
+
+  box-sizing: border-box;
+  min-width: 48px;
+  height: 24px;
+  padding: 6px 2px;
+
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  color: var(--color-light-100);
+  text-align: left;
+
+  background-color: transparent;
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+
+  &:active {
+    border: 1px solid var(--color-dark-100);
+  }
+
+  &:hover {
+    background-color: var(--color-dark-500);
+  }
+
+  &:focus {
+    border: 1px solid var(--color-info-700);
+    outline: 1px solid var(--color-info-700);
+  }
+
+  .SelectIcon {
+    position: absolute;
+    top: 0;
+    right: 2px;
+  }
+
+  &[data-state='open'] {
+    border-radius: 2px 2px 0 0;
+
+    .SelectIcon {
+      transform: rotate(180deg);
+    }
+  }
+}

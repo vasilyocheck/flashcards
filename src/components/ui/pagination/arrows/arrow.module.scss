@@ -1,0 +1,12 @@
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 24px;
+  padding-top: 2px;
+}
+
+.rightArrow {
+  transform: rotate(180deg);
+}
