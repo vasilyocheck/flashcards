@@ -4,17 +4,14 @@ import { Button } from './'
 
 const meta = {
   argTypes: {
+    className: {
+      control: { type: 'radio' },
+      options: ['with-icon', 'none'],
+    },
     variant: {
       control: { type: 'radio' },
       fullWidth: true,
-      options: [
-        'primary',
-        'secondary',
-        'tertiary',
-        'link',
-        'primary-with-icon',
-        'secondary-with-icon',
-      ],
+      options: ['primary', 'secondary', 'tertiary', 'link'],
     },
   },
   component: Button,
@@ -36,7 +33,7 @@ export const Primary: Story = {
 export const PrimaryWithIcon: Story = {
   args: {
     children: 'Primary Button',
-    className: 'primary-with-icon',
+    className: 'with-icon',
     disabled: false,
     variant: 'primary',
   },
@@ -53,7 +50,7 @@ export const Secondary: Story = {
 export const SecondaryWithIcon: Story = {
   args: {
     children: 'Secondary Button',
-    className: 'secondary-with-icon',
+    className: 'with-icon',
     disabled: false,
     variant: 'secondary',
   },
