@@ -1,0 +1,102 @@
+/* reset */
+button,
+fieldset,
+input {
+  all: unset;
+}
+
+.DialogOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--black-a9);
+  animation: overlay-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.DialogContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: grid;
+  gap: 24px;
+
+  width: 90vw;
+  max-width: 450px;
+  max-height: 85vh;
+  padding: 24px;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  box-shadow:
+    hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
+    hsl(206deg 22% 7% / 20%) 0 10px 20px -15px;
+
+  animation: content-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.DialogContent:focus {
+  outline: none;
+}
+
+.Button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 35px;
+  padding: 0 15px;
+
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  color: green;
+
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px var(--black-a7);
+}
+
+.IconButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  font-family: inherit;
+  color: var(--color-light-100);
+
+  border-radius: 100%;
+}
+
+.IconButton:hover {
+  opacity: 0.8;
+}
+
+@keyframes overlay-show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes content-show {
+  from {
+    transform: translate(-50%, -46%) scale(0.94);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
