@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal/modal'
 import { Meta, StoryObj } from '@storybook/react'
 
@@ -11,5 +12,11 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {},
+  render: () => (
+    <Modal nameButton={'click'}>
+      <div>123</div>
+      <div>Привет чел</div>
+      <Button>click</Button>
+    </Modal>
+  ),
 }

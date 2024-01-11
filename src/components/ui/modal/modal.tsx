@@ -4,11 +4,11 @@ import s from './modal.module.scss'
 
 type Props = {
   buttonClose?: boolean
-  children: any
-  nameButton: string
+  children?: any
+  nameButton?: string
 }
 
-export const Modal = ({ buttonClose = true, children, nameButton }: Props) => (
+export const Modal = ({ buttonClose = true, children, nameButton = 'click' }: Props) => (
   <Dialog.Root>
     <Dialog.Trigger asChild>
       <button className={s.Button}>{nameButton}</button>

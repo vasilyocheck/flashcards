@@ -9,7 +9,7 @@ input {
   position: fixed;
   inset: 0;
   background-color: var(--black-a9);
-  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: overlay-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .DialogContent {
@@ -32,7 +32,7 @@ input {
     hsl(206deg 22% 7% / 35%) 0 10px 38px -10px,
     hsl(206deg 22% 7% / 20%) 0 10px 20px -15px;
 
-  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: content-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .DialogContent:focus {
@@ -76,14 +76,10 @@ input {
 }
 
 .IconButton:hover {
-  background-color: var(--violet-4);
+  opacity: 0.8;
 }
 
-.IconButton:focus {
-  box-shadow: 0 0 0 2px var(--violet-7);
-}
-
-@keyframes overlayShow {
+@keyframes overlay-show {
   from {
     opacity: 0;
   }
@@ -93,9 +89,9 @@ input {
   }
 }
 
-@keyframes contentShow {
+@keyframes content-show {
   from {
-    transform: translate(-50%, -48%) scale(0.96);
+    transform: translate(-50%, -46%) scale(0.94);
     opacity: 0;
   }
 
