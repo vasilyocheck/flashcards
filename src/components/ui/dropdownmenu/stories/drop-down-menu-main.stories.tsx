@@ -18,5 +18,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const DropDownMenuAvatar: Story = {
-  args: {},
+  args: {
+    mail: 'j&johnson@gmail.com',
+    name: 'Ivan',
+  },
 }
