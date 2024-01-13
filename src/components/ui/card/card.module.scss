@@ -1,0 +1,15 @@
+div {
+  all: unset;
+}
+
+.default {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  width: 420px;
+  height: 540px;
+  padding: 36px;
+
+  background-color: var(--color-dark-700);
+}
