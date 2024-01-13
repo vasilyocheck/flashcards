@@ -4,7 +4,7 @@ import * as RadixCheckbox from '@radix-ui/react-checkbox'
 import s from './checkbox.module.scss'
 
 type CheckboxProps = {
-  callback: (checked: boolean) => void
+  callback?: (checked: boolean) => void
   checked?: boolean
   disabled?: boolean
   id?: string
@@ -14,7 +14,9 @@ type CheckboxProps = {
 export const Checkbox = (props: CheckboxProps) => {
   const { callback, checked, disabled, id, label } = props
   const handleCheckedChange = () => {
-    callback(!checked)
+    if (callback) {
+      callback(!checked)
+    }
   }
   const textLabelClass = !disabled ? s.textLabel : s.textLabel + ' ' + s.textLabelDisabled
 
