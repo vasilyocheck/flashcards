@@ -1,0 +1,70 @@
+/* reset */
+button {
+  all: unset;
+}
+
+.RadioGroupRoot {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  height: 36px;
+  padding: 10px;
+
+  &[data-disabled] {
+    .Label {
+      color: var(--color-light-900);
+    }
+
+    .RadioGroupItem {
+      border: 1.6px solid var(--color-accent-900);
+    }
+
+    .RadioGroupIndicator {
+      background-color: var(--color-accent-900);
+    }
+  }
+}
+
+.RadioGroupItem:not([disabled]):hover {
+  background-color: var(--color-dark-500);
+  box-shadow: 0 0 0 10px var(--color-dark-500);
+}
+
+.RadioGroupItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 16px;
+  height: 16px;
+
+  border: 1.6px solid var(--color-accent-500);
+  border-radius: 50%;
+}
+
+/* .RadioGroupItem:focus {
+  background-color: var(--color-accent-900);
+  box-shadow: 0 0 0 10px var(--color-accent-900);
+} */
+
+.RadioGroupIndicator {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 8px;
+  height: 8px;
+
+  background-color: var(--color-accent-500);
+  border-radius: 50%;
+}
+
+.Label {
+  padding-left: 15px;
+  font-size: 15px;
+  line-height: 1;
+  color: white;
+}
