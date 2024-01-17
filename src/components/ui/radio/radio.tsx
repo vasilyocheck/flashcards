@@ -4,7 +4,7 @@ import * as RadioGroup from '@radix-ui/react-radio-group'
 
 import s from './radio.module.scss'
 
-type RadioGroupProps<T = string> = ComponentPropsWithoutRef<typeof RadioGroup.Root> & {
+export type RadioGroupProps<T = string> = ComponentPropsWithoutRef<typeof RadioGroup.Root> & {
   ariaLabel?: string
   array: T[]
   className?: string
@@ -31,7 +31,7 @@ export const RadioGroupComponent = forwardRef<ElementRef<typeof RadioGroup.Root>
       >
         {array.map((o, i) => {
           return (
-            <div style={{ alignItems: 'center', display: 'flex' }}>
+            <div key={i + o} style={{ alignItems: 'center', display: 'flex' }}>
               <RadioGroup.Item className={s.RadioGroupItem} id={`${i}`} value={o}>
                 <RadioGroup.Indicator className={s.RadioGroupIndicator} />
               </RadioGroup.Item>
