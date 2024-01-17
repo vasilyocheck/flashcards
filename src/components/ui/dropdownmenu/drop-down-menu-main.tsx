@@ -19,7 +19,7 @@ export const DropdownMenuAvatar = ({ img, mail, name }: Props) => {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <button aria-label={'Customise options'} className={s.IconButton}>
-          <img alt={'Аватар'} className={s.DropdownMenuImage} src={img ? img : image} />
+          <img alt={'Avatar'} className={s.DropdownMenuImage} src={img ? img : image} />
         </button>
       </DropdownMenu.Trigger>
 
@@ -29,7 +29,7 @@ export const DropdownMenuAvatar = ({ img, mail, name }: Props) => {
         style={{ outline: '1px solid var(--color-dark-500)' }}
       >
         <DropdownMenu.Label className={s.DropdownMenuLabel}>
-          <img alt={'Аватар'} className={s.DropdownMenuImageProfile} src={img ? img : image} />
+          <img alt={'Avatar'} className={s.DropdownMenuImageProfile} src={img ? img : image} />
           <div className={s.InfoProfile}>
             <span className={s.InfoProfileName}>{name}</span>
             <span className={s.InfoProfileMail}>{mail}</span>
@@ -37,7 +37,7 @@ export const DropdownMenuAvatar = ({ img, mail, name }: Props) => {
         </DropdownMenu.Label>
         <Item icon={user}>My profile</Item>
         <Item icon={enter}>Sign Out</Item>
-        <img alt={'Стрелка'} className={s.Arrow} src={arrow} />
+        <img alt={'Arrow'} className={s.Arrow} src={arrow} />
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   )
