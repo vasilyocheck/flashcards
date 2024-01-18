@@ -19,6 +19,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const CardEmpty: Story = {
-  args: {},
+export const CardComponent: Story = {
+  render: () => <Card style={{ height: '540px' }} />,
 }
