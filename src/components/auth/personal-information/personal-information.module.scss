@@ -1,5 +1,5 @@
 .text {
-  //margin-bottom: 23px;
+  margin-top: -8px;
   text-align: center;
   opacity: 0.5;
 }
@@ -10,6 +10,13 @@
 }
 
 .textName {
+  padding-left: 10px;
+}
+
+.nameBtn {
+  cursor: pointer;
+  height: 16px;
+  margin-left: 10px;
 }
 
 .img {
@@ -18,10 +25,23 @@
   border-radius: 50%;
 }
 
+.editBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.editBlockTrue {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
 .nameBlock {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .imgBlock {

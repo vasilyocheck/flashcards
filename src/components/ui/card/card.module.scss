@@ -7,8 +7,10 @@ div {
   flex-direction: column;
   gap: 18px;
 
+  box-sizing: border-box;
   width: 420px;
-  height: 540px;
+
+  //height: 540px;
   padding: 36px;
 
   background-color: var(--color-dark-700);
