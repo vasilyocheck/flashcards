@@ -21,7 +21,6 @@ export const PersonalInformation = ({ img, mail, name }: Props) => {
   const [editMode, setEditMode] = useState(false)
   const onSubmit = (data: any) => {
     setEditMode(false)
-    console.log(data)
   }
 
   return (
