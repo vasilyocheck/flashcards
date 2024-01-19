@@ -68,7 +68,7 @@ export const TextField = forwardRef<HTMLInputElement, PropsType>(
               onClick={setShowPasswordHandler}
               type={'button'}
             >
-              {showPassword ? <Eye /> : <EyeOff />}
+              {showPassword ? <EyeOff /> : <Eye />}
             </button>
           )}
         </div>
