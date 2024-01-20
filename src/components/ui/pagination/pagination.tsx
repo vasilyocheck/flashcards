@@ -3,6 +3,7 @@ import { pageSizeVariants } from '@/components/ui/pagination/data/page-size-vari
 import { PageButton } from '@/components/ui/pagination/page-button/page-button'
 import { createPagesPool } from '@/components/ui/pagination/utils/utils'
 import { SelectComponent } from '@/components/ui/select'
+import { v1 } from 'uuid'
 
 import s from './pagination.module.scss'
 
@@ -32,104 +33,63 @@ export const Pagination = (props: PaginationProps) => {
     onPageChange(newPageNum + currentPage)
   }
   const pagesCount = Math.ceil(itemsCount / itemsPerPage)
+  const outOfRange = -1
   const minPageNum = 1
-  const isPagesCountMinimum = pagesCount <= 7
+  const maxPageNum = 5
+  const minPageCount = 7
+  const lastFivePagesStart = pagesCount - 4
+  const isPagesCountMinimum = pagesCount <= minPageCount
   const contentToRender = []
 
-  let pagesToShow
-
   if (isPagesCountMinimum) {
-    for (let i = minPageNum; i <= pagesCount; i++) {
-      contentToRender.push(i)
-    }
-
-    const pagesPool = createPagesPool(minPageNum, pagesCount)
-
-    pagesToShow = pagesPool.map(p => {
-      return <PageButton choosePage={onPageChange} currentPage={currentPage} id={p} key={p} />
-    })
+    createPagesPool(minPageNum, pagesCount).map(p => contentToRender.push(p))
   }
-  if (!isPagesCountMinimum && currentPage <= 5) {
-    const pagesPool = createPagesPool(minPageNum, 5)
-    const start = pagesPool.map(p => (
-      <PageButton choosePage={onPageChange} currentPage={currentPage} id={p} key={p} />
-    ))
-    const middle = <PageButton key={pagesCount + 1} />
-    const end = (
-      <PageButton
-        choosePage={onPageChange}
-        currentPage={currentPage}
-        id={pagesCount}
-        key={pagesCount}
-      />
-    )
-
-    pagesToShow = [start, middle, end]
+  if (!isPagesCountMinimum && currentPage <= maxPageNum) {
+    createPagesPool(minPageNum, maxPageNum).map(p => contentToRender.push(p))
+    contentToRender.push(outOfRange)
+    contentToRender.push(pagesCount)
   }
-  if (!isPagesCountMinimum && currentPage > pagesCount - 5) {
-    const pagesPool = createPagesPool(pagesCount - 4, pagesCount)
-
-    const start = <PageButton choosePage={onPageChange} currentPage={currentPage} id={1} key={1} />
-    const middle = <PageButton key={pagesCount + 2} />
-    const end = pagesPool.map(p => (
-      <PageButton choosePage={onPageChange} currentPage={currentPage} id={p} key={p} />
-    ))
-
-    pagesToShow = [start, middle, end]
+  if (!isPagesCountMinimum && currentPage > maxPageNum && currentPage < lastFivePagesStart) {
+    contentToRender[0] = minPageNum
+    contentToRender[1] = outOfRange
+    contentToRender[2] = currentPage - 1
+    contentToRender[3] = currentPage
+    contentToRender[4] = currentPage + 1
+    contentToRender[5] = outOfRange
+    contentToRender[6] = pagesCount
   }
-  if (!isPagesCountMinimum && currentPage > 5 && currentPage < pagesCount - 4) {
-    const el1 = <PageButton choosePage={onPageChange} currentPage={currentPage} id={1} key={1} />
-    const el2 = <PageButton key={pagesCount + 1} />
-    const el3 = (
-      <PageButton
-        choosePage={onPageChange}
-        currentPage={currentPage}
-        id={currentPage - 1}
-        key={currentPage - 1}
-      />
-    )
-    const el4 = (
-      <PageButton
-        choosePage={onPageChange}
-        currentPage={currentPage}
-        id={currentPage}
-        key={currentPage}
-      />
-    )
-    const el5 = (
-      <PageButton
-        choosePage={onPageChange}
-        currentPage={currentPage}
-        id={currentPage + 1}
-        key={currentPage + 1}
-      />
-    )
-    const el6 = <PageButton key={pagesCount + 2} />
-    const el7 = (
-      <PageButton
-        choosePage={onPageChange}
-        currentPage={currentPage}
-        id={pagesCount}
-        key={pagesCount}
-      />
-    )
-
-    pagesToShow = [el1, el2, el3, el4, el5, el6, el7]
+  if (!isPagesCountMinimum && currentPage > maxPageNum && currentPage >= lastFivePagesStart) {
+    contentToRender[0] = minPageNum
+    contentToRender[1] = outOfRange
+    createPagesPool(lastFivePagesStart, pagesCount).map(p => contentToRender.push(p))
   }
+
+  const pagesToShow = contentToRender.map(item => {
+    const uniqueId = v1()
+
+    return item > 0 ? (
+      <PageButton currentPage={currentPage} id={item} key={uniqueId} onClick={onPageChange} />
+    ) : (
+      <PageButton key={uniqueId} />
+    )
+  })
 
   return (
     <div className={s.wrapper}>
       <Arrow
         callback={() => changePage('prev')}
         direction={'prev'}
-        disabled={isPagesCountMinimum || currentPage < 6}
+        disabled={isPagesCountMinimum || currentPage <= maxPageNum}
         key={'prev'}
       />
       <div className={s.pagingBody}>{pagesToShow}</div>
       <Arrow
         callback={() => changePage('next')}
         direction={'next'}
-        disabled={isPagesCountMinimum || currentPage > pagesCount - 5}
+        disabled={
+          isPagesCountMinimum ||
+          (contentToRender[1] === outOfRange && contentToRender[5] > outOfRange)
+        }
         key={'next'}
       />
       <span className={s.showPageSize}>
@@ -141,7 +101,7 @@ export const Pagination = (props: PaginationProps) => {
           value={`${itemsPerPage}`}
         />{' '}
         на странице
-      </span>{' '}
+      </span>
     </div>
   )
 }
