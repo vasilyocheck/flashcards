@@ -1,25 +1,38 @@
+import { ReactNode } from 'react'
+
+import { Button } from '@/components/ui/button'
+import { Typography } from '@/components/ui/typography'
 import * as Dialog from '@radix-ui/react-dialog'
 
 import s from './modal.module.scss'
 
 type Props = {
-  buttonClose?: boolean
-  children?: any
+  children?: ReactNode | string
   nameButton?: string
+  title?: string
+  variantForButton?: 'link' | 'primary' | 'secondary' | 'tertiary'
+  width?: string
 }
 
-export const Modal = ({ buttonClose = true, children, nameButton = 'click' }: Props) => {
+export const Modal = ({
+  children,
+  nameButton = 'click',
+  title,
+  variantForButton = 'primary',
+  width = '253px',
+}: Props) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className={s.Button}>{nameButton}</button>
+        {/*<button className={s.Button}>{nameButton}</button>*/}
+        <Button variant={variantForButton}>{nameButton}</Button>
       </Dialog.Trigger>
 
       <Dialog.Portal>
         <Dialog.Overlay className={s.DialogOverlay} />
-        <Dialog.Content className={s.DialogContent}>
-          {children}
-          {buttonClose && (
+        <Dialog.Content className={s.DialogContent} style={{ width }}>
+          <div className={s.title}>
+            <Typography variant={'h2'}>{title}</Typography>
             <Dialog.Close asChild>
               <button aria-label={'Close'} className={s.IconButton}>
                 <svg
@@ -45,7 +58,8 @@ export const Modal = ({ buttonClose = true, children, nameButton = 'click' }: Pr
                 </svg>
               </button>
             </Dialog.Close>
-          )}
+          </div>
+          <div className={s.content}>{children}</div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
