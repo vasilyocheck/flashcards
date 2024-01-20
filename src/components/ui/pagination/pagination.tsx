@@ -116,7 +116,6 @@ export const Pagination = (props: PaginationProps) => {
 
     pagesToShow = [el1, el2, el3, el4, el5, el6, el7]
   }
-  console.log(contentToRender)
 
   return (
     <div className={s.wrapper}>
