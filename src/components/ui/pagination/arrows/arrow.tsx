@@ -1,3 +1,5 @@
+import { KeyboardEvent } from 'react'
+
 import s from './arrow.module.scss'
 
 type ArrowProps = {
@@ -11,9 +13,14 @@ export const Arrow = ({ callback, direction, disabled }: ArrowProps) => {
   const handleCallback = () => {
     callback()
   }
+  const handleOnSpaceDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.code === 'Space') {
+      callback()
+    }
+  }
 
   return (
-    <button className={arrowStyle} disabled={disabled}>
+    <button className={arrowStyle} disabled={disabled} onKeyDown={handleOnSpaceDown}>
       <svg
         fill={'none'}
         height={'16'}
