@@ -34,7 +34,7 @@ export const CreateNewPassword = () => {
           <TextField {...register('password')} label={'Password'} type={'password'}></TextField>
           {errors.password?.message && (
             <Typography className={s.errorMessage} variant={'error'}>
-              {errors.password.message}
+              {errors.password.message as string}
             </Typography>
           )}
         </div>
