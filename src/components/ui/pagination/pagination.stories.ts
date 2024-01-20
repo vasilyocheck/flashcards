@@ -14,30 +14,30 @@ type Story = StoryObj<typeof meta>
 
 export const PaginationPageOneSelected: Story = {
   args: {
-    choosePage: () => {},
     currentPage: 1,
     itemsCount: 1005,
     itemsPerPage: 10,
-    setItemsPerPage: () => {},
+    onItemsPerPageChange: () => {},
+    onPageChange: () => {},
   },
 }
 
 export const PaginationPageSevenSelected: Story = {
   args: {
-    choosePage: () => {},
     currentPage: 7,
     itemsCount: 1005,
     itemsPerPage: 10,
-    setItemsPerPage: () => {},
+    onItemsPerPageChange: () => {},
+    onPageChange: () => {},
   },
 }
 
 export const Pagination98Selected: Story = {
   args: {
-    choosePage: () => {},
     currentPage: 98,
     itemsCount: 1005,
     itemsPerPage: 10,
-    setItemsPerPage: () => {},
+    onItemsPerPageChange: () => {},
+    onPageChange: () => {},
   },
 }
