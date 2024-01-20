@@ -1,18 +1,18 @@
 import s from './page-button.module.scss'
 
 type PageButtonProps = {
-  choosePage?: (buttonId: number) => void
   currentPage?: number
   id?: number
+  onClick?: (buttonId: number) => void
 }
 
 export const PageButton = (props: PageButtonProps) => {
-  const { choosePage, currentPage, id: id } = props
+  const { currentPage, id: id, onClick } = props
   const currentStyle =
     currentPage === id && id !== undefined ? s.bodyItem + ' ' + s.bodyItemActive : s.bodyItem
   const handleChoosePage = () => {
-    if (choosePage && id) {
-      choosePage(id)
+    if (onClick && id) {
+      onClick(id)
     }
   }
 
