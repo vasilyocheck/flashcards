@@ -11,6 +11,16 @@ button {
   height: 24px;
 
   border-radius: 50%;
+
+  &:focus-visible {
+    background-color: var(--color-dark-100);
+    box-shadow: 0 0 0 6px var(--color-dark-100);
+  }
+
+  &:active {
+    background-color: var(--color-dark-100);
+    box-shadow: 0 0 0 6px var(--color-dark-100);
+  }
 }
 
 .CheckboxRoot {
