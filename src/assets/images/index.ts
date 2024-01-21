@@ -1,3 +1,4 @@
+export { DefaultAvatar } from './defaultAvatar'
 export { Email } from './email'
 export { Loading } from './loading'
 export { Logo } from './logo'
