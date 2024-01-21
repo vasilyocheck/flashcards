@@ -24,7 +24,7 @@ export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Checkb
 
     return (
       <label className={s.root} htmlFor={id}>
-        <span className={s.circle}>
+        <button className={s.circle}>
           <RadixCheckbox.Root
             checked={checked}
             className={!disabled ? s.CheckboxRoot : s.CheckboxRoot + ' ' + s.disabled}
@@ -39,7 +39,7 @@ export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Checkb
               <Tick disabled={disabled} />
             </RadixCheckbox.Indicator>
           </RadixCheckbox.Root>
-        </span>
+        </button>
         {label && <span className={textLabelClass}>{label}</span>}
       </label>
     )
