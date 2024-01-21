@@ -8,6 +8,7 @@ const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
 }
 
+import { ImageIcon } from '@/assets'
 import { Checkbox } from '@/components/ui/checkbox'
 import { TextField } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
@@ -24,6 +25,7 @@ export const AddNewDeck: Story = {
     <Modal nameButton={'Add New Deck'} title={'Add New Deck'} width={'542px'}>
       <TextField label={'Name Pack'} name={'123'}></TextField>
       <Button className={'uploadButton'} fullWidth variant={'secondary'}>
+        <ImageIcon style={{ height: '16px', width: '16px' }} />
         Upload Image
       </Button>
       <div className={s.checkbox}>
@@ -46,6 +48,7 @@ export const AddNewCard: Story = {
       <TextField label={'Question?'} name={'123'}></TextField>
       <img src={image} />
       <Button className={'uploadButton'} variant={'secondary'}>
+        <ImageIcon style={{ height: '16px', width: '16px' }} />
         Change Image
       </Button>
       <Typography className={s.textQuestion} variant={'body2'}>
@@ -54,6 +57,7 @@ export const AddNewCard: Story = {
       <TextField label={'Answer'} name={'123'}></TextField>
       <img src={image} />
       <Button className={'uploadButton'} variant={'secondary'}>
+        <ImageIcon style={{ height: '16px', width: '16px' }} />
         Change Image
       </Button>
       <div className={s.buttons}>
