@@ -1,18 +1,12 @@
-import { Checkbox } from '@/components/ui/checkbox/checkbox'
+import { Provider } from 'react-redux'
 
-function App() {
+import { Router } from '@/router'
+import { store } from '@/services/store'
+
+export const App = () => {
   return (
-    <div>
-      <span>Hello</span>
-      <Checkbox />
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      ></div>
-    </div>
+    <Provider store={store}>
+      <Router />
+    </Provider>
   )
 }
-
-export default App
