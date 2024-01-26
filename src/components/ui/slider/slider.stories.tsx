@@ -25,7 +25,7 @@ const meta: Meta<typeof Slider> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const SliderWithHooks = (args: SliderProps) => {
+export const SliderWithHooks = (args: SliderProps) => {
   const [value, setValue] = useState(args.value)
 
   const handleOnValueChange = (value: number[]) => {

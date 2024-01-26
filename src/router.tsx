@@ -6,6 +6,8 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { MainPage } from '@/pages/main-page'
+
 const publicRoutes: RouteObject[] = [
   {
     element: <div>login</div>,
@@ -15,7 +17,11 @@ const publicRoutes: RouteObject[] = [
 
 const privateRoutes: RouteObject[] = [
   {
-    element: <div>hello</div>,
+    element: <MainPage />,
+    path: '/',
+  },
+  {
+    element: <div>2 страница</div>,
     path: '/',
   },
 ]
