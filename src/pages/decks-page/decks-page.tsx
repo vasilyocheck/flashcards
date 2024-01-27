@@ -1,10 +1,8 @@
 import { ChangeEvent, useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import { DeleteIcon, ImageIcon } from '@/assets'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Header } from '@/components/ui/header'
 import { Modal } from '@/components/ui/modal'
 import { Pagination } from '@/components/ui/pagination'
 import { Slider } from '@/components/ui/slider'
@@ -16,8 +14,8 @@ import { Typography } from '@/components/ui/typography'
 import { useDebounce } from '@/hooks/hooks'
 import { useGetDecksQuery } from '@/services/base-api'
 
-import sModal from '../components/ui/modal/modal.module.scss'
-import s from './main-page.module.scss'
+import sModal from '../../components/ui/modal/modal.module.scss'
+import s from './decks-page.module.scss'
 
 export type PaginationType = {
   currentPage: number
@@ -52,10 +50,8 @@ type Sort = {
   key: string
 } | null
 
-export const MainPage = () => {
-  const navigate = useNavigate()
+export const DecksPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  // const [currentPage, setCurrentPage] = useSearchParams(serializeFormQuery(1))
   const [valuesMinMax, setValuesMinMax] = useState([0, 10])
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState<Sort>(null)
@@ -90,15 +86,8 @@ export const MainPage = () => {
     return <div>...loading</div>
   }
 
-  console.log(sortedString)
-
   return (
     <div className={s.wrapper}>
-      <Header
-        callback={() => navigate('/login')}
-        userEmail={'sample@sample.com'}
-        userName={'Ivan'}
-      />
       <div className={s.title}>
         <Typography variant={'large'}>Decks list</Typography>
         <Modal nameButton={'Add New Deck'} title={'Add New Deck'} width={'542px'}>
@@ -124,10 +113,9 @@ export const MainPage = () => {
           type={'search'}
           value={search}
         />
-        {/* Не могу добавить стиль для главной кнопки, нет логики */}
-        <Tabs label={'Show decks cards'} style={{ width: '230px' }}>
-          <TabItem value={'My cards'}>My cards</TabItem>
-          <TabItem value={'All cards'}>All cards</TabItem>
+        <Tabs className={s.tabs} label={'Show decks cards'} value={'All Cards'}>
+          <TabItem value={'My Cards'}>My cards</TabItem>
+          <TabItem value={'All Cards'}>All cards</TabItem>
         </Tabs>
         <Slider
           label={'Number of cards'}

@@ -1,6 +1,6 @@
-import { DeleteIcon, EditIcon } from '@/assets'
+import { DeleteIcon, EditIcon, PlayCircleIcon } from '@/assets'
 import { Column } from '@/components/ui/table/table.stories'
-import { PlayIcon } from '@radix-ui/react-icons'
+// import { PlayIcon } from '@radix-ui/react-icons'
 
 import s from './tableConstuctor/table.module.scss'
 
@@ -99,7 +99,7 @@ export const TableStory = ({ items, onSort, sort }: TableType) => {
               <TableDataCell>{new Date(t.updated).toLocaleDateString('ru-RU')}</TableDataCell>
               <TableDataCell>{t.author.name}</TableDataCell>
               <TableDataCell>
-                <PlayIcon />
+                <PlayCircleIcon size={1} />
                 <EditIcon size={1} />
                 <DeleteIcon size={1} />
               </TableDataCell>
