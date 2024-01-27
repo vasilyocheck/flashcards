@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+
 import { MainPage } from '@/pages/main-page'
 
 const publicRoutes: RouteObject[] = [
@@ -18,10 +19,6 @@ const publicRoutes: RouteObject[] = [
 const privateRoutes: RouteObject[] = [
   {
     element: <MainPage />,
-    path: '/',
-  },
-  {
-    element: <div>2 страница</div>,
     path: '/',
   },
 ]
