@@ -1,4 +1,4 @@
-import { DeckResponse } from '@/pages/main-page'
+import { DeckResponse } from '@/pages/decks-page/decks-page'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export type GetDecksType = {
