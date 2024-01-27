@@ -9,7 +9,7 @@ import s from './textfield.module.scss'
 
 export type TextFieldProps = {
   errorMessage?: string
-  label: string
+  label?: string
   type?: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 

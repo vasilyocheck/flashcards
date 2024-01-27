@@ -1,1 +1,1 @@
-export const pageSizeVariants = ['10', '20', '30', '50', '100']
+export const pageSizeVariants = ['5', '7', '10', '15']

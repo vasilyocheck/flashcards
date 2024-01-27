@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { Button } from '@/components/ui/button'
+import { Button, ButtonProps } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import * as Dialog from '@radix-ui/react-dialog'
 
@@ -20,7 +20,7 @@ export const Modal = ({
   title,
   variantForButton = 'primary',
   width = '253px',
-}: Props) => {
+}: Props & Omit<ButtonProps, keyof Props>) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
