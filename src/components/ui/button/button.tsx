@@ -4,6 +4,7 @@ import s from './button.module.scss'
 
 export type ButtonProps<T extends ElementType = 'button'> = {
   as?: T
+  callback?: () => void
   children?: ReactNode | string
   className?: string
   fullWidth?: boolean
@@ -15,6 +16,7 @@ export const Button = <T extends ElementType = 'button'>(
 ) => {
   const {
     as: Component = 'button',
+    callback,
     children,
     className,
     fullWidth,
@@ -25,6 +27,7 @@ export const Button = <T extends ElementType = 'button'>(
   return (
     <Component
       className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className ? s[className] : ''}`}
+      onClick={callback}
       {...rest}
     >
       {children}

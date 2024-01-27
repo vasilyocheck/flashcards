@@ -12,7 +12,7 @@ import s from '../tableConstuctor/table.module.scss'
 export const TableHeader: FC<
   Omit<
     ComponentPropsWithoutRef<'thead'> & {
-      columns: Column[]
+      columns?: Column[]
       onSort?: (sort: Sort) => void
       sort?: Sort
     },
@@ -41,10 +41,12 @@ export const TableHeader: FC<
     arrow: clsx(s.arrow, sort?.direction === 'asc' && s.arrowUp),
   }
 
+  console.log(sort?.direction)
+
   return (
     <TableHead {...rest}>
       <TableRow>
-        {columns.map(({ key, sortable = true, title }) => (
+        {columns?.map(({ key, sortable = true, title }) => (
           <TableHeadCell key={key} onClick={handleSort(key, sortable)}>
             <Typography className={s.tableHeadTitle} variant={'subtitle2'}>
               {title}{' '}

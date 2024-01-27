@@ -6,7 +6,8 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { MainPage } from '@/pages/main-page/main-page'
+
+import { MainPage } from '@/pages/main-page'
 
 const publicRoutes: RouteObject[] = [
   {
