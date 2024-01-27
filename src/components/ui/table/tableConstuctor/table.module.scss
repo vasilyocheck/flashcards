@@ -50,17 +50,12 @@
 
 .arrow {
   position: absolute;
-  top: 10px;
+  //top: 10px;
   transform-origin: center;
 
   margin-left: 5px;
 
   fill: var(--color-light-100);
-}
-
-.arrowUp {
-  transform: rotate(90deg);
-  transition: all 0.3s ease-in-out;
 }
 
 .tableImage {
@@ -71,4 +66,9 @@
 .icon {
   width: 20px;
   height: 20px;
+}
+
+.arrowUp {
+  transform: rotate(180deg);
+  transition: all 0.3s ease-in-out;
 }

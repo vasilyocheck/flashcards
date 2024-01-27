@@ -1,5 +1,4 @@
 import { DeckResponse } from '@/pages/main-page'
-import { BaseQueryArg } from '@reduxjs/toolkit/dist/query/baseQueryTypes'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export type GetDecksType = {
@@ -36,4 +35,4 @@ export const baseApi = createApi({
   reducerPath: 'baseApi',
 })
 
-export const { useCreateDeckMutation, useGetDecksQuery } = baseApi
+export const { useGetDecksQuery } = baseApi

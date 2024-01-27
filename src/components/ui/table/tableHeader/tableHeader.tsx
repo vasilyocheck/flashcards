@@ -41,6 +41,8 @@ export const TableHeader: FC<
     arrow: clsx(s.arrow, sort?.direction === 'asc' && s.arrowUp),
   }
 
+  console.log(sort?.direction)
+
   return (
     <TableHead {...rest}>
       <TableRow>

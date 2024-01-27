@@ -13,7 +13,6 @@ export const Slider = forwardRef<ElementRef<typeof SliderPrimitive.Root>, Slider
 
     return (
       <div>
-        {/*className={s.valueWrapper}*/}
         {label && <span>{label}</span>}
         <div className={s.container}>
           <span className={s.valueWrapper}>{restProps?.value?.[0]}</span>

@@ -7,7 +7,18 @@ import s from './tableConstuctor/table.module.scss'
 import { Table, TableBody, TableDataCell, TableRow } from './tableConstuctor'
 import { TableHeader } from './tableHeader/tableHeader'
 
-export const TableStory = (items: any) => {
+type Sort = {
+  direction: 'asc' | 'desc'
+  key: string
+} | null
+
+type TableType = {
+  items: any
+  onSort?: (sort: Sort) => void
+  sort?: Sort
+}
+
+export const TableStory = ({ items, onSort, sort }: TableType) => {
   //   const options = [
   //     {
   //       cardsCount: 10,
@@ -48,7 +59,7 @@ export const TableStory = (items: any) => {
   //   ]
   const columns: Array<Column> = [
     {
-      key: 'title',
+      key: 'name',
       title: 'Name',
     },
     {
@@ -60,7 +71,7 @@ export const TableStory = (items: any) => {
       title: 'Last Updated',
     },
     {
-      key: 'createdBy',
+      key: 'author.name', // ЗДЕСЬ поправь
       title: 'Created by',
     },
     {
@@ -73,10 +84,9 @@ export const TableStory = (items: any) => {
 
   return (
     <Table>
-      {/*onClick={sortHandler} onSort={setSort} sort={sort}*/}
-      <TableHeader columns={columns} />
+      <TableHeader columns={columns} onSort={onSort} sort={sort} />
       <TableBody>
-        {items.items.map((t: any) => {
+        {items.map((t: any) => {
           return (
             <TableRow key={t.id}>
               <TableDataCell>

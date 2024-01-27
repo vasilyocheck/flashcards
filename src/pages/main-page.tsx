@@ -1,15 +1,13 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { DeleteIcon, ImageIcon } from '@/assets'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-import { ControlledTextField } from '@/components/ui/controlled/controlled-textfield'
 import { Header } from '@/components/ui/header'
 import { Modal } from '@/components/ui/modal'
 import { Pagination } from '@/components/ui/pagination'
 import { Slider } from '@/components/ui/slider'
-import { SliderWithHooks } from '@/components/ui/slider/slider.stories'
 import { TableStory } from '@/components/ui/table'
 import { Tabs } from '@/components/ui/tabs'
 import { TabItem } from '@/components/ui/tabs/tabItem'
@@ -49,33 +47,58 @@ export interface DeckAuthor {
   name: string
 }
 
+type Sort = {
+  direction: 'asc' | 'desc'
+  key: string
+} | null
+
 export const MainPage = () => {
   const navigate = useNavigate()
   const [currentPage, setCurrentPage] = useState(1)
-  // const [min, setMin] = useState(0)
-  // const [max, setMax] = useState(10)
+  // const [currentPage, setCurrentPage] = useSearchParams(serializeFormQuery(1))
   const [valuesMinMax, setValuesMinMax] = useState([0, 10])
   const [search, setSearch] = useState('')
+  const [sort, setSort] = useState<Sort>(null)
+
+  const sortedString = useMemo(() => {
+    if (!sort) {
+      return undefined
+    }
+
+    return `${sort.key}-${sort.direction}`
+  }, [sort])
+
   const debouncedSearch = useDebounce<string>(search, 500)
-  const { data } = useGetDecksQuery({ currentPage, name: debouncedSearch })
+  const { data } = useGetDecksQuery({
+    currentPage,
+    maxCardsCount: valuesMinMax[1],
+    minCardsCount: valuesMinMax[0],
+    name: debouncedSearch,
+    orderBy: sortedString,
+  })
 
   const clearFilter = () => {
     setSearch('')
+    setValuesMinMax([0, 10])
   }
 
-  const handleOnValueChange = () => {}
-
-  useEffect(() => {}, [currentPage])
+  const handleOnValueChange = (value: number[]) => {
+    setValuesMinMax(value)
+  }
 
   if (!data) {
     return <div>...loading</div>
   }
 
-  console.log(valuesMinMax)
+  console.log(sortedString)
 
   return (
     <div className={s.wrapper}>
-      <Header callabck={() => navigate('/login')} />
+      <Header
+        callback={() => navigate('/login')}
+        userEmail={'sample@sample.com'}
+        userName={'Ivan'}
+      />
       <div className={s.title}>
         <Typography variant={'large'}>Decks list</Typography>
         <Modal nameButton={'Add New Deck'} title={'Add New Deck'} width={'542px'}>
@@ -95,21 +118,23 @@ export const MainPage = () => {
       </div>
       <div className={s.options}>
         <TextField
-          onChange={(e: any) => setSearch(e.currentTarget.value + '')}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.currentTarget.value + '')}
           placeholder={'Input search'}
           style={{ width: '300px' }}
           type={'search'}
           value={search}
         />
-        {/*<ControlledTextField placeholder={'Input search'} style={{ width: '300px' }} type={'search'} />*/}
+        {/* Не могу добавить стиль для главной кнопки, нет логики */}
         <Tabs label={'Show decks cards'} style={{ width: '230px' }}>
-          <TabItem value={'1'}>My cards</TabItem>
-          <TabItem value={'2'}>All cards</TabItem>
+          <TabItem value={'My cards'}>My cards</TabItem>
+          <TabItem value={'All cards'}>All cards</TabItem>
         </Tabs>
-        {/*<SliderWithHooks label={'Number of cards'} max={10} min={0} step={1} value={[min, max]} />*/}
         <Slider
           label={'Number of cards'}
+          max={10}
+          min={0}
           onValueChange={handleOnValueChange}
+          step={1}
           value={valuesMinMax}
         />
         <Button className={'buttonDeleteTable'} onClick={clearFilter} variant={'secondary'}>
@@ -117,7 +142,7 @@ export const MainPage = () => {
           Clear Filter
         </Button>
       </div>
-      <TableStory items={data.items} />
+      <TableStory items={data.items} onSort={setSort} sort={sort} />
       <div className={s.pagination}>
         <Pagination
           currentPage={currentPage}
