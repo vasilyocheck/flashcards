@@ -52,6 +52,7 @@ export const DecksPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [valuesMinMax, setValuesMinMax] = useState([0, 10])
   const [search, setSearch] = useState('')
+  const [tabValue, setTabValue] = useState('All Cards')
   const [sort, setSort] = useState<Sort>(null)
 
   const sortedString = useMemo(() => {
@@ -76,6 +77,18 @@ export const DecksPage = () => {
     setValuesMinMax([0, 10])
   }
 
+  const onChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.currentTarget.value + '')
+  }
+
+  const onChangeTabsValue = (value: string) => {
+    setTabValue(value)
+  }
+
+  const onChangePagination = (currentPageNum: number) => {
+    setCurrentPage(currentPageNum)
+  }
+
   const handleOnValueChange = (value: number[]) => {
     setValuesMinMax(value)
   }
@@ -93,12 +106,17 @@ export const DecksPage = () => {
       <div className={s.options}>
         <TextField
           className={s.textField}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.currentTarget.value + '')}
+          onChange={onChangeInputValue}
           placeholder={'Input search'}
           type={'search'}
           value={search}
         />
-        <Tabs className={s.tabs} label={'Show decks cards'} value={'All Cards'}>
+        <Tabs
+          className={s.tabs}
+          label={'Show decks cards'}
+          onValueChange={onChangeTabsValue}
+          value={tabValue}
+        >
           <TabItem value={'My Cards'}>My cards</TabItem>
           <TabItem value={'All Cards'}>All cards</TabItem>
         </Tabs>
@@ -121,9 +139,7 @@ export const DecksPage = () => {
           currentPage={currentPage}
           itemsCount={data.pagination.totalItems}
           onItemsPerPageChange={() => {}}
-          onPageChange={currentPageNum => {
-            setCurrentPage(currentPageNum)
-          }}
+          onPageChange={onChangePagination}
         />
       </div>
     </div>
