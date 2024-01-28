@@ -11,6 +11,11 @@ export type GetDecksType = {
   orderBy?: string
 }
 
+export type ArgCreateDeckType = {
+  isPrivate?: boolean
+  name: string
+}
+
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.flashcards.andrii.es',
@@ -21,10 +26,18 @@ export const baseApi = createApi({
   }),
   endpoints: builder => {
     return {
-      // createDeck: builder.mutation<any, void>({
-      //   query: () => {},
-      // }),
+      addDeck: builder.mutation<any, ArgCreateDeckType>({
+        invalidatesTags: ['Decks'],
+        query: deck => {
+          return {
+            body: deck,
+            method: 'POST',
+            url: '/v1/decks',
+          }
+        },
+      }),
       getDecks: builder.query<DeckResponse, GetDecksType | void>({
+        providesTags: ['Decks'],
         query: args => ({
           params: args ? args : undefined,
           url: `/v2/decks`,
@@ -33,6 +46,7 @@ export const baseApi = createApi({
     }
   },
   reducerPath: 'baseApi',
+  tagTypes: ['Decks'],
 })
 
-export const { useGetDecksQuery } = baseApi
+export const { useAddDeckMutation, useGetDecksQuery } = baseApi
