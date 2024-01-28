@@ -93,7 +93,7 @@ export const DecksPage = () => {
         <Modal nameButton={'Add New Deck'} title={'Add New Deck'} width={'542px'}>
           <TextField label={'Name Pack'} name={'123'}></TextField>
           <Button className={'uploadButton'} fullWidth variant={'secondary'}>
-            <ImageIcon style={{ height: '16px', width: '16px' }} />
+            <ImageIcon size={1} />
             Upload Image
           </Button>
           <div className={sModal.checkbox}>
@@ -107,9 +107,9 @@ export const DecksPage = () => {
       </div>
       <div className={s.options}>
         <TextField
+          className={s.textField}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.currentTarget.value + '')}
           placeholder={'Input search'}
-          style={{ width: '300px' }}
           type={'search'}
           value={search}
         />
@@ -126,7 +126,7 @@ export const DecksPage = () => {
           value={valuesMinMax}
         />
         <Button className={'buttonDeleteTable'} onClick={clearFilter} variant={'secondary'}>
-          <DeleteIcon style={{ height: '16px', width: '16px' }} />
+          <DeleteIcon size={1} />
           Clear Filter
         </Button>
       </div>
