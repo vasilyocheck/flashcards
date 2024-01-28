@@ -1,9 +1,8 @@
 import { ChangeEvent, useMemo, useState } from 'react'
 
-import { DeleteIcon, ImageIcon } from '@/assets'
+import { DeleteIcon } from '@/assets'
+import { AddNewDeck } from '@/components/decks'
 import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Modal } from '@/components/ui/modal'
 import { Pagination } from '@/components/ui/pagination'
 import { Slider } from '@/components/ui/slider'
 import { TableStory } from '@/components/ui/table'
@@ -14,7 +13,6 @@ import { Typography } from '@/components/ui/typography'
 import { useDebounce } from '@/hooks/hooks'
 import { useGetDecksQuery } from '@/services/base-api'
 
-import sModal from '../../components/ui/modal/modal.module.scss'
 import s from './decks-page.module.scss'
 
 export type PaginationType = {
@@ -90,20 +88,7 @@ export const DecksPage = () => {
     <div className={s.wrapper}>
       <div className={s.title}>
         <Typography variant={'large'}>Decks list</Typography>
-        <Modal nameButton={'Add New Deck'} title={'Add New Deck'} width={'542px'}>
-          <TextField label={'Name Pack'} name={'123'}></TextField>
-          <Button className={'uploadButton'} fullWidth variant={'secondary'}>
-            <ImageIcon size={1} />
-            Upload Image
-          </Button>
-          <div className={sModal.checkbox}>
-            <Checkbox label={'Private pack'} />
-          </div>
-          <div className={sModal.buttons}>
-            <Button variant={'secondary'}>Cancel</Button>
-            <Button>Add New Pack</Button>
-          </div>
-        </Modal>
+        <AddNewDeck />
       </div>
       <div className={s.options}>
         <TextField
