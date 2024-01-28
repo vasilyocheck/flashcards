@@ -37,6 +37,7 @@ export const Pagination = (props: PaginationProps) => {
   const minPageNum = 1
   const maxPageNum = 5
   const minPageCount = 7
+  const numToSwitchView = 4
   const lastFivePagesStart = pagesCount - 4
   const isPagesCountMinimum = pagesCount <= minPageCount
   const contentToRender = []
@@ -49,7 +50,7 @@ export const Pagination = (props: PaginationProps) => {
     contentToRender.push(outOfRange)
     contentToRender.push(pagesCount)
   }
-  if (!isPagesCountMinimum && currentPage > maxPageNum && currentPage < lastFivePagesStart) {
+  if (!isPagesCountMinimum && currentPage > numToSwitchView && currentPage <= lastFivePagesStart) {
     contentToRender[0] = minPageNum
     contentToRender[1] = outOfRange
     contentToRender[2] = currentPage - 1
@@ -58,7 +59,7 @@ export const Pagination = (props: PaginationProps) => {
     contentToRender[5] = outOfRange
     contentToRender[6] = pagesCount
   }
-  if (!isPagesCountMinimum && currentPage > maxPageNum && currentPage >= lastFivePagesStart) {
+  if (!isPagesCountMinimum && currentPage > maxPageNum && currentPage > lastFivePagesStart) {
     contentToRender[0] = minPageNum
     contentToRender[1] = outOfRange
     createPagesPool(lastFivePagesStart, pagesCount).map(p => contentToRender.push(p))
@@ -79,17 +80,14 @@ export const Pagination = (props: PaginationProps) => {
       <Arrow
         callback={() => changePage('prev')}
         direction={'prev'}
-        disabled={isPagesCountMinimum || currentPage <= maxPageNum}
+        disabled={currentPage === minPageNum}
         key={'prev'}
       />
       <div className={s.pagingBody}>{pagesToShow}</div>
       <Arrow
         callback={() => changePage('next')}
         direction={'next'}
-        disabled={
-          isPagesCountMinimum ||
-          (contentToRender[1] === outOfRange && contentToRender[5] > outOfRange)
-        }
+        disabled={currentPage === pagesCount}
         key={'next'}
       />
       <span className={s.showPageSize}>
