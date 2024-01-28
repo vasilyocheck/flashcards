@@ -30,7 +30,7 @@
     speak: none;
 
     font-family: fontello, sans-serif;
-    font-size: 1rem;
+    font-size: 0.4375rem;
     font-weight: 400;
 
     /* For safety - reset parent styles, that can break glyph codes */
@@ -72,21 +72,21 @@
   text-decoration-line: underline;
 }
 
-.forgot{
+.forgot {
   display: flex;
   justify-content: end;
   color: white;
 }
 
-.checkbox_block{
+.checkbox_block {
   position: relative;
   top: 12px;
   left: -5px;
 }
 
-.link_block{
+.link_block {
   position: relative;
-  top:-13px;
+  top: -13px;
   right: 0;
 
   display: flex;
@@ -94,7 +94,7 @@
 
   padding-bottom: 46px;
 
-  & a{
+  & a {
     margin-right: 12px;
   }
 }
