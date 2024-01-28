@@ -29,11 +29,11 @@ export const Header = (props: HeaderProps) => {
     )
 
   return (
-    <div className={s.header}>
+    <header className={s.header}>
       <div className={s.headerInfo}>
         <AppLogo />
         {contentToShow}
       </div>
-    </div>
+    </header>
   )
 }
