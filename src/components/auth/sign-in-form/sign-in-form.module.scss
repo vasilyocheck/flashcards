@@ -5,14 +5,16 @@
   font-style: normal;
   src: url('@/fonts/fontello.eot?0000');
   src:
-    url('@/fonts/fontello.eot?0000#iefix') format('embedded-opentype'),
-    url('@/fonts/fontello.woff2?0000') format('woff2'),
-    url('@/fonts/fontello.woff?0000') format('woff'),
-    url('@/fonts/fontello.ttf?0000') format('truetype'),
-    url('@/fonts/fontello.svg?0000#fontello') format('svg');
+          url('@/fonts/fontello.eot?0000#iefix') format('embedded-opentype'),
+          url('@/fonts/fontello.woff2?0000') format('woff2'),
+          url('@/fonts/fontello.woff?0000') format('woff'),
+          url('@/fonts/fontello.ttf?0000') format('truetype'),
+          url('@/fonts/fontello.svg?0000#fontello') format('svg');
 }
 
 .signInForm {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -29,19 +31,14 @@
   & input[type='password'] {
     speak: none;
 
+
     font-family: fontello, sans-serif;
-    font-size: 0.4375rem;
+    font-size: 1rem;
     font-weight: 400;
 
     /* For safety - reset parent styles, that can break glyph codes */
     font-variant: normal;
     text-transform: none;
-
-    /* Uncomment for 3D effect */
-
-    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
-
-    /* add spacing to better separate each image */
     letter-spacing: 2px;
 
     /* Font smoothing. That was taken from TWBS */
@@ -66,43 +63,25 @@
 }
 
 .link {
+  cursor: pointer;
+
+  margin-top: -20px;
+
   font-size: 1rem;
   font-weight: 700;
   color: var(--color-accent-500);
   text-decoration-line: underline;
 }
 
-.forgot {
-  display: flex;
-  justify-content: end;
-  color: white;
+
+.checkboxWrapper{
+  margin-top: -10px;
+  margin-left: -14px;
 }
 
-.checkbox_block {
-  position: relative;
-  top: 12px;
-  left: -5px;
-}
-
-.link_block {
-  position: relative;
-  top: -13px;
-  right: 0;
-
-  display: flex;
-  justify-content: end;
-
-  padding-bottom: 46px;
-
-  & a {
-    margin-right: 12px;
-  }
-}
-
-.linkAndQuestion_block {
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-  align-items: center;
-  justify-content: center;
+.linkForgotPassword{
+  cursor: pointer;
+  width: 100%;
+  padding-right: 12px;
+  text-align: right;
 }
