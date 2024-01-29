@@ -1,6 +1,5 @@
 import { DeleteIcon, EditIcon, PlayCircleIcon } from '@/assets'
 import { Column } from '@/components/ui/table/table.stories'
-// import { PlayIcon } from '@radix-ui/react-icons'
 
 import s from './tableConstuctor/table.module.scss'
 
@@ -12,51 +11,19 @@ type Sort = {
   key: string
 } | null
 
+type DeleteDeckType = {
+  id: string
+}
+
 type TableType = {
+  deleteDeck: ({ id }: DeleteDeckType) => void
   items: any
   onSort?: (sort: Sort) => void
   sort?: Sort
+  userId?: string
 }
 
-export const TableStory = ({ items, onSort, sort }: TableType) => {
-  //   const options = [
-  //     {
-  //       cardsCount: 10,
-  //       createdBy: 'John Doe',
-  //       title: 'A',
-  //       updated: '2023-07-07',
-  //     },
-  //     {
-  //       cardsCount: 5,
-  //       createdBy: 'Jane Smith',
-  //       title: 'B',
-  //       updated: '2023-07-06',
-  //     },
-  //     {
-  //       cardsCount: 8,
-  //       createdBy: 'Alice Johnson',
-  //       title: 'C',
-  //       updated: '2023-07-05',
-  //     },
-  //     {
-  //       cardsCount: 3,
-  //       createdBy: 'Bob Anderson',
-  //       title: 'D',
-  //       updated: '2023-07-07',
-  //     },
-  //     {
-  //       cardsCount: 12,
-  //       createdBy: 'Emma Davis',
-  //       title: 'E',
-  //       updated: '2023-07-04',
-  //     },
-  //     {
-  //       cardsCount: 1,
-  //       createdBy: '01',
-  //       title: 'Books',
-  //       updated: '2023-01-31T12:45:00.000Z',
-  //     },
-  //   ]
+export const TableStory = ({ deleteDeck, items, onSort, sort, userId }: TableType) => {
   const columns: Array<Column> = [
     {
       key: 'name',
@@ -71,7 +38,7 @@ export const TableStory = ({ items, onSort, sort }: TableType) => {
       title: 'Last Updated',
     },
     {
-      key: 'author.name', // ЗДЕСЬ поправь
+      key: 'author.name',
       title: 'Created by',
     },
     {
@@ -79,8 +46,6 @@ export const TableStory = ({ items, onSort, sort }: TableType) => {
       title: '',
     },
   ]
-
-  console.log(items)
 
   return (
     <Table>
@@ -100,8 +65,12 @@ export const TableStory = ({ items, onSort, sort }: TableType) => {
               <TableDataCell>{t.author.name}</TableDataCell>
               <TableDataCell>
                 <PlayCircleIcon size={1} />
-                <EditIcon size={1} />
-                <DeleteIcon size={1} />
+                {t.author.id === userId ? (
+                  <>
+                    <EditIcon size={1} />
+                    <DeleteIcon onClick={() => deleteDeck({ id: t.id })} size={1} />
+                  </>
+                ) : null}
               </TableDataCell>
             </TableRow>
           )
