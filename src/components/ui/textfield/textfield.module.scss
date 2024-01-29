@@ -9,6 +9,16 @@
       fill: var(--color-light-100);
     }
   }
+
+  & .errorMessage {
+    position: absolute;
+    top: 27px;
+    left: 0;
+
+    font-size: 10px;
+    color: var(--color-danger-300);
+    
+  }
 }
 
 .field {
