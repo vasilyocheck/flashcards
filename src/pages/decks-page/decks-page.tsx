@@ -11,7 +11,7 @@ import { TabItem } from '@/components/ui/tabs/tabItem'
 import { TextField } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
 import { useDebounce } from '@/hooks/hooks'
-import { useGetDecksQuery } from '@/services/base-api'
+import { useDeleteDeckMutation, useGetDecksQuery, useMeQuery } from '@/services/base-api'
 
 import s from './decks-page.module.scss'
 
@@ -75,6 +75,11 @@ export const DecksPage = () => {
     name: debouncedSearch,
     orderBy: sortedString,
   })
+  const { data: dataMe } = useMeQuery()
+
+  console.log(dataMe?.id)
+  const [deleteDeck] = useDeleteDeckMutation()
+  // const [createDeck] = useCreateDeckMutation()
 
   const clearFilter = () => {
     setSearch('')
@@ -141,7 +146,13 @@ export const DecksPage = () => {
           Clear Filter
         </Button>
       </div>
-      <TableStory items={data.items} onSort={setSort} sort={sort} />
+      <TableStory
+        deleteDeck={deleteDeck}
+        items={data.items}
+        onSort={setSort}
+        sort={sort}
+        userId={dataMe?.id}
+      />
       <div className={s.pagination}>
         <Pagination
           currentPage={currentPage}
