@@ -48,12 +48,15 @@ type Sort = {
   key: string
 } | null
 
+const defaultItemsPerPage = 7
+
 export const DecksPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [valuesMinMax, setValuesMinMax] = useState([0, 10])
   const [search, setSearch] = useState('')
   const [tabValue, setTabValue] = useState('All Cards')
   const [sort, setSort] = useState<Sort>(null)
+  const [itemsPerPage, setItemsPerPage] = useState(defaultItemsPerPage)
 
   const sortedString = useMemo(() => {
     if (!sort) {
@@ -66,6 +69,7 @@ export const DecksPage = () => {
   const debouncedSearch = useDebounce<string>(search, 500)
   const { data } = useGetDecksQuery({
     currentPage,
+    itemsPerPage,
     maxCardsCount: valuesMinMax[1],
     minCardsCount: valuesMinMax[0],
     name: debouncedSearch,
@@ -79,6 +83,10 @@ export const DecksPage = () => {
 
   const onChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.currentTarget.value + '')
+  }
+
+  const onChangeCountItemsPerPage = (itemsPerPage: number) => {
+    setItemsPerPage(itemsPerPage)
   }
 
   const onChangeTabsValue = (value: string) => {
@@ -138,7 +146,8 @@ export const DecksPage = () => {
         <Pagination
           currentPage={currentPage}
           itemsCount={data.pagination.totalItems}
-          onItemsPerPageChange={() => {}}
+          itemsPerPage={defaultItemsPerPage}
+          onItemsPerPageChange={onChangeCountItemsPerPage}
           onPageChange={onChangePagination}
         />
       </div>
