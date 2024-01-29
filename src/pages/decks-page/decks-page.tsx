@@ -52,11 +52,12 @@ const defaultItemsPerPage = 7
 
 export const DecksPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const [valuesMinMax, setValuesMinMax] = useState([0, 10])
+  const [valuesMinMax, setValuesMinMax] = useState([0, 61])
   const [search, setSearch] = useState('')
   const [tabValue, setTabValue] = useState('All Cards')
   const [sort, setSort] = useState<Sort>(null)
   const [itemsPerPage, setItemsPerPage] = useState(defaultItemsPerPage)
+  const [userIdForTabs, setUserIdForTabs] = useState<string | undefined>(undefined)
 
   const sortedString = useMemo(() => {
     if (!sort) {
@@ -68,6 +69,7 @@ export const DecksPage = () => {
 
   const debouncedSearch = useDebounce<string>(search, 500)
   const { data } = useGetDecksQuery({
+    authorId: userIdForTabs,
     currentPage,
     itemsPerPage,
     maxCardsCount: valuesMinMax[1],
@@ -76,10 +78,7 @@ export const DecksPage = () => {
     orderBy: sortedString,
   })
   const { data: dataMe } = useMeQuery()
-
-  console.log(dataMe?.id)
   const [deleteDeck] = useDeleteDeckMutation()
-  // const [createDeck] = useCreateDeckMutation()
 
   const clearFilter = () => {
     setSearch('')
@@ -96,6 +95,14 @@ export const DecksPage = () => {
 
   const onChangeTabsValue = (value: string) => {
     setTabValue(value)
+  }
+
+  const onChangeTabItemMyCards = () => {
+    setUserIdForTabs(dataMe?.id)
+  }
+
+  const onChangeTabItemAllCards = () => {
+    setUserIdForTabs(undefined)
   }
 
   const onChangePagination = (currentPageNum: number) => {
@@ -130,8 +137,12 @@ export const DecksPage = () => {
           onValueChange={onChangeTabsValue}
           value={tabValue}
         >
-          <TabItem value={'My Cards'}>My cards</TabItem>
-          <TabItem value={'All Cards'}>All cards</TabItem>
+          <TabItem onClick={onChangeTabItemMyCards} value={'My Cards'}>
+            My cards
+          </TabItem>
+          <TabItem onClick={onChangeTabItemAllCards} value={'All Cards'}>
+            All cards
+          </TabItem>
         </Tabs>
         <Slider
           label={'Number of cards'}
