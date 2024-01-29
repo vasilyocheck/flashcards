@@ -1,4 +1,4 @@
-import { ChangeEvent, EventHandler, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 import { ImageIcon } from '@/assets'
 import { Button } from '@/components/ui/button'
@@ -12,6 +12,7 @@ import sModal from '@/components/ui/modal/modal.module.scss'
 export const AddNewDeck = () => {
   const [addDeck] = useAddDeckMutation()
   const [name, setName] = useState('')
+  const [isPrivate, setIsPrivate] = useState(true)
   const [textfieldError, setTextFieldError] = useState('')
 
   const handleOnTextfieldChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,11 +22,15 @@ export const AddNewDeck = () => {
     setName(e.currentTarget.value)
   }
 
+  const handleIsPrivateChange = () => {
+    setIsPrivate(!isPrivate)
+  }
+
   const handleAddNewPack = () => {
     if (name.length < 5) {
       setTextFieldError('Your deck name shall be at least 5 characters')
     } else {
-      console.log({ name })
+      addDeck({ isPrivate, name })
     }
   }
 
@@ -42,7 +47,7 @@ export const AddNewDeck = () => {
         Upload Image
       </Button>
       <div className={sModal.checkbox}>
-        <Checkbox label={'Private pack'} />
+        <Checkbox callback={handleIsPrivateChange} checked={isPrivate} label={'Private pack'} />
       </div>
       <div className={sModal.buttons}>
         <Button
