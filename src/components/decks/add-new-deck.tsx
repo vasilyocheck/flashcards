@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from 'react'
 
-import { ImageIcon } from '@/assets'
 import { UploadImg } from '@/components/decks/upload-img/upload-img'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -12,9 +11,10 @@ import sModal from '@/components/ui/modal/modal.module.scss'
 
 export const AddNewDeck = () => {
   const [addDeck] = useAddDeckMutation()
+  const [isOpen, setIsOpen] = useState(false)
   const [name, setName] = useState('')
   const [isPrivate, setIsPrivate] = useState(true)
-  const [cover, setCover] = useState(null)
+  const [cover, setCover] = useState<File | string>('')
   const [textfieldError, setTextFieldError] = useState('')
 
   const handleOnTextFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,36 +28,53 @@ export const AddNewDeck = () => {
     setIsPrivate(!isPrivate)
   }
 
+  const closeModal = () => {
+    setIsOpen(false)
+    setName('')
+    setIsPrivate(true)
+    setCover('')
+  }
+
+  const handleClose = () => {
+    setIsOpen(!isOpen)
+  }
+
   const handleAddNewPack = () => {
     if (name.length <= 5) {
       setTextFieldError('Your deck name shall be at least 5 characters')
     } else {
-      addDeck({ cover, isPrivate, name })
+      const requestBody = new FormData()
+
+      requestBody.append('cover', cover)
+      requestBody.append('name', name)
+      requestBody.append('isPrivate', isPrivate.toString())
+
+      addDeck(requestBody)
+      closeModal()
     }
   }
 
   return (
-    <Modal nameButton={'Add New Deck'} title={'Add New Deck'} width={'542px'}>
+    <Modal
+      nameButton={'Add New Deck'}
+      onOpenChange={handleClose}
+      open={isOpen}
+      title={'Add New Deck'}
+      width={'542px'}
+    >
       <TextField
         errorMessage={textfieldError}
         label={'Name Pack'}
         onChange={handleOnTextFieldChange}
         value={name}
       />
-      {/*<Button className={'uploadButton'} fullWidth variant={'secondary'}>
-        <ImageIcon size={1} />
-        Upload Image
-      </Button>*/}
+
       <UploadImg onUpload={setCover} />
       <div className={sModal.checkbox}>
         <Checkbox callback={handleIsPrivateChange} checked={isPrivate} label={'Private pack'} />
       </div>
       <div className={sModal.buttons}>
-        <Button
-          onClick={() => console.log('close window func')}
-          type={'reset'}
-          variant={'secondary'}
-        >
+        <Button onClick={closeModal} type={'reset'} variant={'secondary'}>
           Cancel
         </Button>
         <Button onClick={handleAddNewPack}>Add New Pack</Button>

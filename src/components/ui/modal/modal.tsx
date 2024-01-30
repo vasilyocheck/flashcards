@@ -9,22 +9,26 @@ import s from './modal.module.scss'
 type Props = {
   children?: ReactNode | string
   nameButton?: string
+  onOpenChange: (isOpen: boolean) => void
+  open: boolean
   title?: string
   variantForButton?: 'link' | 'primary' | 'secondary' | 'tertiary'
   width?: string
 }
 
-export const Modal = ({
-  children,
-  nameButton = 'click',
-  title,
-  variantForButton = 'primary',
-  width = '253px',
-}: Props & Omit<ButtonProps, keyof Props>) => {
+export const Modal = (props: Props & Omit<ButtonProps, keyof Props>) => {
+  const {
+    children,
+    nameButton = 'click',
+    title,
+    variantForButton = 'primary',
+    width = '253px',
+    ...rest
+  } = props
+
   return (
-    <Dialog.Root>
+    <Dialog.Root {...rest}>
       <Dialog.Trigger asChild>
-        {/*<button className={s.Button}>{nameButton}</button>*/}
         <Button variant={variantForButton}>{nameButton}</Button>
       </Dialog.Trigger>
 

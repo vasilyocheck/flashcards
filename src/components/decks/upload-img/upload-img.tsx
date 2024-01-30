@@ -9,42 +9,29 @@ type Props = {
 
 export const UploadImg = ({ onUpload }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const [selectedImage, setSelectedImage] = useState<any>(null)
+  const [selectedImage, setSelectedImage] = useState<File | null>(null)
 
   const selectFileHandler = () => {
     inputRef && inputRef.current?.click()
   }
-  const [isAvaBroken, setIsAvaBroken] = useState(false)
+  const [imgError, setImgError] = useState('')
 
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setImgError('')
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0]
 
-      console.log(file)
-
-      if (file.size < 4000000) {
+      if (file.size < 1000000) {
         setSelectedImage(e.target.files[0])
-        postCover(file)
+        onUpload(file)
       } else {
-        alert('The uploaded file is too big')
+        alert('The uploaded file is too big. The allowed max size is 1 Mb.')
       }
     }
   }
 
-  const postCover = (file: File) => {
-    const formData = new FormData()
-
-    formData.append('cover', file)
-    onUpload(formData)
-    /*axios.post('https://neko-back.herokuapp.com/file', formData)
-            .then((res) => {
-                console.log('response: ', res.data)
-            })*/
-  }
-
   const errorHandler = () => {
-    setIsAvaBroken(true)
-    //alert('Кривая картинка')
+    setImgError('Error occurred during file uploading')
   }
 
   return (
@@ -54,9 +41,10 @@ export const UploadImg = ({ onUpload }: Props) => {
           alt={'ava'}
           onError={errorHandler}
           src={URL.createObjectURL(selectedImage)}
-          style={{ width: '100%' }}
+          style={{ maxHeight: '200px' }}
         />
       )}
+      {imgError && <div>{imgError}</div>}
       <label>
         <Button fullWidth onClick={selectFileHandler} variant={'secondary'}>
           <ImageIcon size={1} />
