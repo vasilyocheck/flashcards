@@ -11,13 +11,11 @@ export type GetDecksType = {
   orderBy?: string
 }
 
-
 export type CreateDeckType = {
   cover?: string
   isPrivate?: boolean
   name: string
 }
-
 
 export type Deck = {
   author: Author
@@ -53,7 +51,6 @@ export type Pagination = {
   totalPages: number
 }
 
-
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.flashcards.andrii.es',
@@ -73,7 +70,7 @@ export const baseApi = createApi({
             url: '/v1/decks',
           }
         },
-
+      }),
       createDeck: builder.mutation<any, CreateDeckType>({
         invalidatesTags: ['Decks'],
         query: args => ({
@@ -107,7 +104,4 @@ export const baseApi = createApi({
   tagTypes: ['Decks'],
 })
 
-
-export const { useAddDeckMutation, useCreateDeckMutation, useDeleteDeckMutation, useGetDecksQuery, useMeQuery } =
-  baseApi
-
+export const { useAddDeckMutation, useDeleteDeckMutation, useGetDecksQuery, useMeQuery } = baseApi
