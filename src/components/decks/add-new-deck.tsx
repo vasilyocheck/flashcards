@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 
 import { ImageIcon } from '@/assets'
+import { UploadImg } from '@/components/decks/upload-img/upload-img'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Modal } from '@/components/ui/modal'
@@ -13,10 +14,11 @@ export const AddNewDeck = () => {
   const [addDeck] = useAddDeckMutation()
   const [name, setName] = useState('')
   const [isPrivate, setIsPrivate] = useState(true)
+  const [cover, setCover] = useState(null)
   const [textfieldError, setTextFieldError] = useState('')
 
-  const handleOnTextfieldChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (textfieldError && name.length > 4) {
+  const handleOnTextFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (textfieldError && name.length > 3) {
       setTextFieldError('')
     }
     setName(e.currentTarget.value)
@@ -27,10 +29,10 @@ export const AddNewDeck = () => {
   }
 
   const handleAddNewPack = () => {
-    if (name.length < 5) {
+    if (name.length <= 5) {
       setTextFieldError('Your deck name shall be at least 5 characters')
     } else {
-      addDeck({ isPrivate, name })
+      addDeck({ cover, isPrivate, name })
     }
   }
 
@@ -39,13 +41,14 @@ export const AddNewDeck = () => {
       <TextField
         errorMessage={textfieldError}
         label={'Name Pack'}
-        onChange={handleOnTextfieldChange}
+        onChange={handleOnTextFieldChange}
         value={name}
       />
-      <Button className={'uploadButton'} fullWidth variant={'secondary'}>
+      {/*<Button className={'uploadButton'} fullWidth variant={'secondary'}>
         <ImageIcon size={1} />
         Upload Image
-      </Button>
+      </Button>*/}
+      <UploadImg onUpload={setCover} />
       <div className={sModal.checkbox}>
         <Checkbox callback={handleIsPrivateChange} checked={isPrivate} label={'Private pack'} />
       </div>
