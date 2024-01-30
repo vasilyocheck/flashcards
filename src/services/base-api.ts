@@ -11,11 +11,48 @@ export type GetDecksType = {
   orderBy?: string
 }
 
+
 export type CreateDeckType = {
   cover?: string
   isPrivate?: boolean
   name: string
 }
+
+
+export type Deck = {
+  author: Author
+  cardsCount: number
+  cover?: null | string
+  created: string
+  id: string
+  isBlocked?: boolean | null
+  isDeleted: boolean | null
+  isPrivate: boolean
+  name: string
+  rating: number
+  shots: number
+  updated: string
+  userId: string
+}
+
+export type Author = {
+  id: string
+  name: string
+}
+
+export type DecksResponse = {
+  items: Deck[]
+  maxCardsCount: number
+  pagination: Pagination
+}
+
+export type Pagination = {
+  currentPage: number
+  itemsPerPage: number
+  totalItems: number
+  totalPages: number
+}
+
 
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -27,6 +64,16 @@ export const baseApi = createApi({
   }),
   endpoints: builder => {
     return {
+      addDeck: builder.mutation<DecksResponse, FormData>({
+        invalidatesTags: ['Decks'],
+        query: args => {
+          return {
+            body: args,
+            method: 'POST',
+            url: '/v1/decks',
+          }
+        },
+
       createDeck: builder.mutation<any, CreateDeckType>({
         invalidatesTags: ['Decks'],
         query: args => ({
@@ -60,5 +107,7 @@ export const baseApi = createApi({
   tagTypes: ['Decks'],
 })
 
-export const { useCreateDeckMutation, useDeleteDeckMutation, useGetDecksQuery, useMeQuery } =
+
+export const { useAddDeckMutation, useCreateDeckMutation, useDeleteDeckMutation, useGetDecksQuery, useMeQuery } =
   baseApi
+
