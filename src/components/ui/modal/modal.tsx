@@ -9,8 +9,8 @@ import s from './modal.module.scss'
 type Props = {
   children?: ReactNode | string
   nameButton?: string
-  onOpenChange: (isOpen: boolean) => void
-  open: boolean
+  onOpenChange?: (isOpen: boolean) => void
+  open?: boolean
   title?: string
   variantForButton?: 'link' | 'primary' | 'secondary' | 'tertiary'
   width?: string
