@@ -38,30 +38,25 @@ export const SignInForm = () => {
         label={'Email'}
         name={'email'}
       />
-      <div>
-        <ControlledTextField
-          control={control}
-          errorMessage={errors.password?.message}
-          label={'Password'}
-          name={'password'}
-          type={'password'}
-        />
-        <div className={s.checkbox_block}>
-          <ControlledCheckbox control={control} label={'Remember me'} name={'remember'} />
-        </div>
+      <ControlledTextField
+        className={s.button}
+        control={control}
+        errorMessage={errors.password?.message}
+        label={'Password'}
+        name={'password'}
+        type={'password'}
+      />
+      <div className={s.checkboxWrapper}>
+        <ControlledCheckbox control={control} label={'Remember me'} name={'remember'} />
       </div>
 
-      <div className={s.link_block}>
-        <Link className={s.link__password}>Forgot Password?</Link>
-      </div>
-
+      <Link className={s.linkForgotPassword}>Forgot Password?</Link>
       <Button fullWidth type={'submit'}>
         Sign In
       </Button>
-      <div className={s.linkAndQuestion_block}>
-        <div className={s.already}>{"Don't have an account?"}</div>
-        <Link className={s.link}>Sign Up</Link>
-      </div>
+
+      <span className={s.already}>{"Don't have an account?"}</span>
+      <Link className={s.link}>Sign Up</Link>
     </form>
   )
 }

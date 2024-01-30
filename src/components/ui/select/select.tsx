@@ -21,7 +21,7 @@ export const SelectComponent = ({
   return (
     <Select.Root disabled={disabled} onValueChange={callback}>
       <Select.Trigger className={className}>
-        <Select.Value aria-label={value} placeholder={array[0]} />
+        <Select.Value aria-label={value} placeholder={value} />
         <Select.Icon className={s.SelectIcon}>
           <svg
             className={s.SelectSvg}

@@ -71,8 +71,8 @@ export const TextField = forwardRef<HTMLInputElement, PropsType>(
               {showPassword ? <EyeOff /> : <Eye />}
             </button>
           )}
+          <span className={s.errorMessage}>{errorMessage}</span>
         </div>
-        {errorMessage && <label className={s.labelError}>{errorMessage}</label>}
       </div>
     )
   }
