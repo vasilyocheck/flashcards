@@ -40,7 +40,7 @@
 
 
     font-family: fontello, sans-serif;
-    font-size: 1rem;
+    font-size: 0.475rem;
     font-weight: 400;
 
     /* For safety - reset parent styles, that can break glyph codes */
@@ -53,7 +53,9 @@
     -moz-osx-font-smoothing: grayscale;
 
     &::placeholder{
+      width: 100%;
       font-family: Roboto, sans-serif;
+      font-size: 1rem;
       letter-spacing: normal;
     }
   }
@@ -62,9 +64,9 @@
 .field {
   box-sizing: border-box;
   width: 100%;
-  padding: 6px 12px;
+  padding: 12px;
 
-  font-family: inherit;
+
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-m);
 
@@ -116,7 +118,7 @@
   cursor: pointer;
 
   position: absolute;
-  top: 50%;
+  top: 64%;
   right: 0;
   bottom: 50%;
   transform: translateY(-50%);
