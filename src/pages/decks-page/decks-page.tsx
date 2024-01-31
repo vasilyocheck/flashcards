@@ -126,7 +126,7 @@ export const DecksPage = () => {
     if (!isLoadingSliderRange) {
       setValuesMinMax([sliderRange.min, sliderRange.max])
     }
-  }, [isLoadingSliderRange])
+  }, [isLoadingSliderRange, sliderRange])
 
   if (!data) {
     return <div>...loading</div>
