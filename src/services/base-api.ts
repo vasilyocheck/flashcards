@@ -93,6 +93,12 @@ export const baseApi = createApi({
           url: `/v2/decks`,
         }),
       }),
+      getMinMax: builder.query<any, void>({
+        // providesTags: ['Decks'],
+        query: () => ({
+          url: `/v2/decks/min-max-cards`,
+        }),
+      }),
       me: builder.query<any, void>({
         query: () => ({
           url: `/v1/auth/me`,
@@ -104,4 +110,10 @@ export const baseApi = createApi({
   tagTypes: ['Decks'],
 })
 
-export const { useAddDeckMutation, useDeleteDeckMutation, useGetDecksQuery, useMeQuery } = baseApi
+export const {
+  useAddDeckMutation,
+  useDeleteDeckMutation,
+  useGetDecksQuery,
+  useGetMinMaxQuery,
+  useMeQuery,
+} = baseApi
