@@ -1,4 +1,4 @@
-import { ChangeEvent, useMemo, useState } from 'react'
+import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 
 import { DeleteIcon } from '@/assets'
 import { AddNewDeck } from '@/components/decks'
@@ -11,7 +11,12 @@ import { TabItem } from '@/components/ui/tabs/tabItem'
 import { TextField } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
 import { useDebounce } from '@/hooks/hooks'
-import { useDeleteDeckMutation, useGetDecksQuery, useMeQuery } from '@/services/base-api'
+import {
+  useDeleteDeckMutation,
+  useGetDecksQuery,
+  useGetMinMaxQuery,
+  useMeQuery,
+} from '@/services/base-api'
 
 import s from './decks-page.module.scss'
 
@@ -51,8 +56,10 @@ type Sort = {
 const defaultItemsPerPage = 7
 
 export const DecksPage = () => {
+  const { data: sliderRange, isLoading: isLoadingSliderRange } = useGetMinMaxQuery()
+
   const [currentPage, setCurrentPage] = useState(1)
-  const [valuesMinMax, setValuesMinMax] = useState([0, 61])
+  const [valuesMinMax, setValuesMinMax] = useState([0, 10])
   const [search, setSearch] = useState('')
   const [tabValue, setTabValue] = useState('All Cards')
   const [sort, setSort] = useState<Sort>(null)
@@ -68,12 +75,14 @@ export const DecksPage = () => {
   }, [sort])
 
   const debouncedSearch = useDebounce<string>(search, 500)
+  const debounceRangeMin = useDebounce<number>(valuesMinMax[0])
+  const debounceRangeMax = useDebounce<number>(valuesMinMax[1])
   const { data } = useGetDecksQuery({
     authorId: userIdForTabs,
     currentPage,
     itemsPerPage,
-    maxCardsCount: valuesMinMax[1],
-    minCardsCount: valuesMinMax[0],
+    maxCardsCount: debounceRangeMax,
+    minCardsCount: debounceRangeMin,
     name: debouncedSearch,
     orderBy: sortedString,
   })
@@ -113,6 +122,12 @@ export const DecksPage = () => {
     setValuesMinMax(value)
   }
 
+  useEffect(() => {
+    if (!isLoadingSliderRange) {
+      setValuesMinMax([sliderRange.min, sliderRange.max])
+    }
+  }, [isLoadingSliderRange])
+
   if (!data) {
     return <div>...loading</div>
   }
@@ -146,8 +161,8 @@ export const DecksPage = () => {
         </Tabs>
         <Slider
           label={'Number of cards'}
-          max={10}
-          min={0}
+          max={sliderRange.max || 61}
+          min={sliderRange.min || 0}
           onValueChange={handleOnValueChange}
           step={1}
           value={valuesMinMax}
