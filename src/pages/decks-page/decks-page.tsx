@@ -161,7 +161,7 @@ export const DecksPage = () => {
         </Tabs>
         <Slider
           label={'Number of cards'}
-          max={sliderRange.max || 61}
+          max={sliderRange.max || 10}
           min={sliderRange.min || 0}
           onValueChange={handleOnValueChange}
           step={1}
