@@ -1,4 +1,5 @@
 import { DeleteIcon, EditIcon, PlayCircleIcon } from '@/assets'
+import { IconButton } from '@/components/ui/iconButton'
 import { Column } from '@/components/ui/table/table.stories'
 
 import s from './tableConstuctor/table.module.scss'
@@ -64,11 +65,14 @@ export const TableStory = ({ deleteDeck, items, onSort, sort, userId }: TableTyp
               <TableDataCell>{new Date(t.updated).toLocaleDateString('ru-RU')}</TableDataCell>
               <TableDataCell>{t.author.name}</TableDataCell>
               <TableDataCell>
-                <PlayCircleIcon size={1} />
+                <IconButton icon={<PlayCircleIcon size={1.1} />} size={1.1}></IconButton>
                 {t.author.id === userId ? (
                   <>
-                    <EditIcon size={1} />
-                    <DeleteIcon onClick={() => deleteDeck({ id: t.id })} size={1} />
+                    <IconButton icon={<EditIcon />} size={1.1}></IconButton>
+                    <IconButton
+                      icon={<DeleteIcon onClick={() => deleteDeck({ id: t.id })} />}
+                      size={1.1}
+                    ></IconButton>
                   </>
                 ) : null}
               </TableDataCell>
