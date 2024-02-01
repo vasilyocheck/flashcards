@@ -16,7 +16,7 @@ import {
   useGetDecksQuery,
   useGetMinMaxQuery,
   useMeQuery,
-} from '@/services/base-api'
+} from '@/services/services/decks/decks.service'
 
 import s from './decks-page.module.scss'
 

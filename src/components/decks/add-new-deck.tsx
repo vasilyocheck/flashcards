@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Modal } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/textfield'
-import { useAddDeckMutation } from '@/services/base-api'
+import { useAddDeckMutation } from '@/services/services/decks/decks.service'
 
 import sModal from '@/components/ui/modal/modal.module.scss'
 
