@@ -7,6 +7,7 @@
 
   width: 420px;
   height: 528px;
+  margin: 36px auto 0;
   padding: 33px 36px 29px;
 
   background-color: var(--color-dark-700);
@@ -29,6 +30,8 @@
 }
 
 .link {
+  cursor: pointer;
+
   font-size: 1rem;
   font-weight: 700;
   color: var(--color-accent-500);
