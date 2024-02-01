@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { ControlledTextField } from '@/components/ui/controlled/controlled-textfield'
+import { useSignUpMutation } from '@/services/services/decks/decks.service'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@radix-ui/themes'
 import { z } from 'zod'
@@ -23,6 +25,8 @@ const loginSchema = z
 type FormValues = z.infer<typeof loginSchema>
 
 export const SignUpForm = () => {
+  const navigate = useNavigate()
+  const [signUp] = useSignUpMutation()
   const {
     control,
     formState: { errors },
@@ -30,10 +34,8 @@ export const SignUpForm = () => {
   } = useForm<FormValues>({ resolver: zodResolver(loginSchema) })
 
   const onSubmit = (data: FormValues) => {
-    console.log(data)
+    signUp({ email: data.email, password: data.password })
   }
-
-  console.log(errors)
 
   return (
     <form className={s.signUpForm} onSubmit={handleSubmit(onSubmit)}>
@@ -63,7 +65,9 @@ export const SignUpForm = () => {
         Sign Up
       </Button>
       <div className={s.already}>Already have an account?</div>
-      <Link className={s.link}>Sign In</Link>
+      <Link className={s.link} onClick={() => navigate('/login')}>
+        Sign In
+      </Link>
     </form>
   )
 }

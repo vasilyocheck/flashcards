@@ -39,6 +39,11 @@ export const DecksService = baseApi.injectEndpoints({
           url: `/v1/auth/me`,
         }),
       }),
+      signUp: builder.mutation<any, any>({
+        query: () => ({
+          url: `/v1/auth/sign-up`,
+        }),
+      }),
     }
   },
 })
@@ -49,4 +54,5 @@ export const {
   useGetDecksQuery,
   useGetMinMaxQuery,
   useMeQuery,
+  useSignUpMutation,
 } = DecksService

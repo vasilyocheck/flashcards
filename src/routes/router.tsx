@@ -38,7 +38,7 @@ export const Router = () => {
 }
 
 export function PrivateRoutes() {
-  const isAuthenticated = true
+  const isAuthenticated = false
 
   return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
 }

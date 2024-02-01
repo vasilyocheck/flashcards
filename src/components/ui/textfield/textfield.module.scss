@@ -5,13 +5,12 @@
   font-style: normal;
   src: url('@/fonts/fontello.eot?0000');
   src:
-          url('@/fonts/fontello.eot?0000#iefix') format('embedded-opentype'),
-          url('@/fonts/fontello.woff2?0000') format('woff2'),
-          url('@/fonts/fontello.woff?0000') format('woff'),
-          url('@/fonts/fontello.ttf?0000') format('truetype'),
-          url('@/fonts/fontello.svg?0000#fontello') format('svg');
+    url('@/fonts/fontello.eot?0000#iefix') format('embedded-opentype'),
+    url('@/fonts/fontello.woff2?0000') format('woff2'),
+    url('@/fonts/fontello.woff?0000') format('woff'),
+    url('@/fonts/fontello.ttf?0000') format('truetype'),
+    url('@/fonts/fontello.svg?0000#fontello') format('svg');
 }
-
 
 .rootBlock {
   position: relative;
@@ -27,17 +26,15 @@
 
   & .errorMessage {
     position: absolute;
-    top: 27px;
+    top: 35px;
     left: 0;
 
     font-size: 10px;
     color: var(--color-danger-300);
-    
   }
 
   & input[type='password'] {
     speak: none;
-
 
     font-family: fontello, sans-serif;
     font-size: 0.475rem;
@@ -52,7 +49,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    &::placeholder{
+    &::placeholder {
       width: 100%;
       font-family: Roboto, sans-serif;
       font-size: 1rem;
@@ -65,7 +62,6 @@
   box-sizing: border-box;
   width: 100%;
   padding: 12px;
-
 
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-m);
@@ -172,5 +168,3 @@
     opacity: 0.7;
   }
 }
-
-
