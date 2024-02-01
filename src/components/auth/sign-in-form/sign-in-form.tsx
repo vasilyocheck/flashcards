@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-textfield'
@@ -19,6 +20,7 @@ const loginSchema = z.object({
 type FormValues = z.infer<typeof loginSchema>
 
 export const SignInForm = () => {
+  const navigate = useNavigate()
   const {
     control,
     formState: { errors },
@@ -56,7 +58,9 @@ export const SignInForm = () => {
       </Button>
 
       <span className={s.already}>{"Don't have an account?"}</span>
-      <Link className={s.link}>Sign Up</Link>
+      <Link className={s.link} onClick={() => navigate('/sign-up')}>
+        Sign Up
+      </Link>
     </form>
   )
 }

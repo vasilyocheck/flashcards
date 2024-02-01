@@ -9,6 +9,7 @@
 
   width: 420px;
   height: 528px;
+  margin: 36px auto 0;
   padding: 33px 36px 29px;
 
   background-color: var(--color-dark-700);
@@ -41,12 +42,11 @@
   text-decoration-line: underline;
 }
 
-
-.checkboxWrapper{
+.checkboxWrapper {
   margin-left: -14px;
 }
 
-.linkForgotPassword{
+.linkForgotPassword {
   cursor: pointer;
 
   width: 100%;
