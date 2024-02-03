@@ -15,13 +15,13 @@ import sampleAnswer from './img/redux-cool.png'
 
 export const CardPage = () => {
   const [isToMain, setIsToMain] = useState(false)
-  const [imageQuest, setImageQuest] = useState(sampleImg2)
-  const [deckName, setDeckName] = useState('Deck Name')
-  const [question, setQuestion] = useState('How this works in Javascript?')
-  const [attempts, setAttempts] = useState(10)
+  const [imageQuest] = useState(sampleImg2)
+  const [deckName] = useState('Deck Name')
+  const [question] = useState('How this works in Javascript?')
+  const [attempts] = useState(10)
   const [isAnswerShown, setIsAnswerShown] = useState(false)
-  const [answer, setAnswer] = useState('This is how this works in JS')
-  const [imageAnswer, setImageAnswer] = useState(sampleAnswer)
+  const [answer] = useState('This is how this works in JS')
+  const [imageAnswer] = useState(sampleAnswer)
   const answerOptions = assessOptions.map(o => o.value)
   const [answerValue, setAnswerValue] = useState<string>(answerOptions[0])
   const handleOnClickBack = () => {
