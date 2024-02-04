@@ -9,7 +9,7 @@ import { PageNotFound } from '@/pages/page-not-found'
 export const privateRoutes: RouteObject[] = [
   { element: <DecksPage />, path: '/' },
   { element: <div>Приватная страница</div>, path: '/private:id' },
-  { element: <CardPage />, path: '/card' },
+  { element: <CardPage />, path: '/card/:cardId' },
 ]
 
 export const publicRoutes: RouteObject[] = [
