@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { DeleteIcon, EditIcon, PlayCircleIcon } from '@/assets'
 import { IconButton } from '@/components/ui/iconButton'
@@ -22,12 +23,20 @@ type DeleteDeckType = {
 type TableType = {
   deleteDeck: ({ id }: DeleteDeckType) => void
   items: any
+  onClickCallback?: (itemId: string) => void
   onSort?: (sort: Sort) => void
   sort?: Sort
   userId?: string
 }
 
-export const TableStory = ({ deleteDeck, items, onSort, sort, userId }: TableType) => {
+export const TableStory = ({
+  deleteDeck,
+  items,
+  onClickCallback,
+  onSort,
+  sort,
+  userId,
+}: TableType) => {
   const columns: Array<Column> = [
     {
       key: 'name',
@@ -50,6 +59,11 @@ export const TableStory = ({ deleteDeck, items, onSort, sort, userId }: TableTyp
       title: '',
     },
   ]
+  const handleOnClick = (itemId: string) => {
+    if (itemId && onClickCallback) {
+      onClickCallback(itemId)
+    }
+  }
 
   return (
     <Table>
@@ -68,7 +82,16 @@ export const TableStory = ({ deleteDeck, items, onSort, sort, userId }: TableTyp
               <TableDataCell>{new Date(t.updated).toLocaleDateString('ru-RU')}</TableDataCell>
               <TableDataCell>{t.author.name}</TableDataCell>
               <TableDataCell>
-                <IconButton icon={<PlayCircleIcon size={1.1} />} size={1.1}></IconButton>
+                <IconButton
+                  icon={
+                    <Link to={`/card/${t.id}`}>
+                      <PlayCircleIcon color={'white'} size={1.1} />
+                    </Link>
+                  }
+                  onClick={() => handleOnClick(t.id)}
+                  size={1.1}
+                ></IconButton>
+
                 {t.author.id === userId ? (
                   <>
                     <IconButton icon={<EditIcon />} size={1.1}></IconButton>
