@@ -1,3 +1,4 @@
+import { LoginParamsType } from '@/components/auth/sign-in-form'
 import { DeckResponse } from '@/pages/decks-page'
 import { DeckWithId } from '@/pages/one-deck-page'
 import { baseApi } from '@/services/base-api'
@@ -6,6 +7,7 @@ import {
   DeckById,
   DecksResponse,
   GetDecksType,
+  LoginResponseType,
 } from '@/services/services/decks/decks.types'
 
 export const DecksService = baseApi.injectEndpoints({
@@ -56,6 +58,13 @@ export const DecksService = baseApi.injectEndpoints({
           url: `/v2/decks/min-max-cards`,
         }),
       }),
+      login: builder.mutation<LoginResponseType, LoginParamsType>({
+        query: body => ({
+          body,
+          method: 'POST',
+          url: '/v1/auth/login',
+        }),
+      }),
       me: builder.query<any, void>({
         query: () => ({
           url: `/v1/auth/me`,
@@ -78,6 +87,7 @@ export const {
   useGetDeckQuery,
   useGetDecksQuery,
   useGetMinMaxQuery,
+  useLoginMutation,
   useMeQuery,
   useSignUpMutation,
 } = DecksService

@@ -57,3 +57,7 @@ export type DeckById = {
 export type ArgsType = {
   deckId: string
 }
+
+export type LoginResponseType = {
+  accessToken: string
+}
