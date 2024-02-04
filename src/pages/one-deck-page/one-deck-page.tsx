@@ -40,7 +40,7 @@ export const OneDeckPage = () => {
   const { data, isLoading } = useGetCardsQuery({ id: deckId })
   const { data: dataDeck, isLoading: isLoadingDeck } = useGetDeckQuery({ id: deckId })
   const [cards, setCards] = useState([])
-  const [deck, setDeck] = useState<DeckWithId>({})
+  const [deck, setDeck] = useState<DeckWithId>({} as DeckWithId)
 
   useEffect(() => {
     if (!isLoading) {
