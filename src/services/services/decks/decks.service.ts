@@ -1,4 +1,5 @@
 import { DeckResponse } from '@/pages/decks-page'
+import { DeckWithId } from '@/pages/one-deck-page'
 import { baseApi } from '@/services/base-api'
 import {
   ArgsType,
@@ -27,10 +28,19 @@ export const DecksService = baseApi.injectEndpoints({
           url: `/v1/decks/${args.id}`,
         }),
       }),
+      getCards: builder.query<any, { id: string | undefined }>({
+        query: args => ({
+          url: `/v1/decks/${args.id}/cards`,
+        }),
+      }),
+      getDeck: builder.query<DeckWithId, { id: string | undefined }>({
+        query: args => ({
+          url: `/v1/decks/${args.id}`,
       getDeckById: builder.query<DeckById, ArgsType>({
         query: args => ({
           method: 'GET',
           url: `/v1/decks/${args.deckId}`,
+
         }),
       }),
       getDecks: builder.query<DeckResponse, GetDecksType | void>({
@@ -62,7 +72,9 @@ export const DecksService = baseApi.injectEndpoints({
 export const {
   useAddDeckMutation,
   useDeleteDeckMutation,
-  useGetDeckByIdQuery,
+  useGetCardsQuery, // camper
+  useGetDeckQuery, // camper
+  useGetDeckByIdQuery, 
   useGetDecksQuery,
   useGetMinMaxQuery,
   useMeQuery,

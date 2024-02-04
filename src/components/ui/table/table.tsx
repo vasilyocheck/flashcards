@@ -1,8 +1,10 @@
+import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 import { DeleteIcon, EditIcon, PlayCircleIcon } from '@/assets'
 import { IconButton } from '@/components/ui/iconButton'
 import { Column } from '@/components/ui/table/table.stories'
+import { Typography } from '@/components/ui/typography'
 
 import s from './tableConstuctor/table.module.scss'
 
@@ -71,10 +73,10 @@ export const TableStory = ({
           return (
             <TableRow key={t.id}>
               <TableDataCell>
-                <span className={s.tableDataContent}>
+                <Typography as={NavLink} className={s.tableDataContent} to={`/decks/${t.id}`}>
                   {t.cover && <img alt={'image'} className={s.tableImage} src={t.cover} />}
                   {t.name}
-                </span>
+                </Typography>
               </TableDataCell>
               <TableDataCell>{t.cardsCount}</TableDataCell>
               <TableDataCell>{new Date(t.updated).toLocaleDateString('ru-RU')}</TableDataCell>
