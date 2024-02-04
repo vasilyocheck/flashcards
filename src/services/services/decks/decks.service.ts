@@ -62,7 +62,7 @@ export const DecksService = baseApi.injectEndpoints({
         query: body => ({
           body,
           method: 'POST',
-          url: 'auth/login',
+          url: '/v1/auth/login',
         }),
       }),
       me: builder.query<any, void>({
