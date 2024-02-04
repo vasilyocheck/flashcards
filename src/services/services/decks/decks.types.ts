@@ -8,12 +8,6 @@ export type GetDecksType = {
   orderBy?: string
 }
 
-export type CreateDeckType = {
-  cover?: string
-  isPrivate?: boolean
-  name: string
-}
-
 export type Deck = {
   author: Author
   cardsCount: number
@@ -46,4 +40,20 @@ export type Pagination = {
   itemsPerPage: number
   totalItems: number
   totalPages: number
+}
+
+export type DeckById = {
+  author: Author
+  cardsCount: number
+  cover: string
+  created: string
+  id: string
+  isPrivate: boolean
+  name: string
+  updated: string
+  userId: string
+}
+
+export type ArgsType = {
+  deckId: string
 }
