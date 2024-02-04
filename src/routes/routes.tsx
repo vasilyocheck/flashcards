@@ -1,11 +1,11 @@
 import { RouteObject } from 'react-router-dom'
 
-import { SignInForm } from '@/components/auth/sign-in-form'
 import { SignUpForm } from '@/components/auth/sign-up-form'
 import { CardPage } from '@/pages/card-page/card-page'
 import { DecksPage } from '@/pages/decks-page/decks-page'
 import { OneDeckPage } from '@/pages/one-deck-page'
 import { PageNotFound } from '@/pages/page-not-found'
+import { SignInPage } from '@/pages/sign-in-page'
 
 export const privateRoutes: RouteObject[] = [
   { element: <DecksPage />, path: '/' },
@@ -16,7 +16,7 @@ export const privateRoutes: RouteObject[] = [
 
 export const publicRoutes: RouteObject[] = [
   {
-    element: <SignInForm />,
+    element: <SignInPage />,
     path: '/login',
   },
   {
