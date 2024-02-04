@@ -36,11 +36,12 @@ export const DecksService = baseApi.injectEndpoints({
       getDeck: builder.query<DeckWithId, { id: string | undefined }>({
         query: args => ({
           url: `/v1/decks/${args.id}`,
+        }),
+      }),
       getDeckById: builder.query<DeckById, ArgsType>({
         query: args => ({
           method: 'GET',
           url: `/v1/decks/${args.deckId}`,
-
         }),
       }),
       getDecks: builder.query<DeckResponse, GetDecksType | void>({
@@ -72,9 +73,9 @@ export const DecksService = baseApi.injectEndpoints({
 export const {
   useAddDeckMutation,
   useDeleteDeckMutation,
-  useGetCardsQuery, // camper
-  useGetDeckQuery, // camper
-  useGetDeckByIdQuery, 
+  useGetCardsQuery,
+  useGetDeckByIdQuery,
+  useGetDeckQuery,
   useGetDecksQuery,
   useGetMinMaxQuery,
   useMeQuery,
