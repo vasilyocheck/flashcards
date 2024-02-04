@@ -17,19 +17,19 @@ const loginSchema = z.object({
   remember: z.boolean(),
 })
 
-type FormValues = z.infer<typeof loginSchema>
+export type LoginParamsType = z.infer<typeof loginSchema>
 
-export const SignInForm = () => {
+type Props = {
+  onSubmit: (data: LoginParamsType) => void
+}
+
+export const SignInForm = ({ onSubmit }: Props) => {
   const navigate = useNavigate()
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<FormValues>({ resolver: zodResolver(loginSchema) })
-
-  const onSubmit = (data: FormValues) => {
-    console.log(data)
-  }
+  } = useForm<LoginParamsType>({ resolver: zodResolver(loginSchema) })
 
   return (
     <form className={s.signInForm} onSubmit={handleSubmit(onSubmit)}>
