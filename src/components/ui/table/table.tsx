@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 
 import { DeleteIcon, EditIcon, PlayCircleIcon } from '@/assets'
 import { IconButton } from '@/components/ui/iconButton'
@@ -82,16 +81,17 @@ export const TableStory = ({
               <TableDataCell>{new Date(t.updated).toLocaleDateString('ru-RU')}</TableDataCell>
               <TableDataCell>{t.author.name}</TableDataCell>
               <TableDataCell>
-                <IconButton
-                  icon={
-                    <Link to={`/card/${t.id}`}>
-                      <PlayCircleIcon color={'white'} size={1.1} />
-                    </Link>
-                  }
-                  onClick={() => handleOnClick(t.id)}
-                  size={1.1}
-                ></IconButton>
-
+                {t.cardsCount !== 0 && (
+                  <IconButton
+                    icon={
+                      <NavLink to={`/card/${t.id}`}>
+                        <PlayCircleIcon color={'white'} size={1.1} />
+                      </NavLink>
+                    }
+                    onClick={() => handleOnClick(t.id)}
+                    size={1.1}
+                  ></IconButton>
+                )}
                 {t.author.id === userId ? (
                   <>
                     <IconButton icon={<EditIcon />} size={1.1}></IconButton>
