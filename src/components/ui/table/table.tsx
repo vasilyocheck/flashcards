@@ -19,6 +19,18 @@ type DeleteDeckType = {
   id: string
 }
 
+type ResponseItemType = {
+  author: { id: string; name: string }
+  cardsCount: number
+  cover: null | string
+  created: string
+  id: string
+  isPrivate: boolean
+  name: string
+  updated: string
+  userId: string
+}
+
 type TableType = {
   deleteDeck: ({ id }: DeleteDeckType) => void
   items: any
@@ -68,7 +80,7 @@ export const TableStory = ({
     <Table>
       <TableHeader columns={columns} onSort={onSort} sort={sort} />
       <TableBody>
-        {items.map((t: any) => {
+        {items.map((t: ResponseItemType) => {
           return (
             <TableRow key={t.id}>
               <TableDataCell>
