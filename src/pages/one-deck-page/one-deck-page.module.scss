@@ -1,13 +1,25 @@
 .backBtn {
   display: flex;
   align-items: center;
+
   margin-top: 24px;
   margin-bottom: 33px;
+
+  text-decoration: none;
+}
+
+.pagination {
+  margin-bottom: 24px;
 }
 
 .backToDeck {
   margin-left: 6px;
   text-decoration: none;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
 }
 
 .wrapper {
@@ -16,6 +28,27 @@
   margin: 0 auto;
 }
 
+.text {
+  margin: 70px 0 30px;
+  color: var(--color-dark-100);
+  text-align: center;
+}
+
 .deckName {
   text-decoration: none;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.textField {
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
