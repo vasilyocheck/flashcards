@@ -44,13 +44,7 @@ type TableType = {
   userId?: string
 } & ComponentPropsWithoutRef<'table'>
 
-export const TableOnePage = ({
-  deleteDeck,
-  items,
-  // onClickCallback,
-  onSort,
-  sort, // userId,
-}: TableType) => {
+export const TableOnePage = ({ deleteDeck, items, onSort, sort }: TableType) => {
   const columns: Array<Column> = [
     {
       key: 'question',
@@ -73,11 +67,6 @@ export const TableOnePage = ({
       title: '',
     },
   ]
-  // const handleOnClick = (itemId: string) => {
-  //   if (itemId && onClickCallback) {
-  //     onClickCallback(itemId)
-  //   }
-  // }
 
   return (
     <Table className={s.pagination}>

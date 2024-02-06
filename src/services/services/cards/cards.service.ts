@@ -3,13 +3,15 @@ import {
   ArgsGrade,
   ArgsType,
   CardsResponse,
+  GetCardsArgs,
+  GetCardsResponse,
   GradeSaveResponse,
 } from '@/services/services/cards/cards.types'
 
 export const CardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      getCards: builder.query<any, any>({
+      getCards: builder.query<GetCardsResponse, GetCardsArgs>({
         query: args => {
           const { id, ...rest } = args
 

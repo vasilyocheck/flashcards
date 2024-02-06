@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -20,7 +20,7 @@ export const CreateNewPassword = () => {
   } = useForm({
     resolver: zodResolver(passwordSchema),
   })
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: FieldValues) => {
     console.log(data)
   }
 

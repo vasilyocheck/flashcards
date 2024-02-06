@@ -4,7 +4,7 @@ import { ImageIcon } from '@/assets'
 import { Button } from '@/components/ui/button'
 
 type Props = {
-  onUpload: (formData: any) => void
+  onUpload: (formData: File) => void
 }
 
 export const UploadImg = ({ onUpload }: Props) => {
