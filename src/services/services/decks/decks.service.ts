@@ -1,4 +1,3 @@
-import { LoginParamsType } from '@/components/auth/sign-in-form'
 import { DeckResponse } from '@/pages/decks-page'
 import { DeckWithId } from '@/pages/one-deck-page'
 import { baseApi } from '@/services/base-api'
@@ -7,7 +6,6 @@ import {
   DeckById,
   DecksResponse,
   GetDecksType,
-  LoginResponseType,
 } from '@/services/services/decks/decks.types'
 
 export const DecksService = baseApi.injectEndpoints({
@@ -28,11 +26,6 @@ export const DecksService = baseApi.injectEndpoints({
         query: args => ({
           method: 'DELETE',
           url: `/v1/decks/${args.id}`,
-        }),
-      }),
-      getCards: builder.query<any, { id: string | undefined }>({
-        query: args => ({
-          url: `/v1/decks/${args.id}/cards`,
         }),
       }),
       getDeck: builder.query<DeckWithId, { id: string | undefined }>({
@@ -58,23 +51,6 @@ export const DecksService = baseApi.injectEndpoints({
           url: `/v2/decks/min-max-cards`,
         }),
       }),
-      login: builder.mutation<LoginResponseType, LoginParamsType>({
-        query: body => ({
-          body,
-          method: 'POST',
-          url: '/v1/auth/login',
-        }),
-      }),
-      me: builder.query<any, void>({
-        query: () => ({
-          url: `/v1/auth/me`,
-        }),
-      }),
-      signUp: builder.mutation<any, any>({
-        query: () => ({
-          url: `/v1/auth/sign-up`,
-        }),
-      }),
     }
   },
 })
@@ -82,12 +58,8 @@ export const DecksService = baseApi.injectEndpoints({
 export const {
   useAddDeckMutation,
   useDeleteDeckMutation,
-  useGetCardsQuery,
   useGetDeckByIdQuery,
   useGetDeckQuery,
   useGetDecksQuery,
   useGetMinMaxQuery,
-  useLoginMutation,
-  useMeQuery,
-  useSignUpMutation,
 } = DecksService

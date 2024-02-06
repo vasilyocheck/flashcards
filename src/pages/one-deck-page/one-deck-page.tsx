@@ -4,27 +4,6 @@ import { NavLink, useParams } from 'react-router-dom'
 import { ArrowBackIcon, ImageIcon } from '@/assets'
 import { IconWrapper } from '@/assets/icons/IconWrapper'
 import { Typography } from '@/components/ui/typography'
-import {
-  useGetCardsQuery,
-  useGetDeckQuery,
-  useMeQuery,
-} from '@/services/services/decks/decks.service'
-
-type Card = {
-  answer: string
-  answerImg: any
-  answerVideo: any
-  created: Date
-  deckId: string
-  grade: number
-  id: string
-  question: string
-  questionImg: any
-  questionVideo: any
-  shots: number
-  updated: string
-  userId: string
-}
 
 export type DeckWithId = {
   cardsCount: number
@@ -45,6 +24,9 @@ import image from '@/components/ui/modal/img/example-image.png'
 import { Pagination } from '@/components/ui/pagination'
 import { TextField } from '@/components/ui/textfield'
 import { TableOnePage } from '@/pages/one-deck-page/table-one-deck-page'
+import { useMeQuery } from '@/services/services/app/auth.service'
+import { useGetCardsQuery } from '@/services/services/cards/cards.service'
+import { useGetDeckQuery } from '@/services/services/decks/decks.service'
 
 import s from './one-deck-page.module.scss'
 
@@ -61,6 +43,8 @@ export const OneDeckPage = () => {
   const [cards, setCards] = useState([])
   const [myId, setMyId] = useState('1')
   const [deck, setDeck] = useState<DeckWithId>({} as DeckWithId)
+
+  console.log(itemsPerPage)
 
   const onChangeCountItemsPerPage = (itemsPerPage: number) => {
     setItemsPerPage(itemsPerPage)
@@ -108,7 +92,7 @@ export const OneDeckPage = () => {
                   Question:
                 </Typography>
                 <TextField label={'Question?'} name={'123'}></TextField>
-                <img src={image} />
+                <img alt={'picture'} src={image} />
                 <Button className={'uploadButton'} variant={'secondary'}>
                   <ImageIcon style={{ height: '16px', width: '16px' }} />
                   Change Image
@@ -117,7 +101,7 @@ export const OneDeckPage = () => {
                   Answer:
                 </Typography>
                 <TextField label={'Answer'} name={'123'}></TextField>
-                <img src={image} />
+                <img alt={'picture'} src={image} />
                 <Button className={'uploadButton'} variant={'secondary'}>
                   <ImageIcon style={{ height: '16px', width: '16px' }} />
                   Change Image
@@ -142,7 +126,7 @@ export const OneDeckPage = () => {
                   Question:
                 </Typography>
                 <TextField label={'Question?'} name={'123'}></TextField>
-                <img src={image} />
+                <img alt={'picture'} src={image} />
                 <Button className={'uploadButton'} variant={'secondary'}>
                   <ImageIcon style={{ height: '16px', width: '16px' }} />
                   Change Image
@@ -151,7 +135,7 @@ export const OneDeckPage = () => {
                   Answer:
                 </Typography>
                 <TextField label={'Answer'} name={'123'}></TextField>
-                <img src={image} />
+                <img alt={'picture'} src={image} />
                 <Button className={'uploadButton'} variant={'secondary'}>
                   <ImageIcon style={{ height: '16px', width: '16px' }} />
                   Change Image
