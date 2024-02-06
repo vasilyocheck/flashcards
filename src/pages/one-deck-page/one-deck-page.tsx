@@ -33,18 +33,20 @@ import s from './one-deck-page.module.scss'
 const defaultItemsPerPage = 7
 
 export const OneDeckPage = () => {
+  // const userId = useAppSelector(state => state.app.userId)
   const { deckId } = useParams()
   const { data: userId, isLoading: isLoadingMe } = useMeQuery()
-  const { data, isLoading } = useGetCardsQuery({ id: deckId })
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(defaultItemsPerPage)
-  // const userId = useAppSelector(state => state.app.userId)
   const { data: dataDeck, isLoading: isLoadingDeck } = useGetDeckQuery({ id: deckId })
-  const [cards, setCards] = useState([])
   const [myId, setMyId] = useState('1')
   const [deck, setDeck] = useState<DeckWithId>({} as DeckWithId)
 
-  console.log(itemsPerPage)
+  const { data, isLoading } = useGetCardsQuery({
+    currentPage,
+    id: deckId,
+    itemsPerPage,
+  })
 
   const onChangeCountItemsPerPage = (itemsPerPage: number) => {
     setItemsPerPage(itemsPerPage)
@@ -55,9 +57,6 @@ export const OneDeckPage = () => {
   }
 
   useEffect(() => {
-    if (!isLoading) {
-      setCards(data.items)
-    }
     if (!isLoadingMe) {
       setMyId(userId.id)
     }
@@ -151,11 +150,10 @@ export const OneDeckPage = () => {
           </div>
           <div>
             <TextField className={s.textField} placeholder={'Input search'} type={'search'} />
-            <TableOnePage deleteDeck={() => {}} items={cards} />
+            <TableOnePage deleteDeck={() => {}} items={data?.items} />
             <Pagination
               currentPage={currentPage}
-              // itemsCount={data.pagination.totalItems}
-              itemsCount={10} // хард код
+              itemsCount={data?.pagination.totalItems}
               itemsPerPage={defaultItemsPerPage}
               onItemsPerPageChange={onChangeCountItemsPerPage}
               onPageChange={onChangePagination}

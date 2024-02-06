@@ -9,10 +9,15 @@ import {
 export const CardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      getCards: builder.query<any, { id: string | undefined }>({
-        query: args => ({
-          url: `/v1/decks/${args.id}/cards`,
-        }),
+      getCards: builder.query<any, any>({
+        query: args => {
+          const { id, ...rest } = args
+
+          return {
+            params: rest ? rest : undefined,
+            url: `/v1/decks/${args.id}/cards`,
+          }
+        },
       }),
       getRandomCard: builder.query<CardsResponse, ArgsType>({
         query: args => {
