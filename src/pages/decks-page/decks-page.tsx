@@ -11,11 +11,11 @@ import { TabItem } from '@/components/ui/tabs/tabItem'
 import { TextField } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
 import { useDebounce } from '@/hooks/hooks'
+import { useMeQuery } from '@/services/services/app/auth.service'
 import {
   useDeleteDeckMutation,
   useGetDecksQuery,
   useGetMinMaxQuery,
-  useMeQuery,
 } from '@/services/services/decks/decks.service'
 
 import s from './decks-page.module.scss'
@@ -91,7 +91,7 @@ export const DecksPage = () => {
 
   const clearFilter = () => {
     setSearch('')
-    setValuesMinMax([0, 10])
+    setValuesMinMax([0, 61])
   }
 
   const onChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -161,8 +161,8 @@ export const DecksPage = () => {
         </Tabs>
         <Slider
           label={'Number of cards'}
-          max={sliderRange.max || 10}
-          min={sliderRange.min || 0}
+          max={sliderRange?.max || 10}
+          min={sliderRange?.min || 0}
           onValueChange={handleOnValueChange}
           step={1}
           value={valuesMinMax}

@@ -1,11 +1,11 @@
-import { ComponentPropsWithoutRef, useEffect } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { DropdownMenuAvatar } from '@/components/ui/dropdownmenu/drop-down-menu-main'
 import { AppLogo } from '@/components/ui/header/logo/app-logo'
-import { setUserId } from '@/services/services/app/app-slice'
-import { useMeQuery } from '@/services/services/decks/decks.service'
-import { useAppDispatch } from '@/services/store'
+// import { setUserId } from '@/services/services/app/app-slice'
+// import { useMeQuery } from '@/services/services/decks/decks.service'
+// import { useAppDispatch } from '@/services/store'
 
 import s from './header.module.scss'
 
