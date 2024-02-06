@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom'
 
 import { LoginParamsType, SignInForm } from '@/components/auth/sign-in-form'
 import { Page } from '@/page'
-import { useLoginMutation, useMeQuery } from '@/services/services/decks/decks.service'
+import { useLoginMutation, useMeQuery } from '@/services/services/app/auth.service'
 
 export const SignInPage = () => {
   const { isError, isLoading } = useMeQuery()

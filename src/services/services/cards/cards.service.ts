@@ -9,6 +9,11 @@ import {
 export const CardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
+      getCards: builder.query<any, { id: string | undefined }>({
+        query: args => ({
+          url: `/v1/decks/${args.id}/cards`,
+        }),
+      }),
       getRandomCard: builder.query<CardsResponse, ArgsType>({
         query: args => {
           return {
@@ -29,4 +34,4 @@ export const CardsService = baseApi.injectEndpoints({
   },
 })
 
-export const { useGetRandomCardQuery, useSaveCardMutation } = CardsService
+export const { useGetCardsQuery, useGetRandomCardQuery, useSaveCardMutation } = CardsService

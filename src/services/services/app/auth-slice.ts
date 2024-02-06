@@ -1,16 +1,16 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-export type AppType = {
+export type AuthType = {
   userId: string
 }
 
-const initialState: AppType = {
+const initialState: AuthType = {
   userId: '1',
 }
 
-const appSlice = createSlice({
+const authSlice = createSlice({
   initialState,
-  name: 'app',
+  name: 'auth',
   reducers: {
     setUserId: (state, action: PayloadAction<{ userId: string }>) => {
       debugger
@@ -19,7 +19,7 @@ const appSlice = createSlice({
   },
 })
 
-const appActions = appSlice.actions
+const authActions = authSlice.actions
 
-export const { setUserId } = appActions
-export const appReducer = appSlice.reducer
+export const { setUserId } = authActions
+export const authReducer = authSlice.reducer
