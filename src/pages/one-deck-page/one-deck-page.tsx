@@ -24,7 +24,7 @@ import image from '@/components/ui/modal/img/example-image.png'
 import { Pagination } from '@/components/ui/pagination'
 import { TextField } from '@/components/ui/textfield'
 import { TableOnePage } from '@/pages/one-deck-page/table-one-deck-page'
-import { useMeQuery } from '@/services/services/app/auth.service'
+import { useMeQuery } from '@/services/services/auth/auth.service'
 import { useGetCardsQuery } from '@/services/services/cards/cards.service'
 import { useGetDeckQuery } from '@/services/services/decks/decks.service'
 

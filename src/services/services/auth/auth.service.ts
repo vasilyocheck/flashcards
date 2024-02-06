@@ -18,7 +18,9 @@ export const AuthService = baseApi.injectEndpoints({
         }),
       }),
       signUp: builder.mutation<any, any>({
-        query: () => ({
+        query: args => ({
+          body: args,
+          method: 'POST',
           url: `/v1/auth/sign-up`,
         }),
       }),
