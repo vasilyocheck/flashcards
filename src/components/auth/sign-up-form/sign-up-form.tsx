@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { ControlledTextField } from '@/components/ui/controlled/controlled-textfield'
-import { useSignUpMutation } from '@/services/services/app/auth.service'
+import { useSignUpMutation } from '@/services/services/auth/auth.service'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@radix-ui/themes'
 import { z } from 'zod'

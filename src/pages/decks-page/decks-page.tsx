@@ -11,7 +11,7 @@ import { TabItem } from '@/components/ui/tabs/tabItem'
 import { TextField } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
 import { useDebounce } from '@/hooks/hooks'
-import { useMeQuery } from '@/services/services/app/auth.service'
+import { useMeQuery } from '@/services/services/auth/auth.service'
 import {
   useDeleteDeckMutation,
   useGetDecksQuery,
