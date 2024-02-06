@@ -17,8 +17,6 @@ export type DeckWithId = {
 }
 
 import { Button } from '@/components/ui/button'
-// import { useAppSelector } from '@/services/store'
-
 import { Modal } from '@/components/ui/modal'
 import image from '@/components/ui/modal/img/example-image.png'
 import { Pagination } from '@/components/ui/pagination'
@@ -33,18 +31,18 @@ import s from './one-deck-page.module.scss'
 const defaultItemsPerPage = 7
 
 export const OneDeckPage = () => {
-  // const userId = useAppSelector(state => state.app.userId)
+  const notFound = 'no deck is found'
   const { deckId } = useParams()
   const { data: userId, isLoading: isLoadingMe } = useMeQuery()
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(defaultItemsPerPage)
-  const { data: dataDeck, isLoading: isLoadingDeck } = useGetDeckQuery({ id: deckId })
+  const { data: dataDeck, isLoading: isLoadingDeck } = useGetDeckQuery({ id: deckId || notFound })
   const [myId, setMyId] = useState('1')
   const [deck, setDeck] = useState<DeckWithId>({} as DeckWithId)
 
   const { data, isLoading } = useGetCardsQuery({
     currentPage,
-    id: deckId,
+    id: deckId || notFound,
     itemsPerPage,
   })
 
@@ -57,7 +55,7 @@ export const OneDeckPage = () => {
   }
 
   useEffect(() => {
-    if (!isLoadingMe) {
+    if (!isLoadingMe && userId) {
       setMyId(userId.id)
     }
     if (!isLoadingDeck) {
@@ -153,7 +151,7 @@ export const OneDeckPage = () => {
             <TableOnePage deleteDeck={() => {}} items={data?.items} />
             <Pagination
               currentPage={currentPage}
-              itemsCount={data?.pagination.totalItems}
+              itemsCount={data?.pagination.totalItems || 20}
               itemsPerPage={defaultItemsPerPage}
               onItemsPerPageChange={onChangeCountItemsPerPage}
               onPageChange={onChangePagination}

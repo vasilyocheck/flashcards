@@ -1,6 +1,7 @@
 import { DeckResponse } from '@/pages/decks-page'
 import { DeckWithId } from '@/pages/one-deck-page'
 import { baseApi } from '@/services/base-api'
+import { MinMaxResponse } from '@/services/services/cards/cards.types'
 import {
   ArgsType,
   DeckById,
@@ -28,7 +29,7 @@ export const DecksService = baseApi.injectEndpoints({
           url: `/v1/decks/${args.id}`,
         }),
       }),
-      getDeck: builder.query<DeckWithId, { id: string | undefined }>({
+      getDeck: builder.query<DeckWithId, { id: string }>({
         query: args => ({
           url: `/v1/decks/${args.id}`,
         }),
@@ -46,7 +47,7 @@ export const DecksService = baseApi.injectEndpoints({
           url: `/v2/decks`,
         }),
       }),
-      getMinMax: builder.query<any, void>({
+      getMinMax: builder.query<MinMaxResponse, void>({
         query: () => ({
           url: `/v2/decks/min-max-cards`,
         }),

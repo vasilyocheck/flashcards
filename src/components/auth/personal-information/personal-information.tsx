@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 
 import { Svg } from '@/components/auth/personal-information/svg'
 import { Button } from '@/components/ui/button'
@@ -19,7 +19,7 @@ type Props = {
 export const PersonalInformation = ({ img, mail, name }: Props) => {
   const { handleSubmit, register } = useForm()
   const [editMode, setEditMode] = useState(false)
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: FieldValues) => {
     setEditMode(false)
     console.log(data)
   }

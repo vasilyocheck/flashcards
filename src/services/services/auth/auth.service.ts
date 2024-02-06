@@ -1,5 +1,6 @@
 import { LoginParamsType } from '@/components/auth/sign-in-form'
 import { baseApi } from '@/services/base-api'
+import { MeResponse, SignUpArgs, SignUpResponse } from '@/services/services/auth/auth.types'
 import { LoginResponseType } from '@/services/services/decks/decks.types'
 
 export const AuthService = baseApi.injectEndpoints({
@@ -12,12 +13,12 @@ export const AuthService = baseApi.injectEndpoints({
           url: '/v1/auth/login',
         }),
       }),
-      me: builder.query<any, void>({
+      me: builder.query<MeResponse, void>({
         query: () => ({
           url: `/v1/auth/me`,
         }),
       }),
-      signUp: builder.mutation<any, any>({
+      signUp: builder.mutation<SignUpResponse, SignUpArgs>({
         query: args => ({
           body: args,
           method: 'POST',
