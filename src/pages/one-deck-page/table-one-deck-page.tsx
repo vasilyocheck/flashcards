@@ -83,7 +83,7 @@ export const TableOnePage = ({
     <Table className={s.pagination}>
       <TableHeader columns={columns} onSort={onSort} sort={sort} />
       <TableBody>
-        {items.map((t: ResponseItemType) => {
+        {items?.map((t: ResponseItemType) => {
           return (
             <TableRow key={t.id}>
               <TableDataCell>
