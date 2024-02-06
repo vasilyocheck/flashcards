@@ -123,7 +123,7 @@ export const DecksPage = () => {
   }
 
   useEffect(() => {
-    if (!isLoadingSliderRange) {
+    if (!isLoadingSliderRange && sliderRange) {
       setValuesMinMax([sliderRange.min, sliderRange.max])
     }
   }, [isLoadingSliderRange, sliderRange])
