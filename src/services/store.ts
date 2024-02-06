@@ -1,7 +1,7 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 import { baseApi } from '@/services/base-api'
-import { authReducer } from '@/services/services/app/auth-slice'
+import { authReducer } from '@/services/services/auth/auth-slice'
 import { cardsReducer } from '@/services/services/cards/cards-slice'
 import { configureStore } from '@reduxjs/toolkit'
 
