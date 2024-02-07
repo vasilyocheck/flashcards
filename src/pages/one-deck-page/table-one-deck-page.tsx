@@ -40,11 +40,12 @@ type TableType = {
   items: any
   onClickCallback?: (itemId: string) => void
   onSort?: (sort: Sort) => void
+  oppositeId: boolean
   sort?: Sort
   userId?: string
 } & ComponentPropsWithoutRef<'table'>
 
-export const TableOnePage = ({ deleteDeck, items, onSort, sort }: TableType) => {
+export const TableOnePage = ({ deleteDeck, items, onSort, oppositeId, sort }: TableType) => {
   const columns: Array<Column> = [
     {
       key: 'question',
@@ -87,10 +88,12 @@ export const TableOnePage = ({ deleteDeck, items, onSort, sort }: TableType) => 
               <TableDataCell>
                 <>
                   <IconButton icon={<EditIcon />} size={1.1}></IconButton>
-                  <IconButton
-                    icon={<DeleteIcon onClick={() => deleteDeck({ id: t.id })} />}
-                    size={1.1}
-                  ></IconButton>
+                  {oppositeId && (
+                    <IconButton
+                      icon={<DeleteIcon onClick={() => deleteDeck({ id: t.id })} />}
+                      size={1.1}
+                    ></IconButton>
+                  )}
                 </>
               </TableDataCell>
             </TableRow>
