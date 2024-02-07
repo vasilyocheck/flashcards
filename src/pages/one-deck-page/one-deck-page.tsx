@@ -89,7 +89,6 @@ export const OneDeckPage = () => {
           </Typography>
           {oppositeId ? (
             <div className={s.button}>
-              {/*Кнопка Add New Card*/}
               <Modal nameButton={'Add New Card'} title={'Add New Card'} width={'532px'}>
                 <Typography className={s.textQuestion} variant={'body2'}>
                   Question:
