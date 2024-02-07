@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, useParams } from 'react-router-dom'
 
-import { ArrowBackIcon, ImageIcon } from '@/assets'
+import { ArrowBackIcon } from '@/assets'
 import { IconWrapper } from '@/assets/icons/IconWrapper'
 import { Typography } from '@/components/ui/typography'
 
@@ -17,12 +17,11 @@ export type DeckWithId = {
 }
 
 import { Button } from '@/components/ui/button'
-import { Modal } from '@/components/ui/modal'
-import image from '@/components/ui/modal/img/example-image.png'
 import { Pagination } from '@/components/ui/pagination'
 import { TextField } from '@/components/ui/textfield'
 import { TableOnePage } from '@/pages/one-deck-page/table-one-deck-page'
 import { useMeQuery } from '@/services/services/auth/auth.service'
+import { AddCard } from '@/services/services/cards/add-card'
 import { useGetCardsQuery } from '@/services/services/cards/cards.service'
 import { useGetDeckQuery } from '@/services/services/decks/decks.service'
 
@@ -89,6 +88,10 @@ export const OneDeckPage = () => {
           </Typography>
           {oppositeId ? (
             <div className={s.button}>
+
+              <AddCard />
+              {/*Кнопка Add New Card
+
               <Modal nameButton={'Add New Card'} title={'Add New Card'} width={'532px'}>
                 <Typography className={s.textQuestion} variant={'body2'}>
                   Question:
@@ -110,9 +113,8 @@ export const OneDeckPage = () => {
                 </Button>
                 <div className={s.buttons}>
                   <Button variant={'secondary'}>Cancel</Button>
-                  <Button>Add New Card</Button>
                 </div>
-              </Modal>
+              </Modal>*/}
             </div>
           ) : null}
         </div>
@@ -123,30 +125,32 @@ export const OneDeckPage = () => {
               {deck.name}
             </Typography>
             {deck.userId === myId ? (
-              <Modal nameButton={'Add New Card'} title={'Add New Card'} width={'532px'}>
-                <Typography className={s.textQuestion} variant={'body2'}>
-                  Question:
-                </Typography>
-                <TextField label={'Question?'} name={'123'}></TextField>
-                <img alt={'picture'} src={image} />
-                <Button className={'uploadButton'} variant={'secondary'}>
-                  <ImageIcon style={{ height: '16px', width: '16px' }} />
-                  Change Image
-                </Button>
-                <Typography className={s.textQuestion} variant={'body2'}>
-                  Answer:
-                </Typography>
-                <TextField label={'Answer'} name={'123'}></TextField>
-                <img alt={'picture'} src={image} />
-                <Button className={'uploadButton'} variant={'secondary'}>
-                  <ImageIcon style={{ height: '16px', width: '16px' }} />
-                  Change Image
-                </Button>
-                <div className={s.buttons}>
-                  <Button variant={'secondary'}>Cancel</Button>
-                  <Button>Add New Card</Button>
-                </div>
-              </Modal>
+              <>
+                <AddCard />
+                {/*<Modal nameButton={'Add New Card'} title={'Add New Card'} width={'532px'}>*/}
+                {/*  <Typography className={s.textQuestion} variant={'body2'}>*/}
+                {/*    Question:*/}
+                {/*  </Typography>*/}
+                {/*  <TextField label={'Question?'} name={'123'}></TextField>*/}
+                {/*  <img alt={'picture'} src={image} />*/}
+                {/*  <Button className={'uploadButton'} variant={'secondary'}>*/}
+                {/*    <ImageIcon style={{ height: '16px', width: '16px' }} />*/}
+                {/*    Change Image*/}
+                {/*  </Button>*/}
+                {/*  <Typography className={s.textQuestion} variant={'body2'}>*/}
+                {/*    Answer:*/}
+                {/*  </Typography>*/}
+                {/*  <TextField label={'Answer'} name={'123'}></TextField>*/}
+                {/*  <img alt={'picture'} src={image} />*/}
+                {/*  <Button className={'uploadButton'} variant={'secondary'}>*/}
+                {/*    <ImageIcon style={{ height: '16px', width: '16px' }} />*/}
+                {/*    Change Image*/}
+                {/*  </Button>*/}
+                {/*  <div className={s.buttons}>*/}
+                {/*    <Button variant={'secondary'}>Cancel</Button>*/}
+                {/*  </div>*/}
+                {/*</Modal>*/}
+              </>
             ) : (
               <Button>Learn to Pack</Button>
             )}
