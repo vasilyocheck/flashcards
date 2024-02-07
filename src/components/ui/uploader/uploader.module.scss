@@ -1,0 +1,14 @@
+.uploader {
+  cursor: pointer;
+
+  position: relative;
+
+  display: inline-block;
+
+  width: 100%;
+  padding-top: 30px;
+
+  .fileInput {
+    display: none;
+  }
+}

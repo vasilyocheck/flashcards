@@ -1,0 +1,31 @@
+@import 'src/styles/mixins';
+
+.form {
+  width: 100%;
+
+  .actionBlock {
+    @include flex($justify: space-between, $align: center);
+
+    padding-top: 40px;
+  }
+
+  & .title {
+    margin-bottom: 5px;
+  }
+
+
+  & label {
+    margin-bottom: -10px;
+  }
+
+  & .formContent {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  & .contentBlock {
+    display: flex;
+    flex-direction: column;
+  }
+}
