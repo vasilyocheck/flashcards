@@ -40,6 +40,8 @@ export const OneDeckPage = () => {
   const [myId, setMyId] = useState('1')
   const [deck, setDeck] = useState<DeckWithId>({} as DeckWithId)
 
+  const oppositeId = deck.userId === myId
+
   const { data, isLoading } = useGetCardsQuery({
     currentPage,
     id: deckId || notFound,
@@ -65,6 +67,10 @@ export const OneDeckPage = () => {
     }
   }, [isLoading, isLoadingDeck])
 
+  if (isLoadingDeck || isLoading) {
+    return <div>...LOADING</div>
+  }
+
   return (
     <div className={s.wrapper}>
       <NavLink className={s.backBtn} to={'/'}>
@@ -81,9 +87,8 @@ export const OneDeckPage = () => {
           <Typography className={s.text} variant={'body1'}>
             This pack is empty. Click add new card to fill this pack
           </Typography>
-          {deck.userId === myId ? (
+          {oppositeId ? (
             <div className={s.button}>
-              {/*Кнопка Add New Card*/}
               <Modal nameButton={'Add New Card'} title={'Add New Card'} width={'532px'}>
                 <Typography className={s.textQuestion} variant={'body2'}>
                   Question:
@@ -148,7 +153,7 @@ export const OneDeckPage = () => {
           </div>
           <div>
             <TextField className={s.textField} placeholder={'Input search'} type={'search'} />
-            <TableOnePage deleteDeck={() => {}} items={data?.items} />
+            <TableOnePage deleteDeck={() => {}} items={data?.items} oppositeId={oppositeId} />
             <Pagination
               currentPage={currentPage}
               itemsCount={data?.pagination.totalItems || 20}
