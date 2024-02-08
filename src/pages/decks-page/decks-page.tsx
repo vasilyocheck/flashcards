@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 import { DeleteIcon } from '@/assets'
 import { AddNewDeck } from '@/components/decks'
 import { Button } from '@/components/ui/button'
+import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
 import { Slider } from '@/components/ui/slider'
 import { TableStory } from '@/components/ui/table'
@@ -129,7 +130,7 @@ export const DecksPage = () => {
   }, [isLoadingSliderRange, sliderRange])
 
   if (!data) {
-    return <div>...loading</div>
+    return <Loader />
   }
 
   return (
