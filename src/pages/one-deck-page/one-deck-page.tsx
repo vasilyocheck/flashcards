@@ -17,6 +17,7 @@ export type DeckWithId = {
 }
 
 import { Button } from '@/components/ui/button'
+import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
 import { TextField } from '@/components/ui/textfield'
 import { TableOnePage } from '@/pages/one-deck-page/table-one-deck-page'
@@ -67,7 +68,7 @@ export const OneDeckPage = () => {
   }, [isLoading, isLoadingDeck])
 
   if (isLoadingDeck || isLoading) {
-    return <div>...LOADING</div>
+    return <Loader />
   }
 
   return (
