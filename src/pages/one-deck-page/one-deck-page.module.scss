@@ -8,6 +8,13 @@
   text-decoration: none;
 }
 
+.tableImage {
+  aspect-ratio: 3/2;
+  max-height: 80px;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
 .pagination {
   margin-bottom: 24px;
 }
@@ -54,5 +61,15 @@
 }
 
 .tableDataContent {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  max-width: 300px;
+
   text-decoration: none;
+}
+
+.tableDataCell {
+  display: flex;
 }

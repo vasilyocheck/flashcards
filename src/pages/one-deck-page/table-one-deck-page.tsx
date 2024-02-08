@@ -78,23 +78,44 @@ export const TableOnePage = ({ deleteDeck, items, onSort, oppositeId, sort }: Ta
             <TableRow key={t.id}>
               <TableDataCell>
                 <Typography as={NavLink} className={s.tableDataContent} to={`/decks/${t.id}`}>
-                  {/*{t.cover && <img alt={'image'} className={s.tableImage} src={t.cover} />}*/}
-                  {t.question}
+                  {t.questionImg && (
+                    <img
+                      alt={'image'}
+                      className={s.tableImage}
+                      height={50}
+                      src={t.answerImg}
+                      width={50}
+                    />
+                  )}
+                  <span>{t.question}</span>
                 </Typography>
               </TableDataCell>
-              <TableDataCell>{t.answer}</TableDataCell>
+              <TableDataCell>
+                <div className={s.tableDataContent}>
+                  {t.answerImg && (
+                    <img
+                      alt={'image'}
+                      className={s.tableImage}
+                      height={50}
+                      src={t.answerImg}
+                      width={50}
+                    />
+                  )}
+                  <span>{t.answer}</span>
+                </div>
+              </TableDataCell>
               <TableDataCell>{new Date(t.updated).toLocaleDateString('ru-RU')}</TableDataCell>
               <TableDataCell>{t.grade}</TableDataCell>
-              <TableDataCell>
-                <>
-                  <IconButton icon={<EditIcon />} size={1.1}></IconButton>
-                  {oppositeId && (
-                    <IconButton
-                      icon={<DeleteIcon onClick={() => deleteDeck({ id: t.id })} />}
-                      size={1.1}
-                    ></IconButton>
-                  )}
-                </>
+              <TableDataCell className={s.allButtons}>
+                {/*<div className={s.allButtons}>*/}
+                <IconButton icon={<EditIcon />} size={1.1}></IconButton>
+                {oppositeId && (
+                  <IconButton
+                    icon={<DeleteIcon onClick={() => deleteDeck({ id: t.id })} />}
+                    size={1.1}
+                  ></IconButton>
+                )}
+                {/*</div>*/}
               </TableDataCell>
             </TableRow>
           )
