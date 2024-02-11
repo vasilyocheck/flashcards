@@ -35,7 +35,7 @@ export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, Checkb
             ref={ref}
             {...rest}
           >
-            <RadixCheckbox.Indicator className={s.CheckboxIndicator}>
+            <RadixCheckbox.Indicator>
               <Tick disabled={disabled} />
             </RadixCheckbox.Indicator>
           </RadixCheckbox.Root>
