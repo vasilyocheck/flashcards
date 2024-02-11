@@ -20,6 +20,13 @@ export const CardsService = baseApi.injectEndpoints({
           url: `/v1/decks/${deckId}/cards`,
         }),
       }),
+      deleteCard: builder.mutation<void, { id: string }>({
+        invalidatesTags: ['Cards'],
+        query: args => ({
+          method: 'DELETE',
+          url: `/v1/cards/${args.id}`,
+        }),
+      }),
       getCards: builder.query<GetCardsResponse, GetCardsArgs>({
         providesTags: ['Cards'],
         query: args => {
@@ -53,6 +60,7 @@ export const CardsService = baseApi.injectEndpoints({
 
 export const {
   useCreateCardMutation,
+  useDeleteCardMutation,
   useGetCardsQuery,
   useGetRandomCardQuery,
   useSaveCardMutation,
