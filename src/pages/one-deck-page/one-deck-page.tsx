@@ -109,7 +109,7 @@ export const OneDeckPage = () => {
           </div>
           <div>
             <TextField className={s.textField} placeholder={'Input search'} type={'search'} />
-            <TableOnePage deleteDeck={() => {}} items={data?.items} oppositeId={oppositeId} />
+            <TableOnePage items={data?.items} oppositeId={oppositeId} />
             <Pagination
               currentPage={currentPage}
               itemsCount={data?.pagination.totalItems || 20}

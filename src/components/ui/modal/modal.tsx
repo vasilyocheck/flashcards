@@ -8,6 +8,7 @@ import s from './modal.module.scss'
 
 type Props = {
   children?: ReactNode | string
+  isDialogueTriggerShown?: boolean
   nameButton?: string
   onOpenChange?: (isOpen: boolean) => void
   open?: boolean
@@ -19,6 +20,7 @@ type Props = {
 export const Modal = (props: Props & Omit<ButtonProps, keyof Props>) => {
   const {
     children,
+    isDialogueTriggerShown = true,
     nameButton = 'click',
     title,
     variantForButton = 'primary',
@@ -28,9 +30,11 @@ export const Modal = (props: Props & Omit<ButtonProps, keyof Props>) => {
 
   return (
     <Dialog.Root {...rest}>
-      <Dialog.Trigger asChild>
-        <Button variant={variantForButton}>{nameButton}</Button>
-      </Dialog.Trigger>
+      {isDialogueTriggerShown && (
+        <Dialog.Trigger asChild>
+          <Button variant={variantForButton}>{nameButton}</Button>
+        </Dialog.Trigger>
+      )}
 
       <Dialog.Portal>
         <Dialog.Overlay className={s.DialogOverlay} />
