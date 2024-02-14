@@ -26,3 +26,9 @@ export type SignUpArgs = {
   sendConfirmationEmail?: boolean
   subject?: string
 }
+
+export type RecoverPassArgs = {
+  email: string
+  html: string
+  subject: string
+}

@@ -1,6 +1,11 @@
 import { LoginParamsType } from '@/components/auth/sign-in-form'
 import { baseApi } from '@/services/base-api'
-import { MeResponse, SignUpArgs, SignUpResponse } from '@/services/services/auth/auth.types'
+import {
+  MeResponse,
+  RecoverPassArgs,
+  SignUpArgs,
+  SignUpResponse,
+} from '@/services/services/auth/auth.types'
 import { LoginResponseType } from '@/services/services/decks/decks.types'
 
 export const AuthService = baseApi.injectEndpoints({
@@ -18,6 +23,13 @@ export const AuthService = baseApi.injectEndpoints({
           url: `/v1/auth/me`,
         }),
       }),
+      recoverPass: builder.mutation<void, RecoverPassArgs>({
+        query: args => ({
+          body: args,
+          method: 'POST',
+          url: `/v1/auth/recover-password`,
+        }),
+      }),
       signUp: builder.mutation<SignUpResponse, SignUpArgs>({
         query: args => ({
           body: args,
@@ -29,4 +41,5 @@ export const AuthService = baseApi.injectEndpoints({
   },
 })
 
-export const { useLoginMutation, useMeQuery, useSignUpMutation } = AuthService
+export const { useLoginMutation, useMeQuery, useRecoverPassMutation, useSignUpMutation } =
+  AuthService
