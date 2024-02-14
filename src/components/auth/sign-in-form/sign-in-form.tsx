@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-textfield'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from '@radix-ui/themes'
 import { z } from 'zod'
 
 import s from './sign-in-form.module.scss'
@@ -24,7 +23,6 @@ type Props = {
 }
 
 export const SignInForm = ({ onSubmit }: Props) => {
-  const navigate = useNavigate()
   const {
     control,
     formState: { errors },
@@ -52,13 +50,15 @@ export const SignInForm = ({ onSubmit }: Props) => {
         <ControlledCheckbox control={control} label={'Remember me'} name={'remember'} />
       </div>
 
-      <Link className={s.linkForgotPassword}>Forgot Password?</Link>
+      <Link className={s.linkForgotPassword} to={'/forgot-pass'}>
+        Forgot Password?
+      </Link>
       <Button fullWidth type={'submit'}>
         Sign In
       </Button>
 
       <span className={s.already}>{"Don't have an account?"}</span>
-      <Link className={s.link} onClick={() => navigate('/sign-up')}>
+      <Link className={s.link} to={'/sign-up'}>
         Sign Up
       </Link>
     </form>

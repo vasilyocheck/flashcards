@@ -1,8 +1,9 @@
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 import { ControlledTextField } from '@/components/ui/controlled/controlled-textfield'
+import { Typography } from '@/components/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from '@radix-ui/themes'
 import { z } from 'zod'
 
 import s from '@/components/auth/forgot-password/forgot-password-form.module.scss'
@@ -13,23 +14,27 @@ const loginSchema = z.object({
   email: z.string().email(),
 })
 
-type FormValues = z.infer<typeof loginSchema>
+export type ForgotPassFormValues = z.infer<typeof loginSchema>
 
-export const ForgotPasswordForm = () => {
+type Props = {
+  onSubmit?: (data: ForgotPassFormValues) => void
+}
+
+export const ForgotPasswordForm = ({ onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<FormValues>({ resolver: zodResolver(loginSchema) })
+  } = useForm<ForgotPassFormValues>({ resolver: zodResolver(loginSchema) })
 
-  const onSubmit = (data: FormValues) => {
-    console.log(data)
+  const onSubmitHandler = (data: ForgotPassFormValues) => {
+    if (data && onSubmit) {
+      onSubmit(data)
+    }
   }
 
-  console.log(errors)
-
   return (
-    <form className={s.signUpForm} onSubmit={handleSubmit(onSubmit)}>
+    <form className={s.signUpForm} onSubmit={handleSubmit(onSubmitHandler)}>
       <div className={s.formTitle}>Forgot your password?</div>
       <ControlledTextField
         control={control}
@@ -44,7 +49,9 @@ export const ForgotPasswordForm = () => {
         Send Instructions
       </Button>
       <div className={s.tryLoginComment}>Did you remember your password?</div>
-      <Link className={s.link}>Try logging in</Link>
+      <Link to={'/login'}>
+        <Typography className={s.tryLink}>Try logging in</Typography>
+      </Link>
     </form>
   )
 }
