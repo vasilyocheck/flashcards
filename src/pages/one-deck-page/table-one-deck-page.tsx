@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { DeleteIcon, EditIcon } from '@/assets'
+import { DeleteIcon, EditIcon, RatingEmptyIcon, RatingFilledIcon } from '@/assets'
 import { IconButton } from '@/components/ui/iconButton'
 import { Column } from '@/components/ui/table/table.stories'
 import { Table, TableBody, TableDataCell, TableRow } from '@/components/ui/table/tableConstuctor'
@@ -75,6 +75,18 @@ export const TableOnePage = ({ items, onSort, oppositeId, sort }: TableType) => 
       <TableHeader columns={columns} onSort={onSort} sort={sort} />
       <TableBody>
         {items?.map((t: ResponseItemType) => {
+          const grades = []
+
+          for (let i = 0; i < t.grade; i++) {
+            grades.push(<RatingFilledIcon className={s.grade} color={'#e5ac39'} size={1} />)
+          }
+
+          const emptyGrades = 5 - t.grade
+
+          for (let j = 0; j < emptyGrades; j++) {
+            grades.push(<RatingEmptyIcon className={s.grade} color={'#e5ac39'} size={1} />)
+          }
+
           return (
             <TableRow key={t.id}>
               <TableDataCell>
@@ -106,9 +118,8 @@ export const TableOnePage = ({ items, onSort, oppositeId, sort }: TableType) => 
                 </div>
               </TableDataCell>
               <TableDataCell>{new Date(t.updated).toLocaleDateString('ru-RU')}</TableDataCell>
-              <TableDataCell>{t.grade}</TableDataCell>
+              <TableDataCell>{grades}</TableDataCell>
               <TableDataCell className={s.allButtons}>
-                {/*<div className={s.allButtons}>*/}
                 <IconButton icon={<EditIcon />} size={1.1}></IconButton>
                 {oppositeId && (
                   <IconButton
@@ -116,7 +127,6 @@ export const TableOnePage = ({ items, onSort, oppositeId, sort }: TableType) => 
                     size={1.1}
                   ></IconButton>
                 )}
-                {/*</div>*/}
               </TableDataCell>
               <ModalDeleteCard isOpen={isOpen} item={t} onOpenChange={handleSetIsOpen} />
             </TableRow>
