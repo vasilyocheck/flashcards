@@ -119,15 +119,15 @@ export const TableOnePage = ({ items, onSort, oppositeId, sort }: TableType) => 
               </TableDataCell>
               <TableDataCell>{new Date(t.updated).toLocaleDateString('ru-RU')}</TableDataCell>
               <TableDataCell>{grades}</TableDataCell>
-              <TableDataCell className={s.allButtons}>
-                <IconButton icon={<EditIcon />} size={1.1}></IconButton>
-                {oppositeId && (
+              {oppositeId && (
+                <TableDataCell className={s.allButtons}>
+                  <IconButton icon={<EditIcon />} size={1.1}></IconButton>
                   <IconButton
                     icon={<DeleteIcon onClick={handleSetIsOpen} />}
                     size={1.1}
                   ></IconButton>
-                )}
-              </TableDataCell>
+                </TableDataCell>
+              )}
               <ModalDeleteCard isOpen={isOpen} item={t} onOpenChange={handleSetIsOpen} />
             </TableRow>
           )
