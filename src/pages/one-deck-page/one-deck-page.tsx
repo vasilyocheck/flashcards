@@ -16,14 +16,20 @@ export type DeckWithId = {
   userId: string
 }
 
+export type CardToDelete = {
+  cardName: string
+  id: string
+} | null
+
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
 import { TextField } from '@/components/ui/textfield'
+import { ModalDeleteCard } from '@/pages/one-deck-page/modal-delete-card/modal-delete-card'
 import { TableOnePage } from '@/pages/one-deck-page/table-one-deck-page'
 import { useMeQuery } from '@/services/services/auth/auth.service'
 import { AddCard } from '@/services/services/cards/add-card'
-import { useGetCardsQuery } from '@/services/services/cards/cards.service'
+import { useDeleteCardMutation, useGetCardsQuery } from '@/services/services/cards/cards.service'
 import { useGetDeckQuery } from '@/services/services/decks/decks.service'
 
 import s from './one-deck-page.module.scss'
@@ -39,6 +45,8 @@ export const OneDeckPage = () => {
   const { data: dataDeck, isLoading: isLoadingDeck } = useGetDeckQuery({ id: deckId || notFound })
   const [myId, setMyId] = useState('1')
   const [deck, setDeck] = useState<DeckWithId>({} as DeckWithId)
+  const [cardToDelete, setCardToDelete] = useState<CardToDelete>(null)
+  const [deleteCard] = useDeleteCardMutation()
 
   const oppositeId = deck.userId === myId
 
@@ -54,6 +62,13 @@ export const OneDeckPage = () => {
 
   const onChangePagination = (currentPageNum: number) => {
     setCurrentPage(currentPageNum)
+  }
+
+  const handleOnOpenChange = (action: string) => {
+    if (action === 'delete' && cardToDelete) {
+      deleteCard({ id: cardToDelete.id })
+    }
+    setCardToDelete(null)
   }
 
   useEffect(() => {
@@ -109,7 +124,11 @@ export const OneDeckPage = () => {
           </div>
           <div>
             <TextField className={s.textField} placeholder={'Input search'} type={'search'} />
-            <TableOnePage items={data?.items} oppositeId={oppositeId} />
+            <TableOnePage
+              items={data?.items}
+              oppositeId={oppositeId}
+              setCardToDelete={setCardToDelete}
+            />
             <Pagination
               currentPage={currentPage}
               itemsCount={data?.pagination.totalItems || 20}
@@ -120,6 +139,11 @@ export const OneDeckPage = () => {
           </div>
         </div>
       )}
+      <ModalDeleteCard
+        isOpen={!!cardToDelete}
+        item={cardToDelete}
+        onOpenChange={handleOnOpenChange}
+      />
     </div>
   )
 }
