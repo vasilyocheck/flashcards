@@ -10,10 +10,14 @@ type Props = {
   onOpenChange: (action: string) => void
 }
 export const ModalDeleteDeck = ({ isOpen, item, onOpenChange }: Props) => {
+  const handleClose = () => {
+    onOpenChange('cancel')
+  }
+
   return (
     <Modal
       isDialogueTriggerShown={false}
-      //onOpenChange={onOpenChange}
+      onOpenChange={handleClose}
       open={isOpen}
       title={'Delete Deck'}
       width={'542px'}

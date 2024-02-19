@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, useState } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { DeleteIcon, EditIcon, RatingEmptyIcon, RatingFilledIcon } from '@/assets'
@@ -7,7 +7,7 @@ import { Column } from '@/components/ui/table/table.stories'
 import { Table, TableBody, TableDataCell, TableRow } from '@/components/ui/table/tableConstuctor'
 import { TableHeader } from '@/components/ui/table/tableHeader/tableHeader'
 import { Typography } from '@/components/ui/typography'
-import { ModalDeleteCard } from '@/pages/one-deck-page/modal-delete-card/modal-delete-card'
+import { CardToDelete } from '@/pages/one-deck-page/one-deck-page'
 
 import s from './one-deck-page.module.scss'
 
@@ -37,11 +37,12 @@ type TableType = {
   onClickCallback?: (itemId: string) => void
   onSort?: (sort: Sort) => void
   oppositeId: boolean
+  setCardToDelete?: (cardToDelete: CardToDelete) => void
   sort?: Sort
   userId?: string
 } & ComponentPropsWithoutRef<'table'>
 
-export const TableOnePage = ({ items, onSort, oppositeId, sort }: TableType) => {
+export const TableOnePage = ({ items, onSort, oppositeId, setCardToDelete, sort }: TableType) => {
   const columns: Array<Column> = [
     {
       key: 'question',
@@ -64,10 +65,11 @@ export const TableOnePage = ({ items, onSort, oppositeId, sort }: TableType) => 
       title: '',
     },
   ]
-  const [isOpen, setIsOpen] = useState(false)
 
-  const handleSetIsOpen = () => {
-    setIsOpen(!isOpen)
+  const handleSetCardToDelete = (card: CardToDelete) => {
+    if (setCardToDelete) {
+      setCardToDelete(card)
+    }
   }
 
   return (
@@ -123,12 +125,15 @@ export const TableOnePage = ({ items, onSort, oppositeId, sort }: TableType) => 
                 <TableDataCell className={s.allButtons}>
                   <IconButton icon={<EditIcon />} size={1.1}></IconButton>
                   <IconButton
-                    icon={<DeleteIcon onClick={handleSetIsOpen} />}
+                    icon={
+                      <DeleteIcon
+                        onClick={() => handleSetCardToDelete({ cardName: t.question, id: t.id })}
+                      />
+                    }
                     size={1.1}
                   ></IconButton>
                 </TableDataCell>
               )}
-              <ModalDeleteCard isOpen={isOpen} item={t} onOpenChange={handleSetIsOpen} />
             </TableRow>
           )
         })}

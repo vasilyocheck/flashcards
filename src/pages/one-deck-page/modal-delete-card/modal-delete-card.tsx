@@ -1,37 +1,33 @@
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
-import { ResponseItemType } from '@/pages/one-deck-page/table-one-deck-page'
-import { useDeleteCardMutation } from '@/services/services/cards/cards.service'
+import { CardToDelete } from '@/pages/one-deck-page'
 
 import sModal from '@/components/ui/modal/modal.module.scss'
 
 type Props = {
   isOpen: boolean
-  item: ResponseItemType
-  onOpenChange: () => void
+  item: CardToDelete
+  onOpenChange: (action: string) => void
 }
 export const ModalDeleteCard = ({ isOpen, item, onOpenChange }: Props) => {
-  const [deleteCard] = useDeleteCardMutation()
-
-  function deleteCardHandler() {
-    deleteCard({ id: item.id })
-    onOpenChange()
+  const handleClose = () => {
+    onOpenChange('cancel')
   }
 
   return (
     <Modal
       isDialogueTriggerShown={false}
-      onOpenChange={onOpenChange}
+      onOpenChange={handleClose}
       open={isOpen}
       title={'Delete Card'}
       width={'542px'}
     >
-      <div>Do you really want to remove {item.question}?</div>
+      <div>Do you really want to remove {item?.cardName}?</div>
       <div className={sModal.buttons}>
-        <Button onClick={onOpenChange} type={'reset'} variant={'secondary'}>
+        <Button onClick={() => onOpenChange('cancel')} type={'reset'} variant={'secondary'}>
           Cancel
         </Button>
-        <Button onClick={deleteCardHandler}>Delete Card</Button>
+        <Button onClick={() => onOpenChange('delete')}>Delete Card</Button>
       </div>
     </Modal>
   )
