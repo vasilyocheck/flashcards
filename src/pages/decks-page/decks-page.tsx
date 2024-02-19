@@ -12,6 +12,7 @@ import { TabItem } from '@/components/ui/tabs/tabItem'
 import { TextField } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
 import { useDebounce } from '@/hooks/hooks'
+import { ModalDeleteDeck } from '@/pages/decks-page/modal-delete-deck'
 import { useMeQuery } from '@/services/services/auth/auth.service'
 import {
   useDeleteDeckMutation,
@@ -54,10 +55,16 @@ type Sort = {
   key: string
 } | null
 
+export type DeckToDelete = {
+  id: string
+  name: string
+} | null
+
 const defaultItemsPerPage = 7
 
 export const DecksPage = () => {
   const { data: sliderRange, isLoading: isLoadingSliderRange } = useGetMinMaxQuery()
+  const [deleteDeck] = useDeleteDeckMutation()
 
   const [currentPage, setCurrentPage] = useState(1)
   const [valuesMinMax, setValuesMinMax] = useState([0, 10])
@@ -66,6 +73,7 @@ export const DecksPage = () => {
   const [sort, setSort] = useState<Sort>(null)
   const [itemsPerPage, setItemsPerPage] = useState(defaultItemsPerPage)
   const [userIdForTabs, setUserIdForTabs] = useState<string | undefined>(undefined)
+  const [deckToDelete, setDeckToDelete] = useState<DeckToDelete>(null)
 
   const sortedString = useMemo(() => {
     if (!sort) {
@@ -88,7 +96,6 @@ export const DecksPage = () => {
     orderBy: sortedString,
   })
   const { data: dataMe } = useMeQuery()
-  const [deleteDeck] = useDeleteDeckMutation()
 
   const clearFilter = () => {
     setSearch('')
@@ -123,11 +130,20 @@ export const DecksPage = () => {
     setValuesMinMax(value)
   }
 
+  const handleDeleteDeck = (action: string) => {
+    if (action === 'delete' && deckToDelete !== null) {
+      deleteDeck({ id: deckToDelete.id })
+    }
+    setDeckToDelete(null)
+  }
+
   useEffect(() => {
     if (!isLoadingSliderRange && sliderRange) {
       setValuesMinMax([sliderRange.min, sliderRange.max])
     }
   }, [isLoadingSliderRange, sliderRange])
+
+  console.log(deckToDelete)
 
   if (!data) {
     return <Loader />
@@ -174,7 +190,7 @@ export const DecksPage = () => {
         </Button>
       </div>
       <TableStory
-        deleteDeck={deleteDeck}
+        deleteDeck={setDeckToDelete}
         items={data.items}
         onSort={setSort}
         sort={sort}
@@ -189,6 +205,11 @@ export const DecksPage = () => {
           onPageChange={onChangePagination}
         />
       </div>
+      <ModalDeleteDeck
+        isOpen={!!deckToDelete}
+        item={deckToDelete}
+        onOpenChange={handleDeleteDeck}
+      />
     </div>
   )
 }
