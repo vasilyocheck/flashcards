@@ -4,6 +4,7 @@ import { DeleteIcon, EditIcon, PlayCircleIcon } from '@/assets'
 import { IconButton } from '@/components/ui/iconButton'
 import { Column } from '@/components/ui/table/table.stories'
 import { Typography } from '@/components/ui/typography'
+import { DeckToDelete } from '@/pages/decks-page'
 
 import s from './tableConstuctor/table.module.scss'
 
@@ -14,10 +15,6 @@ type Sort = {
   direction: 'asc' | 'desc'
   key: string
 } | null
-
-type DeleteDeckType = {
-  id: string
-}
 
 type ResponseItemType = {
   author: { id: string; name: string }
@@ -32,7 +29,7 @@ type ResponseItemType = {
 }
 
 type TableType = {
-  deleteDeck: ({ id }: DeleteDeckType) => void
+  deleteDeck: (item: DeckToDelete) => void
   items: any
   onClickCallback?: (itemId: string) => void
   onSort?: (sort: Sort) => void
@@ -108,7 +105,7 @@ export const TableStory = ({
                   <>
                     <IconButton icon={<EditIcon />} size={1.1}></IconButton>
                     <IconButton
-                      icon={<DeleteIcon onClick={() => deleteDeck({ id: t.id })} />}
+                      icon={<DeleteIcon onClick={() => deleteDeck({ id: t.id, name: t.name })} />}
                       size={1.1}
                     ></IconButton>
                   </>
