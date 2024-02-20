@@ -1,7 +1,8 @@
 import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 
 import { DeleteIcon } from '@/assets'
-import { AddNewDeck } from '@/components/decks'
+import { AddNewDeck } from '@/components/decks/add-new-deck'
+import { ModalEditDeck } from '@/components/decks/edit-deck'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
@@ -60,6 +61,13 @@ export type DeckToDelete = {
   name: string
 } | null
 
+export type DeckToEdit = {
+  cover: string
+  id: string
+  isDeckPrivate: boolean
+  name: string
+} | null
+
 const defaultItemsPerPage = 7
 
 export const DecksPage = () => {
@@ -74,6 +82,7 @@ export const DecksPage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(defaultItemsPerPage)
   const [userIdForTabs, setUserIdForTabs] = useState<string | undefined>(undefined)
   const [deckToDelete, setDeckToDelete] = useState<DeckToDelete>(null)
+  const [deckToEdit, setDeckToEdit] = useState<DeckToEdit>(null)
 
   const sortedString = useMemo(() => {
     if (!sort) {
@@ -143,8 +152,6 @@ export const DecksPage = () => {
     }
   }, [isLoadingSliderRange, sliderRange])
 
-  console.log(deckToDelete)
-
   if (!data) {
     return <Loader />
   }
@@ -193,6 +200,7 @@ export const DecksPage = () => {
         deleteDeck={setDeckToDelete}
         items={data.items}
         onSort={setSort}
+        setDeckToEdit={setDeckToEdit}
         sort={sort}
         userId={dataMe?.id}
       />
@@ -209,6 +217,15 @@ export const DecksPage = () => {
         isOpen={!!deckToDelete}
         item={deckToDelete}
         onOpenChange={handleDeleteDeck}
+      />
+      <ModalEditDeck
+        deckCover={deckToEdit?.cover || ''}
+        deckId={deckToEdit?.id || ''}
+        deckName={deckToEdit?.name || ''}
+        isDeckPrivate={deckToEdit?.isDeckPrivate || false}
+        isOpen={!!deckToEdit}
+        key={deckToEdit?.id}
+        setDeckToEdit={setDeckToEdit}
       />
     </div>
   )
