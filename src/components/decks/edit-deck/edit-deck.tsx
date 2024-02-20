@@ -1,21 +1,37 @@
 import { ChangeEvent, useState } from 'react'
 
-import { UploadImg } from '@/components/decks/upload-img/upload-img'
+import { UploadImg } from '@/components/decks/edit-deck/upload-img/upload-img'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Modal } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/textfield'
-import { useAddDeckMutation } from '@/services/services/decks/decks.service'
+import { DeckToEdit } from '@/pages/decks-page'
+import { useUpdateDeckMutation } from '@/services/services/decks/decks.service'
 
 import sModal from '@/components/ui/modal/modal.module.scss'
 
-export const AddNewDeck = () => {
-  const [addDeck] = useAddDeckMutation()
-  const [isOpen, setIsOpen] = useState(false)
-  const [name, setName] = useState('')
-  const [isPrivate, setIsPrivate] = useState(true)
-  const [cover, setCover] = useState<File | string>('')
+type Props = {
+  deckCover: string
+  deckId: string
+  deckName: string
+  isDeckPrivate: boolean
+  isOpen: boolean
+  setDeckToEdit: (deckToEdit: DeckToEdit) => void
+}
+
+export const ModalEditDeck = ({
+  deckCover,
+  deckId,
+  deckName,
+  isDeckPrivate,
+  isOpen,
+  setDeckToEdit,
+}: Props) => {
+  const [name, setName] = useState(deckName)
+  const [isPrivate, setIsPrivate] = useState(isDeckPrivate)
+  const [cover, setCover] = useState<File | string>(deckCover)
   const [textfieldError, setTextFieldError] = useState('')
+  const [updateDeck] = useUpdateDeckMutation()
 
   const handleOnTextFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (textfieldError && name.length > 3) {
@@ -29,14 +45,14 @@ export const AddNewDeck = () => {
   }
 
   const closeModal = () => {
-    setIsOpen(false)
+    setDeckToEdit(null)
     setName('')
     setIsPrivate(true)
     setCover('')
   }
 
   const handleClose = () => {
-    setIsOpen(!isOpen)
+    setDeckToEdit(null)
   }
 
   const handleAddNewPack = () => {
@@ -49,17 +65,18 @@ export const AddNewDeck = () => {
       requestBody.append('name', name)
       requestBody.append('isPrivate', isPrivate.toString())
 
-      addDeck(requestBody)
+      updateDeck({ deckId, requestBody })
       closeModal()
     }
   }
 
   return (
     <Modal
-      nameButton={'Add New Deck'}
+      isDialogueTriggerShown={false}
+      nameButton={'Update Deck'}
       onOpenChange={handleClose}
       open={isOpen}
-      title={'Add New Deck'}
+      title={'Update Deck'}
       width={'542px'}
     >
       <TextField
@@ -69,7 +86,7 @@ export const AddNewDeck = () => {
         value={name}
       />
 
-      <UploadImg onUpload={setCover} />
+      <UploadImg deckCover={deckCover || ''} onUpload={setCover} />
       <div className={sModal.checkbox}>
         <Checkbox callback={handleIsPrivateChange} checked={isPrivate} label={'Private pack'} />
       </div>
@@ -77,7 +94,7 @@ export const AddNewDeck = () => {
         <Button onClick={closeModal} type={'reset'} variant={'secondary'}>
           Cancel
         </Button>
-        <Button onClick={handleAddNewPack}>Add New Pack</Button>
+        <Button onClick={handleAddNewPack}>Update Pack</Button>
       </div>
     </Modal>
   )

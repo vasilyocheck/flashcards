@@ -61,3 +61,8 @@ export type ArgsType = {
 export type LoginResponseType = {
   accessToken: string
 }
+
+export type UpdateDeckArgs = {
+  deckId: string
+  requestBody: FormData
+}

@@ -4,7 +4,7 @@ import { DeleteIcon, EditIcon, PlayCircleIcon } from '@/assets'
 import { IconButton } from '@/components/ui/iconButton'
 import { Column } from '@/components/ui/table/table.stories'
 import { Typography } from '@/components/ui/typography'
-import { DeckToDelete } from '@/pages/decks-page'
+import { DeckToDelete, DeckToEdit } from '@/pages/decks-page'
 
 import s from './tableConstuctor/table.module.scss'
 
@@ -33,6 +33,7 @@ type TableType = {
   items: any
   onClickCallback?: (itemId: string) => void
   onSort?: (sort: Sort) => void
+  setDeckToEdit?: (deck: DeckToEdit) => void
   sort?: Sort
   userId?: string
 }
@@ -42,6 +43,7 @@ export const TableStory = ({
   items,
   onClickCallback,
   onSort,
+  setDeckToEdit,
   sort,
   userId,
 }: TableType) => {
@@ -70,6 +72,11 @@ export const TableStory = ({
   const handleOnClick = (itemId: string) => {
     if (itemId && onClickCallback) {
       onClickCallback(itemId)
+    }
+  }
+  const handleEditBtnClick = (item: DeckToEdit) => {
+    if (setDeckToEdit) {
+      setDeckToEdit(item)
     }
   }
 
@@ -103,7 +110,21 @@ export const TableStory = ({
                 )}
                 {t.author.id === userId ? (
                   <>
-                    <IconButton icon={<EditIcon />} size={1.1}></IconButton>
+                    <IconButton
+                      icon={
+                        <EditIcon
+                          onClick={() =>
+                            handleEditBtnClick({
+                              cover: t.cover || '',
+                              id: t.id,
+                              isDeckPrivate: t.isPrivate,
+                              name: t.name,
+                            })
+                          }
+                        />
+                      }
+                      size={1.1}
+                    ></IconButton>
                     <IconButton
                       icon={<DeleteIcon onClick={() => deleteDeck({ id: t.id, name: t.name })} />}
                       size={1.1}
