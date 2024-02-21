@@ -7,7 +7,9 @@ import { Column } from '@/components/ui/table/table.stories'
 import { Table, TableBody, TableDataCell, TableRow } from '@/components/ui/table/tableConstuctor'
 import { TableHeader } from '@/components/ui/table/tableHeader/tableHeader'
 import { Typography } from '@/components/ui/typography'
-import { CardToDelete } from '@/pages/one-deck-page/one-deck-page'
+import { CardToDelete, CardToEdit } from '@/pages/one-deck-page/one-deck-page'
+import { setCardToEdit } from '@/services/services/cards/cards-slice'
+import { useAppDispatch } from '@/services/store'
 
 import s from './one-deck-page.module.scss'
 
@@ -43,6 +45,7 @@ type TableType = {
 } & ComponentPropsWithoutRef<'table'>
 
 export const TableOnePage = ({ items, onSort, oppositeId, setCardToDelete, sort }: TableType) => {
+  const dispatch = useAppDispatch()
   const columns: Array<Column> = [
     {
       key: 'question',
@@ -70,6 +73,9 @@ export const TableOnePage = ({ items, onSort, oppositeId, setCardToDelete, sort 
     if (setCardToDelete) {
       setCardToDelete(card)
     }
+  }
+  const handleSetCardToEdit = (card: CardToEdit) => {
+    dispatch(setCardToEdit({ cardToEdit: card }))
   }
 
   return (
@@ -123,7 +129,22 @@ export const TableOnePage = ({ items, onSort, oppositeId, setCardToDelete, sort 
               <TableDataCell>{grades}</TableDataCell>
               {oppositeId && (
                 <TableDataCell className={s.allButtons}>
-                  <IconButton icon={<EditIcon />} size={1.1}></IconButton>
+                  <IconButton
+                    icon={
+                      <EditIcon
+                        onClick={() =>
+                          handleSetCardToEdit({
+                            answer: t.answer,
+                            answerImg: t.answerImg,
+                            id: t.id,
+                            question: t.question,
+                            questionImg: t.questionImg,
+                          })
+                        }
+                      />
+                    }
+                    size={1.1}
+                  ></IconButton>
                   <IconButton
                     icon={
                       <DeleteIcon
