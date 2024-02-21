@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 import { TextField } from '@/components/ui/textfield'
 import { CardToEdit } from '@/pages/one-deck-page'
+import { useUpdateCardMutation } from '@/services/services/cards/cards.service'
 import { setCardToEdit } from '@/services/services/cards/cards-slice'
 import { useAppDispatch } from '@/services/store'
 
@@ -25,7 +26,7 @@ export const ModalEditCard = ({ cardToEdit, isOpen }: Props) => {
   const [answerImg, setAnswerImg] = useState<File | string>(cardToEdit?.answerImg || '')
   const [answerTextfieldError, setAnswerTextFieldError] = useState('')
 
-  //const [updateCard] = useUpdateDeckMutation()
+  const [updateCard] = useUpdateCardMutation()
   const handleAnswerTextFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (answerTextfieldError && answer && answer.length > 3) {
       setAnswerTextFieldError('')
@@ -59,12 +60,19 @@ export const ModalEditCard = ({ cardToEdit, isOpen }: Props) => {
     } else {
       const requestBody = new FormData()
 
-      requestBody.append('questionImg', questImg)
-      requestBody.append('answerImg', answerImg)
+      if (typeof questImg !== 'string') {
+        requestBody.append('questionImg', questImg)
+      }
+      if (typeof answerImg !== 'string') {
+        requestBody.append('answerImg', answerImg)
+      }
+
       quest && requestBody.append('question', quest)
       answer && requestBody.append('answer', answer)
 
-      console.log({ cardId: cardToEdit?.id, requestBody })
+      if (cardToEdit) {
+        updateCard({ cardId: cardToEdit.id, requestBody })
+      }
 
       closeModal()
     }

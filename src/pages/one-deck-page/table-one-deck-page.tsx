@@ -104,7 +104,7 @@ export const TableOnePage = ({ items, onSort, oppositeId, setCardToDelete, sort 
                       alt={'image'}
                       className={s.tableImage}
                       height={50}
-                      src={t.answerImg}
+                      src={t.questionImg}
                       width={50}
                     />
                   )}
