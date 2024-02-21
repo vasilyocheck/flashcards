@@ -30,6 +30,6 @@ export const publicRoutes: RouteObject[] = [
   },
   {
     element: <PageNotFound />,
-    path: '/*',
+    path: '/404',
   },
 ]
