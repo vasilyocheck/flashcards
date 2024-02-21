@@ -7,7 +7,9 @@ import {
 } from 'react-router-dom'
 
 import { Header } from '@/components/ui/header'
+import { Loader } from '@/components/ui/loader'
 import { privateRoutes, publicRoutes } from '@/routes/routes'
+import { useMeQuery } from '@/services/services/auth/auth.service'
 
 const AppLayout = () => {
   const navigate = useNavigate()
@@ -38,7 +40,12 @@ export const Router = () => {
 }
 
 export function PrivateRoutes() {
-  const isAuthenticated = true
+  const { isError, isLoading } = useMeQuery()
+  const isAuth = !isError
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/login'} />
+  if (isLoading) {
+    return <Loader />
+  }
+
+  return isAuth ? <Outlet /> : <Navigate to={'/login'} />
 }
