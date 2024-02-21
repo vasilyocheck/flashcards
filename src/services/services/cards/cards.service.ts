@@ -7,6 +7,7 @@ import {
   GetCardsArgs,
   GetCardsResponse,
   GradeSaveResponse,
+  UpdateCardArgs,
 } from '@/services/services/cards/cards.types'
 
 export const CardsService = baseApi.injectEndpoints({
@@ -54,6 +55,14 @@ export const CardsService = baseApi.injectEndpoints({
           }
         },
       }),
+      updateCard: builder.mutation<Card, UpdateCardArgs>({
+        invalidatesTags: ['Cards'],
+        query: (args: UpdateCardArgs) => ({
+          body: args.requestBody,
+          method: 'PATCH',
+          url: `/v1/cards/${args.cardId}`,
+        }),
+      }),
     }
   },
 })
@@ -64,4 +73,5 @@ export const {
   useGetCardsQuery,
   useGetRandomCardQuery,
   useSaveCardMutation,
+  useUpdateCardMutation,
 } = CardsService

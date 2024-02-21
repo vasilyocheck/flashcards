@@ -78,3 +78,8 @@ export type MinMaxResponse = {
   max: number
   min: number
 }
+
+export type UpdateCardArgs = {
+  cardId: string
+  requestBody: FormData
+}
