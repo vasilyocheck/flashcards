@@ -21,6 +21,15 @@ export type CardToDelete = {
   id: string
 } | null
 
+export type CardToEdit = {
+  answer: string
+  answerImg: string
+  id: string
+  question: string
+  questionImg: string
+} | null
+
+import { ModalEditCard } from '@/components/cards/edit-card'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
@@ -31,6 +40,7 @@ import { useMeQuery } from '@/services/services/auth/auth.service'
 import { AddCard } from '@/services/services/cards/add-card'
 import { useDeleteCardMutation, useGetCardsQuery } from '@/services/services/cards/cards.service'
 import { useGetDeckQuery } from '@/services/services/decks/decks.service'
+import { useAppSelector } from '@/services/store'
 
 import s from './one-deck-page.module.scss'
 
@@ -47,6 +57,7 @@ export const OneDeckPage = () => {
   const [deck, setDeck] = useState<DeckWithId>({} as DeckWithId)
   const [cardToDelete, setCardToDelete] = useState<CardToDelete>(null)
   const [deleteCard] = useDeleteCardMutation()
+  const cardToEdit = useAppSelector(state => state.cards.cardToEdit)
 
   const oppositeId = deck.userId === myId
 
@@ -144,6 +155,7 @@ export const OneDeckPage = () => {
         item={cardToDelete}
         onOpenChange={handleOnOpenChange}
       />
+      {cardToEdit && <ModalEditCard cardToEdit={cardToEdit} isOpen={!!cardToEdit} />}
     </div>
   )
 }
