@@ -32,6 +32,7 @@ const router = createBrowserRouter([
       ...publicRoutes,
     ],
     element: <AppLayout />,
+    errorElement: <Navigate to={'/404'} />,
   },
 ])
 
