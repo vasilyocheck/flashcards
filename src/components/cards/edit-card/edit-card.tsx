@@ -18,7 +18,6 @@ type Props = {
 
 export const ModalEditCard = ({ cardToEdit, isOpen }: Props) => {
   const dispatch = useAppDispatch()
-
   const [quest, setQuest] = useState(cardToEdit?.question)
   const [questImg, setQuestImg] = useState<File | string>(cardToEdit?.questionImg || '')
   const [questTextfieldError, setQuestTextFieldError] = useState('')
