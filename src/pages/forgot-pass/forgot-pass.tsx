@@ -1,8 +1,8 @@
 import { Navigate } from 'react-router-dom'
 
-import { ForgotPassFormValues, ForgotPasswordForm } from '@/components/auth/forgot-password'
-import { Loader } from '@/components/ui/loader'
-import { useMeQuery, useRecoverPassMutation } from '@/services/services/auth/auth.service'
+import { Loader } from '@/components'
+import { useMeQuery, useRecoverPassMutation } from '@/features/auth/api/auth.service'
+import { ForgotPassFormValues, ForgotPasswordForm } from '@/features/auth/ui/forgot-password'
 
 import s from './forgot-pass.module.scss'
 

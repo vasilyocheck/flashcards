@@ -1,0 +1,1 @@
+import { Navigate, Outlet } from 'react-router-dom'import { Loader } from '@/components'import { useMeQuery } from '@/features/auth/api/auth.service'export function PrivateRoutes() {  const { isError, isLoading } = useMeQuery()  const isAuth = !isError  if (isLoading) {    return <Loader />  }  return isAuth ? <Outlet /> : <Navigate to={'/login'} />}

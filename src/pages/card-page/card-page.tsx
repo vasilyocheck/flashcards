@@ -2,19 +2,20 @@ import { useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 
 import { ArrowBackIcon } from '@/assets'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { IconButton } from '@/components/ui/iconButton'
-import { RadioGroupComponent } from '@/components/ui/radio'
+import { useAppDispatch, useAppSelector } from '@/common/hooks'
+import { Button, Card, IconButton, RadioGroupComponent } from '@/components'
+import {
+  setAnswerValue,
+  setIsAnswerShown,
+  useGetRandomCardQuery,
+  useSaveCardMutation,
+} from '@/features/cards'
+import { ArgsGrade } from '@/features/cards/types'
+import { useGetDeckByIdQuery } from '@/features/decks'
 import {
   AssessValue,
   assessOptions,
 } from '@/pages/card-page/assess-answer-options/assess-answer-options'
-import { useGetRandomCardQuery, useSaveCardMutation } from '@/services/services/cards/cards.service'
-import { ArgsGrade } from '@/services/services/cards/cards.types'
-import { setAnswerValue, setIsAnswerShown } from '@/services/services/cards/cards-slice'
-import { useGetDeckByIdQuery } from '@/services/services/decks/decks.service'
-import { useAppDispatch, useAppSelector } from '@/services/store'
 
 import s from './card-page.module.scss'
 
