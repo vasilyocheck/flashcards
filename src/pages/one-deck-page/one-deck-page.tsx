@@ -3,7 +3,6 @@ import { NavLink, useParams } from 'react-router-dom'
 
 import { ArrowBackIcon } from '@/assets'
 import { IconWrapper } from '@/assets/icons/IconWrapper'
-import { Typography } from '@/components/ui/typography'
 
 export type DeckWithId = {
   cardsCount: number
@@ -29,18 +28,17 @@ export type CardToEdit = {
   questionImg: string
 } | null
 
-import { ModalEditCard } from '@/components/cards/edit-card'
+import { useAppSelector } from '@/common/hooks'
+import { Typography } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
 import { TextField } from '@/components/ui/textfield'
-import { ModalDeleteCard } from '@/pages/one-deck-page/modal-delete-card/modal-delete-card'
+import { useMeQuery } from '@/features/auth/api/auth.service'
+import { AddCard, ModalEditCard, useDeleteCardMutation, useGetCardsQuery } from '@/features/cards'
+import { ModalDeleteCard } from '@/features/cards/ui/delete-card'
+import { useGetDeckQuery } from '@/features/decks'
 import { TableOnePage } from '@/pages/one-deck-page/table-one-deck-page'
-import { useMeQuery } from '@/services/services/auth/auth.service'
-import { AddCard } from '@/services/services/cards/add-card'
-import { useDeleteCardMutation, useGetCardsQuery } from '@/services/services/cards/cards.service'
-import { useGetDeckQuery } from '@/services/services/decks/decks.service'
-import { useAppSelector } from '@/services/store'
 
 import s from './one-deck-page.module.scss'
 

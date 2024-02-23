@@ -1,8 +1,7 @@
 import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 
 import { DeleteIcon } from '@/assets'
-import { AddNewDeck } from '@/components/decks/add-new-deck'
-import { ModalEditDeck } from '@/components/decks/edit-deck'
+import { useDebounce } from '@/common/hooks'
 import { Button } from '@/components/ui/button'
 import { Loader } from '@/components/ui/loader'
 import { Pagination } from '@/components/ui/pagination'
@@ -12,16 +11,14 @@ import { Tabs } from '@/components/ui/tabs'
 import { TabItem } from '@/components/ui/tabs/tabItem'
 import { TextField } from '@/components/ui/textfield'
 import { Typography } from '@/components/ui/typography'
-import { useDebounce } from '@/hooks/hooks'
+import { useMeQuery } from '@/features/auth/api/auth.service'
+import { useDeleteDeckMutation, useGetDecksQuery, useGetMinMaxQuery } from '@/features/decks'
 import { ModalDeleteDeck } from '@/pages/decks-page/modal-delete-deck'
-import { useMeQuery } from '@/services/services/auth/auth.service'
-import {
-  useDeleteDeckMutation,
-  useGetDecksQuery,
-  useGetMinMaxQuery,
-} from '@/services/services/decks/decks.service'
 
 import s from './decks-page.module.scss'
+
+import { AddNewDeck } from '../../features/decks/ui/add-new-deck'
+import { ModalEditDeck } from '../../features/decks/ui/edit-deck'
 
 export type PaginationType = {
   currentPage: number

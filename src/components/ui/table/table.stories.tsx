@@ -2,12 +2,13 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { DeleteIcon, EditIcon, PlayCircleIcon } from '@/assets'
 import userAvatar from '@/assets/images/defaultAvatar/defaultAvatar.png'
-import { IconButton } from '@/components/ui/iconButton'
 import { Table, TableBody, TableDataCell, TableRow } from '@/components/ui/table/tableConstuctor'
 import { TableHeader } from '@/components/ui/table/tableHeader/tableHeader'
 import { useHandleSort } from '@/components/ui/table/utils/useHandleSort'
 
 import s from './tableConstuctor/table.module.scss'
+
+import { IconButton } from '../icon-button'
 
 const meta = {
   component: Table,

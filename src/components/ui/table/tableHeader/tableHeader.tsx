@@ -1,13 +1,14 @@
 import { ComponentPropsWithoutRef, FC } from 'react'
 
 import { ArrowDownIcon } from '@/assets/icons/components/ArrowDownIcon'
-import { IconButton } from '@/components/ui/iconButton'
 import { Column, Sort } from '@/components/ui/table/table.stories'
 import { TableHead, TableHeadCell, TableRow } from '@/components/ui/table/tableConstuctor'
 import { Typography } from '@/components/ui/typography'
 import { clsx } from 'clsx'
 
 import s from '../tableConstuctor/table.module.scss'
+
+import { IconButton } from '../../icon-button'
 
 export const TableHeader: FC<
   Omit<
