@@ -3,13 +3,13 @@
   font-family: fontello;
   font-weight: normal;
   font-style: normal;
-  src: url('@/fonts/fontello.eot?0000');
+  src: url('@/common/fonts/fontello.eot?0000');
   src:
-    url('@/fonts/fontello.eot?0000#iefix') format('embedded-opentype'),
-    url('@/fonts/fontello.woff2?0000') format('woff2'),
-    url('@/fonts/fontello.woff?0000') format('woff'),
-    url('@/fonts/fontello.ttf?0000') format('truetype'),
-    url('@/fonts/fontello.svg?0000#fontello') format('svg');
+    url('@/common/fonts/fontello.eot?0000#iefix') format('embedded-opentype'),
+    url('@/common/fonts/fontello.woff2?0000') format('woff2'),
+    url('@/common/fonts/fontello.woff?0000') format('woff'),
+    url('@/common/fonts/fontello.ttf?0000') format('truetype'),
+    url('@/common/fonts/fontello.svg?0000#fontello') format('svg');
 }
 
 .rootBlock {
