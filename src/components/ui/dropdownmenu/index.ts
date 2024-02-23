@@ -1,1 +1,1 @@
-export * from '@/components/ui/dropdownmenu/drop-down-menu'
+export * from './drop-down-menu'

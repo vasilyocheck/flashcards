@@ -1,13 +1,13 @@
 import { NavLink } from 'react-router-dom'
 
 import { DeleteIcon, EditIcon, PlayCircleIcon } from '@/assets'
-import { IconButton } from '@/components/ui/iconButton'
 import { Column } from '@/components/ui/table/table.stories'
 import { Typography } from '@/components/ui/typography'
 import { DeckToDelete, DeckToEdit } from '@/pages/decks-page'
 
 import s from './tableConstuctor/table.module.scss'
 
+import { IconButton } from '../icon-button'
 import { Table, TableBody, TableDataCell, TableRow } from './tableConstuctor'
 import { TableHeader } from './tableHeader/tableHeader'
 

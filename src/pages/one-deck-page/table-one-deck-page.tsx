@@ -2,14 +2,14 @@ import { ComponentPropsWithoutRef } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { DeleteIcon, EditIcon, RatingEmptyIcon, RatingFilledIcon } from '@/assets'
-import { IconButton } from '@/components/ui/iconButton'
+import { useAppDispatch } from '@/common/hooks'
+import { IconButton } from '@/components'
 import { Column } from '@/components/ui/table/table.stories'
 import { Table, TableBody, TableDataCell, TableRow } from '@/components/ui/table/tableConstuctor'
 import { TableHeader } from '@/components/ui/table/tableHeader/tableHeader'
 import { Typography } from '@/components/ui/typography'
+import { setCardToEdit } from '@/features/cards'
 import { CardToDelete, CardToEdit } from '@/pages/one-deck-page/one-deck-page'
-import { setCardToEdit } from '@/services/services/cards/cards-slice'
-import { useAppDispatch } from '@/services/store'
 
 import s from './one-deck-page.module.scss'
 
