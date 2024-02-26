@@ -1,24 +1,14 @@
-import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components'
 import { ControlledCheckbox } from '@/components/controlled/controlled-checkbox/controlled-checkbox'
 import { ControlledTextField } from '@/components/controlled/controlled-text-field/controlled-textfield'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { SignInFormValues, useSignInForm } from '@/features/auth/ui/sign-in-form/use-sign-in-form'
 
 import s from './sign-in-form.module.scss'
 
-const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(3).max(30),
-  remember: z.boolean(),
-})
-
-export type LoginParamsType = z.infer<typeof loginSchema>
-
 type Props = {
-  onSubmit: (data: LoginParamsType) => void
+  onSubmit: (data: SignInFormValues) => void
 }
 
 export const SignInForm = ({ onSubmit }: Props) => {
@@ -26,7 +16,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<LoginParamsType>({ resolver: zodResolver(loginSchema) })
+  } = useSignInForm()
 
   return (
     <form className={s.signInForm} onSubmit={handleSubmit(onSubmit)}>
@@ -46,7 +36,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
         type={'password'}
       />
       <div className={s.checkboxWrapper}>
-        <ControlledCheckbox control={control} label={'Remember me'} name={'remember'} />
+        <ControlledCheckbox control={control} label={'Remember me'} name={'rememberMe'} />
       </div>
 
       <Link className={s.linkForgotPassword} to={'/forgot-pass'}>
