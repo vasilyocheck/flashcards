@@ -12,10 +12,23 @@ import { privateRoutes, publicRoutes } from '@/common/routes/router-settings'
 import { Header } from '@/components'
 
 const AppLayout = () => {
+  // todo: add logic to header
+  // const { data, isError } = useMeQuery()
+  // const [logout, { isLoading }] = useLogoutMutation()
+  // const isAuth = !isError
+
   const navigate = useNavigate()
 
   return (
     <>
+      {/*<Header*/}
+      {/*    name={data?.name}*/}
+      {/*    avatar={data?.avatar}*/}
+      {/*    email={data?.email}*/}
+      {/*    isLoggedIn={isAuth}*/}
+      {/*    logout={logout}*/}
+      {/*    isDisabled={isLoading}*/}
+      {/*/>*/}
       <Header callback={() => navigate(Route.SignIn)} />
       <Outlet />
     </>
