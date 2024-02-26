@@ -5,20 +5,40 @@ import {
   SignUpArgs,
   SignUpResponse,
 } from '@/features/auth/types/auth.types'
-import { LoginParamsType } from '@/features/auth/ui/sign-in-form'
+import { SignInFormValues } from '@/features/auth/ui/sign-in-form/use-sign-in-form'
 import { LoginResponseType } from '@/features/decks/types/decks.types'
 
 export const AuthService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      login: builder.mutation<LoginResponseType, LoginParamsType>({
+      login: builder.mutation<LoginResponseType, SignInFormValues>({
+        invalidatesTags: ['Me'],
         query: body => ({
           body,
           method: 'POST',
           url: '/v1/auth/login',
         }),
       }),
-      me: builder.query<MeResponse, void>({
+      logout: builder.mutation<void, void>({
+        invalidatesTags: ['Me'],
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          const patchResult = dispatch(
+            AuthService.util.updateQueryData('me', undefined, () => null)
+          )
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult.undo()
+          }
+        },
+        query: () => ({
+          method: 'POST',
+          url: 'v1/auth/logout',
+        }),
+      }),
+      me: builder.query<MeResponse | null, void>({
+        providesTags: ['Me'],
         query: () => ({
           url: `/v1/auth/me`,
         }),
@@ -31,6 +51,7 @@ export const AuthService = baseApi.injectEndpoints({
         }),
       }),
       signUp: builder.mutation<SignUpResponse, SignUpArgs>({
+        invalidatesTags: ['Me'],
         query: args => ({
           body: args,
           method: 'POST',
@@ -41,5 +62,10 @@ export const AuthService = baseApi.injectEndpoints({
   },
 })
 
-export const { useLoginMutation, useMeQuery, useRecoverPassMutation, useSignUpMutation } =
-  AuthService
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useMeQuery,
+  useRecoverPassMutation,
+  useSignUpMutation,
+} = AuthService
